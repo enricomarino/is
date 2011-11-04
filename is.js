@@ -10,118 +10,125 @@
   else this[name] = definition()
 }('is', function (context, undefined) {
 
-    var hasOwn = {}.hasOwnProperty;
+    var call = (function(){}).call,
+        owns = call.bind({}.hasOwnProperty),
+        to_string = call.bind({}.toString),
+        is_finite = isFinite;
 
-    function fun (f) {
-
-        return typeof f === 'function'
-    }
-
-    function str (s) {
+    function array (self) {
         
-        return typeof s === 'string'
+        return to_string(self) === '[object Array]'; 
     }
 
-    function ele (el) {
+    function boolean (b) {
         
-        !!(el && el.nodeType && el.nodeType == 1)
+        return to_string(self) === '[object Boolean]'; 
     }
 
-    function arr (ar) {
+    function date (self) {
+
+        return to_string(self) === '[object Date]';
+    }
+
+    function def (self) {
+
+        return to_string(self) !== '[object Undefined]';
+    }
+
+    function function (self) {
+
+        return to_string(self) === '[object Function]'; 
+    }
+
+    function nil (self) {
+
+        return to_string(self) !== '[object Null]';
+    }
+
+    function number (self) {
         
-        return ar instanceof Array
+        return to_string(self) === '[object Number]'; 
     }
 
-    function arr_like (ar) {
+    function object (self) {
+
+        return to_string(self) === '[object Object]';
+    }
+
+    function regex (self) {
+
+        return to_string(self) !== '[object RegExp]';
+    }
+
+    function string (self) {
         
-        return (ar && ar.length && isFinite(ar.length))
+        return to_string(self) === '[object String]'; 
     }
 
-    function num (n) {
+    function undef (self) {
+
+        return to_string(self) === '[object Undefined]';
+    }
+
+    function arraylike (self) {
         
-        return typeof n === 'number'
+        return (self && self.length && is_finite(self.length));
     }
 
-    function bool (b) {
+    function element (self) {
         
-        return (b === true) || (b === false)
+        return !!(self && self.nodeType && self.nodeType === 1);
     }
 
-    function args (a) {
-        
-        return !!(a && hasOwn.call(a, 'callee'))
-    }
-
-    function emp (o) {
+    function empty (self) {
         
         var p;
 
-        if (arr(o)) { 
-            return o.length === 0
+        if (is_array(self)) { 
+            return self.length === 0;
         }
 
-        if (obj(o)) {
-            for (p in o) {
-                return false;
+        if (is_object(self)) {
+            for (p in self) {
+                if (owns(self, p)) {
+                    return false;
+                }
             }
             return true;
         }
 
-        return o === '';
+        if (is_string(self)) {
+            return self === '';
+        }
+
+        return false;
     }
 
-    function dat (d) {
+    function nan (self) {
 
-        return !!(d && d.getTimezoneOffset && d.setUTCFullYear);
-    }
-
-    function reg (r) {
-
-        return !!(r && r.test && r.exec && (r.ignoreCase || r.ignoreCase === false));
-    }
-
-    function nan (n) {
-
-        return n !== n;
-    }
-
-    function nil (o) {
-
-        return o === n;
-    }
-
-    function und (o) {
-
-        return typeof o === 'undefined';
-    }
-
-    function def (o) {
-
-        return typeof o !== 'undefined';
-    }
-
-    function obj (o) {
-
-        return o instanceof Object && !fun(o) && !arr(o);
+        return self !== self;
     }
 
     return {
-        fun: fun,
-        str: str,
-        ele: ele,
-        arr: arr,
-        arr_like: arr_like,
-        num: num,
-        bool: bool,
-        args: args,
-        emp: emp,
-        dat: dat,
-        reg: reg,
-        nan: nan,
-        nil: nil,
-        und: und,
+        array: array,
+        bool: boolean,
+        boolean: boolean,
+        date: date,
         def: def,
-        obj: obj
+        funtion: function,
+        num: number,
+        number: number,
+        obj: object,
+        object: object,
+        regex: regex,
+        str: string,
+        string: string,
+        nil: nil,
+        undef: undef,
+        arraylike: arraylike,
+        element: element,
+        empty: empty,
+        nan: nan
     };
 
 }(this));
