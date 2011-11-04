@@ -1,94 +1,127 @@
-var hasOwn = {}.hasOwnProperty;
+// is.js
+// JavaScript type testing library
+//
+// Copyright 2011 Enrico Marino
+// MIT license
 
-function fun (f) {
+!function (name, definition) {
+  if (typeof module != 'undefined') module.exports = definition()
+  else if (typeof define == 'function' && define.amd) define(name, definition)
+  else this[name] = definition()
+}('is', function (context, undefined) {
 
-    return typeof f === 'function'
-}
+    var hasOwn = {}.hasOwnProperty;
 
-function str (s) {
-    
-    return typeof s === 'string'
-}
+    function fun (f) {
 
-function ele (el) {
-    
-    !!(el && el.nodeType && el.nodeType == 1)
-}
-
-function arr (ar) {
-    
-    return ar instanceof Array
-}
-
-function arrLike (ar) {
-    
-    return (ar && ar.length && isFinite(ar.length))
-}
-
-function num (n) {
-    
-    return typeof n === 'number'
-}
-
-function bool (b) {
-    
-    return (b === true) || (b === false)
-}
-
-function args (a) {
-    
-    return !!(a && hasOwn.call(a, 'callee'))
-}
-
-function emp (o) {
-    
-    var p;
-
-    if (arr(o)) { 
-        return o.length === 0
+        return typeof f === 'function'
     }
 
-    if (obj(o)) {
-        for (p in o) {
-            return false;
+    function str (s) {
+        
+        return typeof s === 'string'
+    }
+
+    function ele (el) {
+        
+        !!(el && el.nodeType && el.nodeType == 1)
+    }
+
+    function arr (ar) {
+        
+        return ar instanceof Array
+    }
+
+    function arr_like (ar) {
+        
+        return (ar && ar.length && isFinite(ar.length))
+    }
+
+    function num (n) {
+        
+        return typeof n === 'number'
+    }
+
+    function bool (b) {
+        
+        return (b === true) || (b === false)
+    }
+
+    function args (a) {
+        
+        return !!(a && hasOwn.call(a, 'callee'))
+    }
+
+    function emp (o) {
+        
+        var p;
+
+        if (arr(o)) { 
+            return o.length === 0
         }
-        return true;
+
+        if (obj(o)) {
+            for (p in o) {
+                return false;
+            }
+            return true;
+        }
+
+        return o === '';
     }
 
-    return o === '';
-}
+    function dat (d) {
 
-function dat (d) {
+        return !!(d && d.getTimezoneOffset && d.setUTCFullYear);
+    }
 
-    return !!(d && d.getTimezoneOffset && d.setUTCFullYear);
-}
+    function reg (r) {
 
-function reg (r) {
+        return !!(r && r.test && r.exec && (r.ignoreCase || r.ignoreCase === false));
+    }
 
-    return !!(r && r.test && r.exec && (r.ignoreCase || r.ignoreCase === false));
-}
+    function nan (n) {
 
-function nan (n) {
+        return n !== n;
+    }
 
-    return n !== n;
-}
+    function nil (o) {
 
-function nil (o) {
+        return o === n;
+    }
 
-    return o === n;
-}
+    function und (o) {
 
-function und (o) {
+        return typeof o === 'undefined';
+    }
 
-    return typeof o === 'undefined';
-}
+    function def (o) {
 
-function def (o) {
+        return typeof o !== 'undefined';
+    }
 
-    return typeof o !== 'undefined';
-}
+    function obj (o) {
 
-function obj (o) {
+        return o instanceof Object && !fun(o) && !arr(o);
+    }
 
-    return o instanceof Object && !fun(o) && !arr(o);
-}
+    return {
+        fun: fun,
+        str: str,
+        ele: ele,
+        arr: arr,
+        arr_like: arr_like,
+        num: num,
+        bool: bool,
+        args: args,
+        emp: emp,
+        dat: dat,
+        reg: reg,
+        nan: nan,
+        nil: nil,
+        und: und,
+        def: def,
+        obj: obj
+    };
+
+}(this));
