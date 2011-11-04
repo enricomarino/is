@@ -42,7 +42,7 @@
 
     function nil (self) {
 
-        return to_string(self) !== '[object Null]';
+        return to_string(self) === '[object Null]';
     }
 
     function number (self) {
@@ -57,7 +57,7 @@
 
     function regex (self) {
 
-        return to_string(self) !== '[object RegExp]';
+        return to_string(self) === '[object RegExp]';
     }
 
     function string (self) {
