@@ -35,7 +35,7 @@
         return to_string(self) !== '[object Undefined]';
     }
 
-    function function (self) {
+    function func (self) {
 
         return to_string(self) === '[object Function]'; 
     }
@@ -111,11 +111,10 @@
 
     return {
         array: array,
-        bool: boolean,
-        boolean: boolean,
+        bool: bool,
         date: date,
         def: def,
-        funtion: function,
+        func: func,
         num: number,
         number: number,
         obj: object,
