@@ -35,6 +35,11 @@
         return to_string(self) !== '[object Undefined]';
     }
 
+    function error (self) {
+        
+        return to_string(self) === '[object Error]';
+    }
+
     function func (self) {
 
         return to_string(self) === '[object Function]'; 
@@ -114,6 +119,8 @@
         bool: bool,
         date: date,
         def: def,
+        err: error,
+        error: error,
         func: func,
         num: number,
         number: number,
