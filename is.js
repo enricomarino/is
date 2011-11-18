@@ -44,6 +44,11 @@
         return to_string.call(self) === '[object Function]'; 
     }
 
+    function integer (self) {
+        
+        return to_string.call(self) === '[object Number]' && self % 1 === 0;
+    }
+
     function nil (self) {
 
         return to_string.call(self) === '[object Null]';
@@ -121,6 +126,7 @@
         err: error,
         error: error,
         func: func,
+        integer: integer,
         num: number,
         number: number,
         obj: object,
