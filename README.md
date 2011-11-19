@@ -2,7 +2,11 @@
 
 JavaScript type testing library
 
-## is it ... ?
+## Tests
+
+to be or not to be?
+test it!
+is it ... ?
 
  - arguments
  - array
