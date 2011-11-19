@@ -1,0 +1,15 @@
+{
+    "name": "is",
+    "description": "JavaScript type testing library",
+    "homepage": "https://github.com/onirame/is",
+    "keywords": ["util", "type", "sniff", "server", "client", "browser"],
+    "author": "Enrico Marino <enrico.marino@email.com>",
+    "contributors": [],
+    "dependencies": [],
+    "repository": {
+        "type": "git", 
+        "url": "git://github.com/onirame/is.git"
+    },
+    "main": "is.js",
+    "version": "0.0.7"
+}

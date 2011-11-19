@@ -14,9 +14,19 @@
         to_string = {}.toString,
         is_finite = isFinite;
 
+    function arguments (self) {
+        
+        return to_string.call(self) === '[object Arguments]';
+    }
+
     function array (self) {
         
         return to_string.call(self) === '[object Array]'; 
+    }
+
+    function arraylike (self) {
+        
+        return (self && self.length && is_finite(self.length));
     }
 
     function boolean (b) {
@@ -34,6 +44,11 @@
         return to_string.call(self) !== '[object Undefined]';
     }
 
+    function element (self) {
+        
+        return !!(self && self.nodeType && self.nodeType === 1);
+    }
+
     function error (self) {
         
         return to_string.call(self) === '[object Error]';
@@ -47,6 +62,11 @@
     function integer (self) {
         
         return to_string.call(self) === '[object Number]' && self % 1 === 0;
+    }
+
+    function nan (self) {
+
+        return self !== self;
     }
 
     function nil (self) {
@@ -79,54 +99,45 @@
         return to_string.call(self) === '[object Undefined]';
     }
 
-    function arraylike (self) {
-        
-        return (self && self.length && is_finite(self.length));
-    }
-
-    function element (self) {
-        
-        return !!(self && self.nodeType && self.nodeType === 1);
-    }
-
     function empty (self) {
         
-        var p;
+        var key;
 
-        if (is_array.call(self)) { 
+        if (array.call(self) || arraylike.call(self) || arguments.call(self)) { 
             return self.length === 0;
         }
 
-        if (is_object.call(self)) {
-            for (p in self) {
-                if (owns.call(self, p)) {
+        if (object.call(self)) {
+            for (key in self) {
+                if (owns.call(self, key)) {
                     return false;
                 }
             }
             return true;
         }
 
-        if (is_string.call(self)) {
+        if (string.call(self)) {
             return self === '';
         }
 
         return false;
     }
 
-    function nan (self) {
-
-        return self !== self;
-    }
-
     return {
+        args: arguments,
+        arguments: arguments,
         array: array,
+        arraylike: arraylike,
         bool: bool,
         date: date,
         def: def,
+        element: element,
         err: error,
         error: error,
         func: func,
         integer: integer,
+        nan: nan,
+        nil: nil,
         num: number,
         number: number,
         obj: object,
@@ -134,12 +145,8 @@
         regex: regex,
         str: string,
         string: string,
-        nil: nil,
         undef: undef,
-        arraylike: arraylike,
-        element: element,
-        empty: empty,
-        nan: nan
+        empty: empty
     };
 
 }(this));
