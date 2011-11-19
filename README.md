@@ -2,6 +2,27 @@
 
 JavaScript type testing library
 
+## is it ... ?
+
+ - arguments
+ - array
+ - array like
+ - boolean
+ - date
+ - defined
+ - element
+ - empty
+ - error
+ - func
+ - integer
+ - nan
+ - nil
+ - number
+ - object
+ - regex
+ - string
+ - undefined
+
 ## License 
 
 (The MIT License)
