@@ -2,30 +2,29 @@
 
 JavaScript type testing library
 
-## Tests
+## API
 
-to be or not to be?
-test it!
-is it ... ?
+is x ... ?
 
- - arguments
- - array
- - array like
- - boolean
- - date
- - defined
- - element
- - empty
- - error
- - func
- - integer
- - nan
- - nil
- - number
- - object
- - regex
- - string
- - undefined
+ - arguments(x), args(x)
+ - array(x)
+ - arraylike(x)
+ - boolean(x), bool(x)
+ - date(x)
+ - decimal(x)
+ - defined(x), def(x)
+ - element(x), el(x)
+ - empty(x)
+ - error(x), err(x)
+ - func(x)
+ - integer(x), int(x)
+ - nan(x)
+ - nil(x)
+ - number(x), num(x)
+ - object(x)
+ - regex(x)
+ - string(x)
+ - undef(x)
 
 ## License 
 

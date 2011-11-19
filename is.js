@@ -39,6 +39,11 @@
         return to_string.call(self) === '[object Date]';
     }
 
+    function decimal (self) {
+        
+        return to_string.call(self) === '[object Number]' && self % 1 !== 0;
+    }
+
     function def (self) {
 
         return to_string.call(self) !== '[object Undefined]';
@@ -129,12 +134,17 @@
         array: array,
         arraylike: arraylike,
         bool: bool,
+        boolean: bool,
         date: date,
+        decimal: decimal,
         def: def,
+        defined: defined,
+        el: element,
         element: element,
         err: error,
         error: error,
         func: func,
+        int: integer,
         integer: integer,
         nan: nan,
         nil: nil,
