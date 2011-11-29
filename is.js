@@ -5,9 +5,9 @@
 // MIT license
 
 !function (name, definition) {
-  if (typeof module != 'undefined') module.exports = definition()
+  if (typeof module != 'undefined') module.exports = definition
   else if (typeof define == 'function' && define.amd) define(name, definition)
-  else this[name] = definition()
+  else this[name] = definition
 }('is', function (context, undefined) {
 
     var owns = {}.hasOwnProperty,
@@ -15,117 +15,96 @@
         is_finite = isFinite;
 
     function arguments (self) {
-        
         return to_string.call(self) === '[object Arguments]';
     }
 
     function array (self) {
-        
         return to_string.call(self) === '[object Array]'; 
     }
 
     function arraylike (self) {
-        
         return (self && self.length && is_finite(self.length));
     }
 
-    function boolean (b) {
-        
+    function boolean (self) {
         return to_string.call(self) === '[object Boolean]'; 
     }
 
     function date (self) {
-
         return to_string.call(self) === '[object Date]';
     }
 
     function decimal (self) {
-        
         return to_string.call(self) === '[object Number]' && self % 1 !== 0;
     }
 
     function def (self) {
-
         return to_string.call(self) !== '[object Undefined]';
     }
 
-    function element (self) {
-        
+    function element (self) {        
         return !!(self && self.nodeType && self.nodeType === 1);
     }
 
+    function empty (self) {
+        var key;
+
+        if (to_string.call(self) === '[object Array]'
+            || return to_string.call(self) === '[object Arguments]') { 
+            return self.length === 0;
+        }
+        if (to_string.call(self) === '[object Object]') {
+            for (key in self) if (owns.call(self, key)) return false;
+            return true;
+        }
+        if (return to_string.call(self) === '[object String]') {
+            return self === '';
+        }
+        return false;
+    }
+
     function error (self) {
-        
         return to_string.call(self) === '[object Error]';
     }
 
-    function func (self) {
+    function equal (self, value) {
+        return self == value;
+    }
 
+    function func (self) {
         return to_string.call(self) === '[object Function]'; 
     }
 
     function integer (self) {
-        
         return to_string.call(self) === '[object Number]' && self % 1 === 0;
     }
 
     function nan (self) {
-
         return self !== self;
     }
 
     function nil (self) {
-
         return to_string.call(self) === '[object Null]';
     }
 
     function number (self) {
-        
         return to_string.call(self) === '[object Number]'; 
     }
 
     function object (self) {
-
         return to_string.call(self) === '[object Object]';
     }
 
     function regex (self) {
-
         return to_string.call(self) === '[object RegExp]';
     }
 
     function string (self) {
-        
         return to_string.call(self) === '[object String]'; 
     }
 
     function undef (self) {
-
         return to_string.call(self) === '[object Undefined]';
-    }
-
-    function empty (self) {
-        
-        var key;
-
-        if (array.call(self) || arraylike.call(self) || arguments.call(self)) { 
-            return self.length === 0;
-        }
-
-        if (object.call(self)) {
-            for (key in self) {
-                if (owns.call(self, key)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        if (string.call(self)) {
-            return self === '';
-        }
-
-        return false;
     }
 
     return {
@@ -141,6 +120,8 @@
         defined: defined,
         el: element,
         element: element,
+        empty: empty,
+        equal: equal,
         err: error,
         error: error,
         func: func,
@@ -155,8 +136,7 @@
         regex: regex,
         str: string,
         string: string,
-        undef: undef,
-        empty: empty
+        undef: undef
     };
 
 }(this));
