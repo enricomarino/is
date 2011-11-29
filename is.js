@@ -71,6 +71,49 @@
         return self == value;
     }
 
+    function equiv (self, value) { 
+        var type = to_string.call(self),
+            key,
+            len;
+
+        if (type !== to_string.call(value)) {
+            return false;
+        }
+        if (type === '[object Object]') {
+            for (key in self) {
+                if (!equiv(self[key], value[key])) {
+                    return false;    
+                }
+            }
+            return true;
+        }
+        if (type === '[object Array]') {
+            len = self.length;
+            if (len !== value.length) {
+                return false;
+            }
+            for (key = 0; key < len; key += 1) {
+                if (!equiv(self[key], value[key])) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        if (type === '[object Function]') {
+            return self.prototype === value.prototype;
+        }
+        if (type === '[object Date]') {
+            return self.getTime() === value.getTime();
+        }
+        if (type === '[object Undefined]') {
+            return false;
+        }
+        if (type === '[object Null]') {
+            return false;
+        }
+        return self == value;
+    }
+
     function func (self) {
         return to_string.call(self) === '[object Function]'; 
     }
@@ -154,6 +197,7 @@
         element: element,
         empty: empty,
         equal: equal,
+        equiv: equiv,
         err: error,
         error: error,
         func: func,
