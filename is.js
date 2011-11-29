@@ -83,6 +83,38 @@
         return self !== self;
     }
 
+    function max (self, value) {
+        return self > value;
+    }
+
+    function maximum (self, value) {
+        var len = values.length,
+            i;
+        
+        for (i = 0, i < len; i += 1) {
+            if (self <= value) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function min (self, value) {
+        return self < value;
+    }
+
+    function minimum (self, values) {
+        var len = values.length,
+            i;
+
+        for (i = 0, i < len; i += 1) {
+            if (self >= value) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     function nil (self) {
         return to_string.call(self) === '[object Null]';
     }
@@ -127,6 +159,10 @@
         func: func,
         int: integer,
         integer: integer,
+        max: max,
+        maximum: maximum,
+        min: min,
+        minimum: minimum,
         nan: nan,
         nil: nil,
         num: number,
