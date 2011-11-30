@@ -193,6 +193,38 @@
         return to_string.call(self) === '[object Undefined]';
     }
 
+    function TRUE (self) {
+        return self === true;
+    }
+
+    function FALSE (self) {
+        return self === false;
+    }
+
+    function ZERO (serf) {
+        return self === 0;
+    }
+
+    function ONE (self) {
+        return self === 1;
+    }
+
+    function even (self) {
+        return to_string.call(self === '[object Number]')
+            && self % 2 === 0;
+    }
+
+    function odd (self) {
+        return to_string.call(self === '[object Number]')
+            && self % 2 === 1;
+    }
+
+    function divisible_by (self, dividend) {
+        return to_string.call(self === '[object Number]')
+            && dividend !== 0
+            && self % dividend === 0;
+    }
+
     return {
         args: arguments,
         arguments: arguments,
@@ -229,7 +261,16 @@
         regex: regex,
         str: string,
         string: string,
-        undef: undef
+        undef: undef,
+        TRUE: TRUE,
+        'true': TRUE,
+        FALSE: FALSE,
+        'false': FALSE,
+        zero: zero,
+        one: one,
+        even: even,
+        odd: odd,
+        divisible_by: divisible_by
     };
 
 }(this));
