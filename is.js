@@ -12,7 +12,13 @@
 
     var owns = {}.hasOwnProperty,
         to_string = {}.toString,
-        is_finite = isFinite;
+        is_finite = isFinite,
+        NON_HOST_TYPES = { 
+            'boolean': 1, 
+            'number': 1, 
+            'string': 1, 
+            'undefined': 1 
+        };        
 
     function arguments (self) {
         return to_string.call(self) === '[object Arguments]';
@@ -118,6 +124,11 @@
         return to_string.call(self) === '[object Function]'; 
     }
 
+    function host (self, property) {
+        var type = typeof self[property];
+        return type === 'object' ? !!self[property] : !NON_HOST_TYPES[type];
+    }
+
     function integer (self) {
         return to_string.call(self) === '[object Number]' && self % 1 === 0;
     }
@@ -201,6 +212,8 @@
         err: error,
         error: error,
         func: func,
+        host: host,
+        host_type: host,
         int: integer,
         integer: integer,
         max: max,
