@@ -1,276 +1,507 @@
-// is.js
-// JavaScript type testing library
-//
-// Copyright 2011 Enrico Marino
-// MIT license
 
-!function (name, definition) {
-  if (typeof module != 'undefined') module.exports = definition
-  else if (typeof define == 'function' && define.amd) define(name, definition)
-  else this[name] = definition
-}('is', function (context, undefined) {
+/*!
+* is
+* the definitive JavaScript type testing library
+* Copyright(c) 2011 Enrico Marino <enrico.marino@email.com>
+* MIT license
+*/
 
-    var owns = {}.hasOwnProperty,
-        to_string = {}.toString,
-        is_finite = isFinite,
-        NON_HOST_TYPES = { 
-            'boolean': 1, 
-            'number': 1, 
-            'string': 1, 
-            'undefined': 1 
-        };        
+!(function (exports) {
 
-    function arguments (self) {
-        return to_string.call(self) === '[object Arguments]';
+  var undefined
+    , owns = {}.hasOwnProperty
+    , toString = {}.toString
+    , isFinite = isFinite
+    , NON_HOST_TYPES = { 
+          'boolean': 1
+        , 'number': 1 
+        , 'string': 1
+        , 'undefined': 1 
+      }
+    ;
+
+  /**
+   * Test if 'value' is an arguments object
+   * 
+   * @param value value to test
+   * @return {Boolean} true if 'value' is an arguments object, false otherwise
+   * @api public
+   */
+
+  is.arguments = function (value) {
+    return '[object Arguments]' === toString.call(value);
+  };
+
+  /**
+   * Test if 'value' is an array
+   * 
+   * @param value value to test
+   * @return {Boolean} true if 'value' is an array, false otherwise
+   * @api public
+   */
+
+  is.array = function (value) {
+    return '[object Array]' === toString.call(value); 
+  };
+
+  /**
+   * Test if 'value' is an empty array(like) object
+   * 
+   * @param {Array|Arguments} value value to test
+   * @return {Boolean} true if 'value' is an empty array(like), false otherwise
+   * @api public
+   */
+
+  is.array.empty = function (value) {
+    return value.length === 0;
+  };
+
+  /**
+   * Test if 'value' is an arraylike object
+   * 
+   * @param value value to test
+   * @return {Boolean} true if 'value' is an arguments object, false otherwise
+   * @api public
+   */
+
+  is.arraylike = function (value) {
+    return value !== undefined 
+      && owns.call(value, 'length') 
+      && isFinite(value.length);
+  };
+
+  /**
+   * Test if 'value' is a boolean
+   *
+   * @param value value to test
+   * @return {Boolean} true if 'value' is a boolean, false otherwise
+   * @api public
+   */
+
+  is.boolean = function (value) {
+    return '[object Boolean]' === toString.call(value); 
+  };
+
+  /**
+   * Test if 'value' is a date
+   *
+   * @param value value to test
+   * @return {Boolean} true if 'value' is a date, false otherwise
+   * @api public
+   */
+
+  is.date = function (value) {
+    return '[object Date]' === toString.call(value);
+  };
+
+  /**
+   * Test if 'value' is a decimal number
+   *
+   * @param value value to test
+   * @return {Boolean} true if 'value' is a decimal number, false otherwise
+   * @api public
+   */
+
+  is.decimal = function (value) {
+    return '[object Number]' === toString.call(value) 
+      && value % 1 !== 0;
+  };
+
+  /**
+   * Test if 'value' is defined
+   *
+   * @param value value to test
+   * @return {Boolean} true if 'value' is defined, false otherwise
+   * @api public
+   */
+
+  is.defined = function (value) {
+    return value !== undefined;
+  };
+
+  /**
+   * Test if 'value' is an html element
+   *
+   * @param value value to test
+   * @return {Boolean} true if 'value' is an html element, false otherwise
+   * @api public
+   */
+
+  is.element = function (value) {        
+    return value !== undefined
+      && owns.call(value, nodeType) 
+      && value.nodeType === 1;
+  };
+
+  /**
+   * Test if 'value' is empty
+   *
+   * @param value value to test
+   * @return {Boolean} true if 'value' is empty, false otherwise
+   * @api public
+   */
+
+  is.empty = function (value) {
+    var type = toString.call(value)
+      , key
+      ;
+
+    if ('[object Array]' === type || '[object Arguments]' === type) { 
+      return value.length === 0;
     }
 
-    function array (self) {
-        return to_string.call(self) === '[object Array]'; 
+    if ('[object Object]' === type) {
+      for (var key in value) if (owns.call(value, key)) return false;
+      return true;
+    }
+    
+    if ('[object String]' === type) {
+      return value === '';
     }
 
-    function arraylike (self) {
-        return (self && self.length && is_finite(self.length));
+    return false;
+  };
+
+  /**
+   * Test if 'value' is an error object
+   *
+   * @param value value to test
+   * @return {Boolean} true if 'value' is an error object, false otherwise
+   * @api public
+   */
+
+  is.error = function (value) {
+    return '[object Error]' === toString.call(value);
+  };
+
+  /**
+   * Test if 'value' is equal to 'other'
+   *
+   * @param value value
+   * @param other value to compare with
+   * @return {Boolean} true if 'value' is equal to 'other', false otherwise
+   */
+
+  is.equal = function (value, other) { 
+    var undefined
+      , type = toString.call(value)
+      , key
+      ;
+
+    if (type !== toString.call(other)) {
+      return false;
     }
 
-    function boolean (self) {
-        return to_string.call(self) === '[object Boolean]'; 
-    }
-
-    function date (self) {
-        return to_string.call(self) === '[object Date]';
-    }
-
-    function decimal (self) {
-        return to_string.call(self) === '[object Number]' && self % 1 !== 0;
-    }
-
-    function def (self) {
-        return to_string.call(self) !== '[object Undefined]';
-    }
-
-    function element (self) {        
-        return !!(self && self.nodeType && self.nodeType === 1);
-    }
-
-    function empty (self) {
-        var key;
-
-        if (to_string.call(self) === '[object Array]'
-            || return to_string.call(self) === '[object Arguments]') { 
-            return self.length === 0;
+    if ('[object Object]' === type) {
+      for (key in value) {
+        if (!equiv(value[key], other[key])) {
+          return false;
         }
-        if (to_string.call(self) === '[object Object]') {
-            for (key in self) if (owns.call(self, key)) return false;
-            return true;
-        }
-        if (return to_string.call(self) === '[object String]') {
-            return self === '';
-        }
+      }
+      return true;
+    }
+
+    if ('[object Array]' === type) {
+      key = value.length;
+      if (key !== other.length) {
         return false;
-    }
-
-    function error (self) {
-        return to_string.call(self) === '[object Error]';
-    }
-
-    function equal (self, value) {
-        return self == value;
-    }
-
-    function equiv (self, value) { 
-        var type = to_string.call(self),
-            key,
-            len;
-
-        if (type !== to_string.call(value)) {
-            return false;
+      }
+      while (--key) {
+        if (!equiv(value[key], other[key])) {
+          return false;
         }
-        if (type === '[object Object]') {
-            for (key in self) {
-                if (!equiv(self[key], value[key])) {
-                    return false;    
-                }
-            }
-            return true;
-        }
-        if (type === '[object Array]') {
-            len = self.length;
-            if (len !== value.length) {
-                return false;
-            }
-            for (key = 0; key < len; key += 1) {
-                if (!equiv(self[key], value[key])) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        if (type === '[object Function]') {
-            return self.prototype === value.prototype;
-        }
-        if (type === '[object Date]') {
-            return self.getTime() === value.getTime();
-        }
-        if (type === '[object Undefined]') {
-            return false;
-        }
-        if (type === '[object Null]') {
-            return false;
-        }
-        return self == value;
+      }
+      return true;
     }
 
-    function func (self) {
-        return to_string.call(self) === '[object Function]'; 
+    if ('[object Function]' === type) {
+      return value.prototype === other.prototype;
     }
 
-    function host (self, property) {
-        var type = typeof self[property];
-        return type === 'object' ? !!self[property] : !NON_HOST_TYPES[type];
+    if ('[object Date]' === type) {
+      return value.getTime() === other.getTime();
     }
 
-    function integer (self) {
-        return to_string.call(self) === '[object Number]' && self % 1 === 0;
+    return value === other;
+  };
+
+  /**
+   * Test if 'value' is an even number
+   *
+   * @param {Number} value to test
+   * @return {Boolean} true if 'value' is an even number, false otherwise
+   * @api public
+   */
+
+  is.even = function (value) {
+    return '[object Number]' === toString.call(value) && value % 2 === 0;
+  };
+
+  /**
+   * Test if 'value' is false
+   *
+   * @param value value to test
+   * @return {Boolean} true if 'value' is false, false otherwise
+   * @api public
+   */
+
+  is.false = function (value) {
+    return value === false;
+  };
+
+  /**
+   * Test if 'value' is a function
+   *
+   * @param value value to test
+   * @return {Boolean} true if 'value' is a function, false otherwise
+   * @api public
+   */
+
+  is.function = function(value) {
+    return '[object Function]' === toString.call(value);
+  };
+
+  /**
+   * Test if 'value' is hosted by 'host'
+   *
+   * @param {String} value to test
+   * @param host host
+   * @return {Boolean} true if 'value' is hosted by 'host', false otherwise
+   * @api public
+   */
+
+  is.hosted = function (value, host) {
+    var type = typeof host[value];
+    return type === 'object' ? !!host[value] : !NON_HOST_TYPES[type];
+  };
+
+  /**
+   * Test if 'value' is greater than or equal to 'other'
+   * 
+   * @param {Number} value value to test
+   * @param {Number} other value to compare with
+   * @return {Boolean} 
+   * @api public
+   */
+
+  is.ge = function (value, other) {
+    return value >= other;
+  };
+
+  /**
+   * Test if 'value' is greater than 'other'
+   * 
+   * @param {Number} value value to test
+   * @param {Number} other value to compare with
+   * @return {Boolean} 
+   * @api public
+   */
+
+  is.gt = function (value, other) {
+    return value > other;
+  };
+
+  /**
+   * Test if 'value' is an integer
+   *
+   * @param value to test
+   * @return {Boolean} true if 'value' is an integer, false otherwise
+   * @api public
+   */
+
+  is.int = function (value) {
+    return '[object Number]' === toString.call(value) && value % 1 === 0;
+  };
+
+  /**
+   * Test if 'value' is not a number
+   *
+   * @param value to test
+   * @return {Boolean} true if 'value' is not a number, false otherwise
+   * @api public
+   */
+
+  is.nan = function (value) {
+    return value === null || value !== value;
+  };
+
+  /**
+   * Test if 'value' is less than 'other'
+   * 
+   * @param {Number} value value to test
+   * @param {Number} other value to compare with
+   * @return {Boolean} if 'value' is less than 'other'
+   * @api public
+   */
+
+  is.lt = function (value, other) {
+    return value < other;
+  };
+
+  /**
+   * Test if 'value' is less than or equal to 'other'
+   * 
+   * @param {Number} value value to test
+   * @param {Number} other value to compare with
+   * @return {Boolean} if 'value' is less than or equal to 'other'
+   * @api public
+   */
+
+  is.le = function (value, other) {
+    return value < other;
+  };
+
+  /**
+   * Test if 'value' is greater than 'others' values
+   * 
+   * @param {Number} value value to test
+   * @param {Array} others values to compare with
+   * @return {Boolean} true if 'value' is greater than 'others' values
+   * @api public
+   */
+
+  is.maximum = function (value, others) {
+    var len = others.length;
+    
+    while (--len) {
+      if (value < others[len]) {
+        return false;
+      }
     }
 
-    function nan (self) {
-        return self !== self;
+    return true;
+  };
+
+  /**
+   * Test if 'value' is less than 'others' values
+   * 
+   * @param {Number} value value to test
+   * @param {Array} others values to compare with
+   * @return {Boolean} true if 'value' is less than 'others' values
+   * @api public
+   */
+
+  is.minimum = function (value, others) {
+    var len = values.length;
+    
+    while (--len) {
+      if (value > others[len]) {
+        return false;
+      }
     }
+    
+    return true;
+  };
 
-    function max (self, value) {
-        return self > value;
-    }
+  /**
+   * Test if 'value' is null
+   *
+   * @param value to test
+   * @return {Boolean} true if 'value' is null, false otherwise
+   * @api public
+   */
 
-    function maximum (self, value) {
-        var len = values.length,
-            i;
-        
-        for (i = 0, i < len; i += 1) {
-            if (self <= value) {
-                return false;
-            }
-        }
-        return true;
-    }
+  is.null = function (value) {
+    return value === null;
+  };
 
-    function min (self, value) {
-        return self < value;
-    }
+  /**
+   * Test if 'value' is a number
+   *
+   * @param value to test
+   * @return {Boolean} true if 'value' is a number, false otherwise
+   * @api public
+   */
 
-    function minimum (self, values) {
-        var len = values.length,
-            i;
+  is.number = function (value) {
+    return '[object Number]' === toString.call(value);
+  };
 
-        for (i = 0, i < len; i += 1) {
-            if (self >= value) {
-                return false;
-            }
-        }
-        return true;
-    }
+  /**
+   * Test if 'value' is an odd number
+   *
+   * @param {Number} value to test
+   * @return {Boolean} true if 'value' is an odd number, false otherwise
+   * @api public
+   */
 
-    function nil (self) {
-        return to_string.call(self) === '[object Null]';
-    }
+  is.odd = function (value) {
+    return '[object Number]' === toString.call(value) && value % 2 !== 0;
+  };
 
-    function number (self) {
-        return to_string.call(self) === '[object Number]'; 
-    }
+  /**
+   * Test if 'value' is an object
+   *
+   * @param value to test
+   * @return {Boolean} true if 'value' is an object, false otherwise
+   * @api public
+   */
 
-    function object (self) {
-        return to_string.call(self) === '[object Object]';
-    }
+  is.object = function (value) {
+    return '[object Object]' === toString.call(value);
+  }
 
-    function regex (self) {
-        return to_string.call(self) === '[object RegExp]';
-    }
+  /**
+   * Test if 'value' is a regular expression
+   *
+   * @param value to test
+   * @return {Boolean} true if 'value' is a regexp, false otherwise
+   * @api public
+   */
 
-    function string (self) {
-        return to_string.call(self) === '[object String]'; 
-    }
+  is.regexp = function (value) {
+    return '[object RegExp]' === toString.call(value);
+  };
 
-    function undef (self) {
-        return to_string.call(self) === '[object Undefined]';
-    }
+  /**
+   * Test if 'value' is a string
+   *
+   * @param value to test
+   * @return {Boolean} true if 'value' is a string, false otherwise
+   * @api public
+   */
 
-    function TRUE (self) {
-        return self === true;
-    }
+  is.string = function (value) {
+    return '[object String]' === toString.call(value);
+  }
 
-    function FALSE (self) {
-        return self === false;
-    }
+  /**
+   * Test if 'value' is true
+   *
+   * @param {Boolean} value to test
+   * @return {Boolean} true if 'value' is true, false otherwise
+   * @api public
+   */
 
-    function ZERO (serf) {
-        return self === 0;
-    }
+  is.true = function (value) {
+    return value === true;
+  };
 
-    function ONE (self) {
-        return self === 1;
-    }
+  /**
+   * Test if 'value' is undefined
+   *
+   * @param value value to test
+   * @return {Boolean} true if 'value' is undefined, false otherwise
+   * @api public
+   */
 
-    function even (self) {
-        return to_string.call(self === '[object Number]')
-            && self % 2 === 0;
-    }
+  is.undefined = function (value) {
+    return value === undefined;
+  };
 
-    function odd (self) {
-        return to_string.call(self === '[object Number]')
-            && self % 2 === 1;
-    }
-
-    function divisible_by (self, dividend) {
-        return to_string.call(self === '[object Number]')
-            && dividend !== 0
-            && self % dividend === 0;
-    }
-
-    return {
-        args: arguments,
-        arguments: arguments,
-        array: array,
-        arraylike: arraylike,
-        bool: bool,
-        boolean: bool,
-        date: date,
-        decimal: decimal,
-        def: def,
-        defined: defined,
-        el: element,
-        element: element,
-        empty: empty,
-        equal: equal,
-        equiv: equiv,
-        err: error,
-        error: error,
-        func: func,
-        host: host,
-        host_type: host,
-        int: integer,
-        integer: integer,
-        max: max,
-        maximum: maximum,
-        min: min,
-        minimum: minimum,
-        nan: nan,
-        nil: nil,
-        num: number,
-        number: number,
-        obj: object,
-        object: object,
-        regex: regex,
-        str: string,
-        string: string,
-        undef: undef,
-        TRUE: TRUE,
-        'true': TRUE,
-        FALSE: FALSE,
-        'false': FALSE,
-        zero: zero,
-        one: one,
-        even: even,
-        odd: odd,
-        divisible_by: divisible_by
-    };
+  /**
+   * Test if 'value' is undefined
+   *
+   * @param {Number} value value to test
+   * @param {Number} n dividend
+   * @return {Boolean} true if 'value' is divisible by 'n', false otherwise
+   * @api public
+   */
+    
+  is.divisibleBy = function (value, n) {
+    return '[object Number]' === toString.call(value)
+      && n !== 0 
+      && value % n === 0;
+  };
 
 }(this));

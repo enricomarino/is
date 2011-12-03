@@ -4,6 +4,7 @@
   "homepage": "https://github.com/onirame/is",
   "keywords": [
     "util",
+    "test",
     "type",
     "sniff",
     "server",
@@ -18,7 +19,7 @@
     "url": "git://github.com/onirame/is.git"
   },
   "main": "is.js",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "devDependencies": {},
   "engines": {
     "node": "*"
