@@ -20,10 +20,15 @@
       }
     ;
 
-  var is = exports.is = {};
+  exports.is = {};
 
   /**
-   * Test if 'value' is a type of 'type'
+   * Library version.
+   */
+  is.version = 0.1.1;
+
+  /**
+   * Test if 'value' is a type of 'type'.
    * 
    * @param value value to test
    * @param {String} type type
@@ -36,7 +41,7 @@
   };
 
   /**
-   * Test if 'value' is an arguments object
+   * Test if 'value' is an arguments object.
    * 
    * @param value value to test
    * @return {Boolean} true if 'value' is an arguments object, false otherwise
@@ -48,7 +53,7 @@
   };
 
   /**
-   * Test if 'value' is an array
+   * Test if 'value' is an array.
    * 
    * @param value value to test
    * @return {Boolean} true if 'value' is an array, false otherwise
@@ -60,7 +65,7 @@
   };
 
   /**
-   * Test if 'value' is an empty array(like) object
+   * Test if 'value' is an empty array(like) object.
    * 
    * @param {Array|Arguments} value value to test
    * @return {Boolean} true if 'value' is an empty array(like), false otherwise
@@ -72,7 +77,7 @@
   };
 
   /**
-   * Test if 'value' is an arraylike object
+   * Test if 'value' is an arraylike object.
    * 
    * @param value value to test
    * @return {Boolean} true if 'value' is an arguments object, false otherwise
@@ -86,7 +91,7 @@
   };
 
   /**
-   * Test if 'value' is a boolean
+   * Test if 'value' is a boolean.
    *
    * @param value value to test
    * @return {Boolean} true if 'value' is a boolean, false otherwise
@@ -98,7 +103,7 @@
   };
 
   /**
-   * Test if 'value' is a date
+   * Test if 'value' is a date.
    *
    * @param value value to test
    * @return {Boolean} true if 'value' is a date, false otherwise
@@ -110,7 +115,7 @@
   };
 
   /**
-   * Test if 'value' is a decimal number
+   * Test if 'value' is a decimal number.
    *
    * @param value value to test
    * @return {Boolean} true if 'value' is a decimal number, false otherwise
@@ -123,7 +128,7 @@
   };
 
   /**
-   * Test if 'value' is defined
+   * Test if 'value' is defined.
    *
    * @param value value to test
    * @return {Boolean} true if 'value' is defined, false otherwise
@@ -135,7 +140,7 @@
   };
 
   /**
-   * Test if 'value' is divisible by 'n'
+   * Test if 'value' is divisible by 'n'.
    *
    * @param {Number} value value to test
    * @param {Number} n dividend
@@ -150,7 +155,7 @@
   };
 
   /**
-   * Test if 'value' is an html element
+   * Test if 'value' is an html element.
    *
    * @param value value to test
    * @return {Boolean} true if 'value' is an html element, false otherwise
@@ -164,7 +169,7 @@
   };
 
   /**
-   * Test if 'value' is empty
+   * Test if 'value' is empty.
    *
    * @param value value to test
    * @return {Boolean} true if 'value' is empty, false otherwise
@@ -193,7 +198,7 @@
   };
 
   /**
-   * Test if 'value' is an error object
+   * Test if 'value' is an error object.
    *
    * @param value value to test
    * @return {Boolean} true if 'value' is an error object, false otherwise
@@ -205,7 +210,7 @@
   };
 
   /**
-   * Test if 'value' is equal to 'other'
+   * Test if 'value' is equal to 'other'.
    *
    * @param value value
    * @param other value to compare with
@@ -256,7 +261,7 @@
   };
 
   /**
-   * Test if 'value' is an even number
+   * Test if 'value' is an even number.
    *
    * @param {Number} value to test
    * @return {Boolean} true if 'value' is an even number, false otherwise
@@ -268,7 +273,7 @@
   };
 
   /**
-   * Test if 'value' is false
+   * Test if 'value' is false.
    *
    * @param value value to test
    * @return {Boolean} true if 'value' is false, false otherwise
@@ -280,7 +285,7 @@
   };
 
   /**
-   * Test if 'value' is a function
+   * Test if 'value' is a function.
    *
    * @param value value to test
    * @return {Boolean} true if 'value' is a function, false otherwise
@@ -292,7 +297,7 @@
   };
 
   /**
-   * Test if 'value' is hosted by 'host'
+   * Test if 'value' is hosted by 'host'.
    *
    * @param {String} value to test
    * @param host host
@@ -306,7 +311,7 @@
   };
 
   /**
-   * Test if 'value' is greater than or equal to 'other'
+   * Test if 'value' is greater than or equal to 'other'.
    * 
    * @param {Number} value value to test
    * @param {Number} other value to compare with
@@ -319,7 +324,7 @@
   };
 
   /**
-   * Test if 'value' is greater than 'other'
+   * Test if 'value' is greater than 'other'.
    * 
    * @param {Number} value value to test
    * @param {Number} other value to compare with
@@ -332,7 +337,7 @@
   };
 
   /**
-   * Test if 'value' is an instance of 'constructor'
+   * Test if 'value' is an instance of 'constructor'.
    * 
    * @param value value to test
    * @return {Boolean} true if 'value' is an instance of 'constructor'
@@ -344,7 +349,7 @@
   };
 
   /**
-   * Test if 'value' is an integer
+   * Test if 'value' is an integer.
    *
    * @param value to test
    * @return {Boolean} true if 'value' is an integer, false otherwise
@@ -356,7 +361,7 @@
   };
 
   /**
-   * Test if 'value' is not a number
+   * Test if 'value' is not a number.
    *
    * @param value to test
    * @return {Boolean} true if 'value' is not a number, false otherwise
@@ -368,7 +373,7 @@
   };
 
   /**
-   * Test if 'value' is less than or equal to 'other'
+   * Test if 'value' is less than or equal to 'other'.
    * 
    * @param {Number} value value to test
    * @param {Number} other value to compare with
@@ -381,7 +386,7 @@
   };
 
   /**
-   * Test if 'value' is less than 'other'
+   * Test if 'value' is less than 'other'.
    * 
    * @param {Number} value value to test
    * @param {Number} other value to compare with
@@ -394,7 +399,7 @@
   };
 
   /**
-   * Test if 'value' is greater than 'others' values
+   * Test if 'value' is greater than 'others' values.
    * 
    * @param {Number} value value to test
    * @param {Array} others values to compare with
@@ -415,7 +420,7 @@
   };
 
   /**
-   * Test if 'value' is less than 'others' values
+   * Test if 'value' is less than 'others' values.
    * 
    * @param {Number} value value to test
    * @param {Array} others values to compare with
@@ -436,7 +441,7 @@
   };
 
   /**
-   * Test if 'value' is null
+   * Test if 'value' is null.
    *
    * @param value to test
    * @return {Boolean} true if 'value' is null, false otherwise
@@ -448,7 +453,7 @@
   };
 
   /**
-   * Test if 'value' is a number
+   * Test if 'value' is a number.
    *
    * @param value to test
    * @return {Boolean} true if 'value' is a number, false otherwise
@@ -460,7 +465,7 @@
   };
 
   /**
-   * Test if 'value' is an odd number
+   * Test if 'value' is an odd number.
    *
    * @param {Number} value to test
    * @return {Boolean} true if 'value' is an odd number, false otherwise
@@ -472,7 +477,7 @@
   };
 
   /**
-   * Test if 'value' is an object
+   * Test if 'value' is an object.
    *
    * @param value to test
    * @return {Boolean} true if 'value' is an object, false otherwise
@@ -484,7 +489,7 @@
   }
 
   /**
-   * Test if 'value' is a regular expression
+   * Test if 'value' is a regular expression.
    *
    * @param value to test
    * @return {Boolean} true if 'value' is a regexp, false otherwise
@@ -496,7 +501,7 @@
   };
 
   /**
-   * Test if 'value' is a string
+   * Test if 'value' is a string.
    *
    * @param value to test
    * @return {Boolean} true if 'value' is a string, false otherwise
@@ -508,7 +513,7 @@
   }
 
   /**
-   * Test if 'value' is true
+   * Test if 'value' is true.
    *
    * @param {Boolean} value to test
    * @return {Boolean} true if 'value' is true, false otherwise
@@ -520,7 +525,7 @@
   };
 
   /**
-   * Test if 'value' is undefined
+   * Test if 'value' is undefined.
    *
    * @param value value to test
    * @return {Boolean} true if 'value' is undefined, false otherwise
@@ -532,7 +537,7 @@
   };
 
   /**
-   * Test if 'value' is within 'start' and 'finish'
+   * Test if 'value' is within 'start' and 'finish'.
    *
    * @param {Number} value value to test
    * @param {Number} start lower bound
