@@ -1,4 +1,4 @@
-# is.js
+# is
 
 the definitive JavaScript type testing library
 
