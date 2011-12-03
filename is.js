@@ -20,6 +20,8 @@
       }
     ;
 
+  var is = exports.is = {};
+
   /**
    * Test if 'value' is an arguments object
    * 
