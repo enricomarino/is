@@ -1,6 +1,6 @@
 {
   "name": "is",
-  "description": "JavaScript type testing library",
+  "description": "the definitive JavaScript type testing library",
   "homepage": "https://github.com/onirame/is",
   "keywords": [
     "util",

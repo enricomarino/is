@@ -23,6 +23,19 @@
   var is = exports.is = {};
 
   /**
+   * Test if 'value' is a type of 'type'
+   * 
+   * @param value value to test
+   * @param {String} type type
+   * @return {Boolean} true if 'value' is an arguments object, false otherwise
+   * @api public
+   */
+
+  is.a = function (value, type) {
+    return typeof value === type;
+  };
+
+  /**
    * Test if 'value' is an arguments object
    * 
    * @param value value to test
@@ -319,6 +332,18 @@
   };
 
   /**
+   * Test if 'value' is an instance of 'constructor'
+   * 
+   * @param value value to test
+   * @return {Boolean} true if 'value' is an instance of 'constructor'
+   * @api public
+   */
+
+  is.instanceof = function (value, constructor) {
+    return value instanceof constructor;
+  };
+
+  /**
    * Test if 'value' is an integer
    *
    * @param value to test
@@ -505,5 +530,18 @@
   is.undefined = function (value) {
     return value === undefined;
   };
+
+  /**
+   * Test if 'value' is within 'start' and 'finish'
+   *
+   * @param {Number} value value to test
+   * @param {Number} start lower bound
+   * @param {Number} finish upper bound
+   * @return {Boolean} true if 'value' is is within 'start' and 'finish'
+   * @api public
+   */
+  is.within = function (value, start, finish) {
+    return value >= start && value <= finish;
+  }
 
 }(this));

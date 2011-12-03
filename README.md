@@ -6,6 +6,7 @@ the definitive JavaScript type testing library
 
 is value ... ?
 
+ - a (value, type)
  - arguments (value)
  - array (value)
  - array.empty (value)
@@ -25,6 +26,7 @@ is value ... ?
  - hosted (value, host)
  - ge (value)
  - gt (value)
+ - instanceof (value, constructor)
  - int (value)
  - nan (value)
  - le (value)
@@ -39,6 +41,7 @@ is value ... ?
  - string (value)
  - true (value)
  - undefined (value)
+ - within (value, start, finish)
 
 ## License 
 
