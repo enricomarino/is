@@ -122,6 +122,21 @@
   };
 
   /**
+   * Test if 'value' is divisible by 'n'
+   *
+   * @param {Number} value value to test
+   * @param {Number} n dividend
+   * @return {Boolean} true if 'value' is divisible by 'n', false otherwise
+   * @api public
+   */
+    
+  is.divisibleBy = function (value, n) {
+    return '[object Number]' === toString.call(value)
+      && n !== 0 
+      && value % n === 0;
+  };
+
+  /**
    * Test if 'value' is an html element
    *
    * @param value value to test
@@ -328,19 +343,6 @@
   };
 
   /**
-   * Test if 'value' is less than 'other'
-   * 
-   * @param {Number} value value to test
-   * @param {Number} other value to compare with
-   * @return {Boolean} if 'value' is less than 'other'
-   * @api public
-   */
-
-  is.lt = function (value, other) {
-    return value < other;
-  };
-
-  /**
    * Test if 'value' is less than or equal to 'other'
    * 
    * @param {Number} value value to test
@@ -350,6 +352,19 @@
    */
 
   is.le = function (value, other) {
+    return value < other;
+  };
+
+  /**
+   * Test if 'value' is less than 'other'
+   * 
+   * @param {Number} value value to test
+   * @param {Number} other value to compare with
+   * @return {Boolean} if 'value' is less than 'other'
+   * @api public
+   */
+
+  is.lt = function (value, other) {
     return value < other;
   };
 
@@ -489,21 +504,6 @@
 
   is.undefined = function (value) {
     return value === undefined;
-  };
-
-  /**
-   * Test if 'value' is undefined
-   *
-   * @param {Number} value value to test
-   * @param {Number} n dividend
-   * @return {Boolean} true if 'value' is divisible by 'n', false otherwise
-   * @api public
-   */
-    
-  is.divisibleBy = function (value, n) {
-    return '[object Number]' === toString.call(value)
-      && n !== 0 
-      && value % n === 0;
   };
 
 }(this));

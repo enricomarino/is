@@ -1,30 +1,44 @@
 # is.js
 
-JavaScript type testing library
+the definitive JavaScript type testing library
 
 ## API
 
-is x ... ?
+is value ... ?
 
- - arguments(x), args(x)
- - array(x)
- - arraylike(x)
- - boolean(x), bool(x)
- - date(x)
- - decimal(x)
- - defined(x), def(x)
- - element(x), el(x)
- - empty(x)
- - error(x), err(x)
- - func(x)
- - integer(x), int(x)
- - nan(x)
- - nil(x)
- - number(x), num(x)
- - object(x)
- - regex(x)
- - string(x)
- - undef(x)
+ - arguments (value)
+ - array (value)
+ - array.empty (value)
+ - arraylike (value)
+ - boolean (value)
+ - date (value)
+ - decimal (value)
+ - defined (value)
+ - divisibleBy (value)
+ - element (value)
+ - empty (value)
+ - error (value)
+ - equal (value)
+ - even (value)
+ - false (value)
+ - function (value)
+ - hosted (value, host)
+ - ge (value)
+ - gt (value)
+ - int (value)
+ - nan (value)
+ - le (value)
+ - lt (value)
+ - maximum (value)
+ - minimum (value)
+ - null (value)
+ - number (value)
+ - odd (value)
+ - object (value)
+ - regexp (value)
+ - string (value)
+ - true (value)
+ - undefined (value)
 
 ## License 
 
