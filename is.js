@@ -25,7 +25,8 @@
   /**
    * Library version.
    */
-  is.version = 0.1.1;
+   
+  is.version = 0.1.2;
 
   /**
    * Test if 'value' is a type of 'type'.
@@ -123,8 +124,7 @@
    */
 
   is.decimal = function (value) {
-    return '[object Number]' === toString.call(value) 
-      && value % 1 !== 0;
+    return '[object Number]' === toString.call(value) && value % 1 !== 0;
   };
 
   /**
@@ -382,7 +382,7 @@
    */
 
   is.le = function (value, other) {
-    return value < other;
+    return value <= other;
   };
 
   /**
