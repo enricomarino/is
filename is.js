@@ -12,11 +12,11 @@
     , owns = {}.hasOwnProperty
     , toString = {}.toString
     , isFinite = isFinite
-    , NON_HOST_TYPES = { 
+    , NON_HOST_TYPES = {
           'boolean': 1
-        , 'number': 1 
+        , 'number': 1
         , 'string': 1
-        , 'undefined': 1 
+        , 'undefined': 1
       }
     ;
 
@@ -25,25 +25,26 @@
   /**
    * Library version.
    */
-   
+
   is.version = 0.1.2;
 
   /**
    * Test if 'value' is a type of 'type'.
-   * 
+   *
    * @param value value to test
    * @param {String} type type
    * @return {Boolean} true if 'value' is an arguments object, false otherwise
    * @api public
    */
 
-  is.a = function (value, type) {
+  is.a =
+  is.type = function (value, type) {
     return typeof value === type;
   };
 
   /**
    * Test if 'value' is an arguments object.
-   * 
+   *
    * @param value value to test
    * @return {Boolean} true if 'value' is an arguments object, false otherwise
    * @api public
@@ -55,19 +56,19 @@
 
   /**
    * Test if 'value' is an array.
-   * 
+   *
    * @param value value to test
    * @return {Boolean} true if 'value' is an array, false otherwise
    * @api public
    */
 
   is.array = function (value) {
-    return '[object Array]' === toString.call(value); 
+    return '[object Array]' === toString.call(value);
   };
 
   /**
    * Test if 'value' is an empty array(like) object.
-   * 
+   *
    * @param {Array|Arguments} value value to test
    * @return {Boolean} true if 'value' is an empty array(like), false otherwise
    * @api public
@@ -79,15 +80,15 @@
 
   /**
    * Test if 'value' is an arraylike object.
-   * 
+   *
    * @param value value to test
    * @return {Boolean} true if 'value' is an arguments object, false otherwise
    * @api public
    */
 
   is.arraylike = function (value) {
-    return value !== undefined 
-      && owns.call(value, 'length') 
+    return value !== undefined
+      && owns.call(value, 'length')
       && isFinite(value.length);
   };
 
@@ -100,7 +101,7 @@
    */
 
   is.boolean = function (value) {
-    return '[object Boolean]' === toString.call(value); 
+    return '[object Boolean]' === toString.call(value);
   };
 
   /**
@@ -147,10 +148,10 @@
    * @return {Boolean} true if 'value' is divisible by 'n', false otherwise
    * @api public
    */
-    
+
   is.divisibleBy = function (value, n) {
     return '[object Number]' === toString.call(value)
-      && n !== 0 
+      && n !== 0
       && value % n === 0;
   };
 
@@ -162,9 +163,9 @@
    * @api public
    */
 
-  is.element = function (value) {        
+  is.element = function (value) {
     return value !== undefined
-      && owns.call(value, nodeType) 
+      && owns.call(value, nodeType)
       && value.nodeType === 1;
   };
 
@@ -181,7 +182,7 @@
       , key
       ;
 
-    if ('[object Array]' === type || '[object Arguments]' === type) { 
+    if ('[object Array]' === type || '[object Arguments]' === type) {
       return value.length === 0;
     }
 
@@ -189,7 +190,7 @@
       for (var key in value) if (owns.call(value, key)) return false;
       return true;
     }
-    
+
     if ('[object String]' === type) {
       return value === '';
     }
@@ -217,7 +218,7 @@
    * @return {Boolean} true if 'value' is equal to 'other', false otherwise
    */
 
-  is.equal = function (value, other) { 
+  is.equal = function (value, other) {
     var undefined
       , type = toString.call(value)
       , key
@@ -312,10 +313,10 @@
 
   /**
    * Test if 'value' is greater than or equal to 'other'.
-   * 
+   *
    * @param {Number} value value to test
    * @param {Number} other value to compare with
-   * @return {Boolean} 
+   * @return {Boolean}
    * @api public
    */
 
@@ -325,10 +326,10 @@
 
   /**
    * Test if 'value' is greater than 'other'.
-   * 
+   *
    * @param {Number} value value to test
    * @param {Number} other value to compare with
-   * @return {Boolean} 
+   * @return {Boolean}
    * @api public
    */
 
@@ -338,7 +339,7 @@
 
   /**
    * Test if 'value' is an instance of 'constructor'.
-   * 
+   *
    * @param value value to test
    * @return {Boolean} true if 'value' is an instance of 'constructor'
    * @api public
@@ -374,7 +375,7 @@
 
   /**
    * Test if 'value' is less than or equal to 'other'.
-   * 
+   *
    * @param {Number} value value to test
    * @param {Number} other value to compare with
    * @return {Boolean} if 'value' is less than or equal to 'other'
@@ -387,7 +388,7 @@
 
   /**
    * Test if 'value' is less than 'other'.
-   * 
+   *
    * @param {Number} value value to test
    * @param {Number} other value to compare with
    * @return {Boolean} if 'value' is less than 'other'
@@ -400,7 +401,7 @@
 
   /**
    * Test if 'value' is greater than 'others' values.
-   * 
+   *
    * @param {Number} value value to test
    * @param {Array} others values to compare with
    * @return {Boolean} true if 'value' is greater than 'others' values
@@ -409,7 +410,7 @@
 
   is.maximum = function (value, others) {
     var len = others.length;
-    
+
     while (--len) {
       if (value < others[len]) {
         return false;
@@ -421,7 +422,7 @@
 
   /**
    * Test if 'value' is less than 'others' values.
-   * 
+   *
    * @param {Number} value value to test
    * @param {Array} others values to compare with
    * @return {Boolean} true if 'value' is less than 'others' values
@@ -430,13 +431,13 @@
 
   is.minimum = function (value, others) {
     var len = values.length;
-    
+
     while (--len) {
       if (value > others[len]) {
         return false;
       }
     }
-    
+
     return true;
   };
 
