@@ -2,6 +2,8 @@
 
 the definitive JavaScript type testing library
 
+To be or not to be? This is the library!
+
 ## API
 
 is value ... ?
@@ -43,7 +45,7 @@ is value ... ?
  - undefined (value)
  - within (value, start, finish)
 
-## License 
+## License
 
 (The MIT License)
 
