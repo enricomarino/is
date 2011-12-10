@@ -79,6 +79,10 @@ To be or not to be? This is the library!
 
  - is.string (value)
 
+## Installation
+
+    $ npm install is
+
 ## License
 
 (The MIT License)
