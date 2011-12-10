@@ -26,7 +26,7 @@
    * Library version.
    */
 
-  is.version = 0.1.2;
+  is.version = 0.1.3;
 
   /**
    * Test if 'value' is a type of 'type'.

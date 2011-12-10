@@ -6,44 +6,78 @@ To be or not to be? This is the library!
 
 ## API
 
-is value ... ?
+### general
 
- - a (value, type)
- - arguments (value)
- - array (value)
- - array.empty (value)
- - arraylike (value)
- - boolean (value)
- - date (value)
- - decimal (value)
- - defined (value)
- - divisibleBy (value, n)
- - element (value)
- - empty (value)
- - error (value)
- - equal (value, other)
- - even (value)
- - false (value)
+ - is.a (value, type) or is.type (value, type)
+ - is.defined (value)
+ - is.empty (value)
+ - is.equal (value, other)
+ - is.hosted (value, host)
+ - is.instanceof (value, constructor)
+ - is.null (value)
+ - is.undefined (value)
+
+### arguments
+
+ - is.arguments (value)
+ - is.arguments.empty (value)
+
+### array
+
+ - is.array (value)
+ - is.array.empty (value)
+ - is.arraylike (value)
+
+### boolean
+
+ - is.boolean (value)
+ - is.false (value)
+ - is.true (value)
+
+### date
+
+ - is.date (value)
+
+### element
+
+ - is.element (value)
+
+### error
+
+ - is.error (value)
+
+### function
+
  - function (value)
- - hosted (value, host)
- - ge (value, other)
- - gt (value, other)
- - instanceof (value, constructor)
- - int (value)
- - nan (value)
- - le (value, other)
- - lt (value, other)
- - maximum (value, others)
- - minimum (value, others)
- - null (value)
- - number (value)
- - odd (value)
- - object (value)
- - regexp (value)
- - string (value)
- - true (value)
- - undefined (value)
- - within (value, start, finish)
+
+### number
+
+ - is.number (value)
+ - is.decimal (value)
+ - is.divisibleBy (value, n)
+ - is.int (value)
+ - is.maximum (value, others)
+ - is.minimum (value, others)
+ - is.nan (value)
+ - is.even (value)
+ - is.odd (value)
+ - is.ge (value, other)
+ - is.gt (value, other)
+ - is.le (value, other)
+ - is.lt (value, other)
+ - is.within (value, start, finish)
+
+### object
+
+ - is.object (value)
+
+### regexp
+
+ - is.regexp (value)
+
+### string
+
+ - is.string (value)
 
 ## License
 
