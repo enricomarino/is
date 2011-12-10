@@ -74,6 +74,7 @@
    * @api public
    */
 
+  is.arguments.empty =
   is.array.empty = function (value) {
     return value.length === 0;
   };
