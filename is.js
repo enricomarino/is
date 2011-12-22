@@ -20,7 +20,7 @@
       }
     ;
 
-  exports.is = {};
+  var is = exports.is = {};
 
   /**
    * Library version.
