@@ -19,7 +19,7 @@
     "url": "git://github.com/onirame/is.git"
   },
   "main": "is.js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "devDependencies": {},
   "engines": {
     "node": "*"

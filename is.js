@@ -20,13 +20,17 @@
       }
     ;
 
+  /**
+   * Library namespace.
+   */
+
   var is = exports.is = {};
 
   /**
    * Library version.
    */
 
-  is.version = '0.1.4';
+  is.version = '0.1.5';
 
   /**
    * Test general.
