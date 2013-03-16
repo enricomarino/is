@@ -1,8 +1,18 @@
 # is
 
-the definitive JavaScript type testing library
+The definitive JavaScript type testing library
 
 To be or not to be? This is the library!
+
+## Installation
+
+As a node.js module
+
+    $ npm install is
+
+As a component
+
+    $ component install enricomarino/is
 
 ## API
 
@@ -79,15 +89,12 @@ To be or not to be? This is the library!
 
  - is.string (value)
 
-## Installation
-
-    $ npm install is
 
 ## License
 
 (The MIT License)
 
-Copyright (c) 2011 Enrico Marino &lt;enrico.marino@email.com&gt;
+Copyright (c) 2013 Enrico Marino
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
