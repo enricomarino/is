@@ -1,24 +1,23 @@
 {
   "name": "is",
+  "author": {
+    "name": "Enrico Marino",
+    "url": "http://onirame.com"
+  },
   "description": "the definitive JavaScript type testing library",
-  "homepage": "https://github.com/onirame/is",
+  "homepage": "https://github.com/enricomarino/is",
   "keywords": [
     "util",
-    "test",
     "type",
-    "sniff",
-    "server",
-    "client",
-    "browser"
+    "test"
   ],
-  "author": "Enrico Marino <enrico.marino@email.com> (http://onirame.no.de)",
   "contributors": [],
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "git://github.com/onirame/is.git"
+    "url": "git://github.com/enricomarino/is.git"
   },
-  "main": "is.js",
+  "main": "index.js",
   "version": "0.1.5",
   "devDependencies": {},
   "engines": {
