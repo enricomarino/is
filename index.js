@@ -640,3 +640,17 @@ is.regexp = function (value) {
 is.string = function (value) {
   return '[object String]' === toString.call(value);
 };
+
+/**
+ * is.hash
+ * Test if `value` is a plain object, ie a hash.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a hash, false otherwise
+ * @api public
+ */
+
+is.hash = function (value) {
+  return is.object(value) && value.constructor === Object && !value.nodeType && !value.setInterval;
+};
+
