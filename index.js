@@ -22,7 +22,7 @@ var NON_HOST_TYPES = {
  * Expose `is`
  */
 
-var is = exports.is = {};
+var is = module.exports = {};
 
 /**
  * Test general.
