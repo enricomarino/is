@@ -223,6 +223,14 @@ test('is.number', function (t) {
   t.end();
 });
 
+test('is.infinite', function (t) {
+  t.true(is.infinite(Infinity), 'positive infinity is infinite');
+  t.true(is.infinite(-Infinity), 'negative infinity is infinite');
+  t.false(is.infinite(NaN), 'NaN is not infinite');
+  t.false(is.infinite(0), 'a number is not infinite');
+  t.end();
+});
+
 test('is.decimal', function (t) {
   t.true(is.decimal(1.1), 'decimal is decimal');
   t.false(is.decimal(0), 'zero is not decimal');

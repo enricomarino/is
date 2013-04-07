@@ -63,6 +63,7 @@ As a component
 ### number
 
  - is.number (value)
+ - is.infinite (value)
  - is.decimal (value)
  - is.divisibleBy (value, n)
  - is.int (value)
