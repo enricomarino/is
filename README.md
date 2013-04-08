@@ -4,6 +4,8 @@ The definitive JavaScript type testing library
 
 To be or not to be? This is the library!
 
+[![browser support][1]][2]
+
 ## Installation
 
 As a node.js module
@@ -63,6 +65,7 @@ As a component
 ### number
 
  - is.number (value)
+ - is.infinite (value)
  - is.decimal (value)
  - is.divisibleBy (value, n)
  - is.int (value)
@@ -114,3 +117,7 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+[1]: https://ci.testling.com/enricomarino/is.png
+[2]: https://ci.testling.com/enricomarino/is
+

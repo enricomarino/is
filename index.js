@@ -10,7 +10,9 @@
 var object = {};
 var owns = object.hasOwnProperty;
 var toString = object.toString;
-var isFinite = isFinite;
+var isActualNaN = function (value) {
+  return is.number(value) && value !== value;
+};
 var NON_HOST_TYPES = {
   "boolean": 1,
   "number": 1,
@@ -22,7 +24,7 @@ var NON_HOST_TYPES = {
  * Expose `is`
  */
 
-var is = exports.is = {};
+var is = module.exports = {};
 
 /**
  * Test general.
@@ -224,17 +226,27 @@ is.array = function (value) {
 };
 
 /**
- * is.array.empty
- * Test if `value` is an empty array(like) object.
+ * is.arguments.empty
+ * Test if `value` is an empty arguments object.
  *
  * @param {Mixed} value value to test
- * @return {Boolean} true if `value` is an empty array(like), false otherwise
+ * @return {Boolean} true if `value` is an empty arguments object, false otherwise
  * @api public
  */
+is.arguments.empty = function (value) {
+  return is.arguments(value) && value.length === 0;
+};
 
-is.arguments.empty =
+/**
+ * is.array.empty
+ * Test if `value` is an empty array.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an empty array, false otherwise
+ * @api public
+ */
 is.array.empty = function (value) {
-  return value.length === 0;
+  return is.array(value) && value.length === 0;
 };
 
 /**
@@ -247,9 +259,11 @@ is.array.empty = function (value) {
  */
 
 is.arraylike = function (value) {
-  return value !== undefined 
+  return !!value && !is.boolean(value)
     && owns.call(value, 'length')
-    && isFinite(value.length);
+    && isFinite(value.length)
+    && is.number(value.length)
+    && value.length >= 0;
 };
 
 /**
@@ -279,7 +293,7 @@ is.boolean = function (value) {
  */
 
 is.false = function (value) {
-  return value === false;
+  return is.boolean(value) && (value === false || value.valueOf() === false);
 };
 
 /**
@@ -292,7 +306,7 @@ is.false = function (value) {
  */
 
 is.true = function (value) {
-  return value === true;
+  return is.boolean(value) && (value === true || value.valueOf() === true);
 };
 
 /**
@@ -327,7 +341,9 @@ is.date = function (value) {
 
 is.element = function (value) {
   return value !== undefined
-    && owns.call(value, nodeType)
+    && typeof HTMLElement !== 'undefined'
+    && value instanceof HTMLElement
+    && owns.call(value, 'nodeType')
     && value.nodeType === 1;
 };
 
@@ -383,6 +399,18 @@ is.number = function (value) {
 };
 
 /**
+ * is.infinite
+ * Test if `value` is positive or negative infinity.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is positive or negative Infinity, false otherwise
+ * @api public
+ */
+is.infinite = function (value) {
+  return value === Infinity || value === -Infinity;
+};
+
+/**
  * is.decimal
  * Test if `value` is a decimal number.
  *
@@ -392,7 +420,7 @@ is.number = function (value) {
  */
 
 is.decimal = function (value) {
-  return '[object Number]' === toString.call(value) && value % 1 !== 0;
+  return is.number(value) && !isActualNaN(value) && value % 1 !== 0;
 };
 
 /**
@@ -406,9 +434,10 @@ is.decimal = function (value) {
  */
 
 is.divisibleBy = function (value, n) {
-  return '[object Number]' === toString.call(value)
-    && n !== 0
-    && value % n === 0;
+  var isDividendInfinite = is.infinite(value);
+  var isDivisorInfinite = is.infinite(n);
+  var isNonZeroNumber = is.number(value) && !isActualNaN(value) && is.number(n) && !isActualNaN(n) && n !== 0;
+  return isDividendInfinite || isDivisorInfinite || (isNonZeroNumber && value % n === 0);
 };
 
 /**
@@ -421,8 +450,7 @@ is.divisibleBy = function (value, n) {
  */
 
 is.int = function (value) {
-  return '[object Number]' === toString.call(value) 
-    && value % 1 === 0;
+  return is.number(value) && !isActualNaN(value) && value % 1 === 0;
 };
 
 /**
@@ -436,9 +464,14 @@ is.int = function (value) {
  */
 
 is.maximum = function (value, others) {
+  if (isActualNaN(value)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.arraylike(others)) {
+    throw new TypeError('second argument must be array-like');
+  }
   var len = others.length;
 
-  while (--len) {
+  while (--len >= 0) {
     if (value < others[len]) {
       return false;
     }
@@ -458,9 +491,14 @@ is.maximum = function (value, others) {
  */
 
 is.minimum = function (value, others) {
-  var len = values.length;
+  if (isActualNaN(value)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.arraylike(others)) {
+    throw new TypeError('second argument must be array-like');
+  }
+  var len = others.length;
 
-  while (--len) {
+  while (--len >= 0) {
     if (value > others[len]) {
       return false;
     }
@@ -479,7 +517,7 @@ is.minimum = function (value, others) {
  */
 
 is.nan = function (value) {
-  return value === null || value !== value;
+  return !is.number(value) || value !== value;
 };
 
 /**
@@ -492,7 +530,7 @@ is.nan = function (value) {
  */
 
 is.even = function (value) {
-  return value % 2 === 0;
+  return is.infinite(value) || (is.number(value) && value === value && value % 2 === 0);
 };
 
 /**
@@ -505,7 +543,7 @@ is.even = function (value) {
  */
 
 is.odd = function (value) {
-  return value % 2 !== 0;
+  return is.infinite(value) || (is.number(value) && value === value && value % 2 !== 0);
 };
 
 /**
@@ -519,7 +557,10 @@ is.odd = function (value) {
  */
 
 is.ge = function (value, other) {
-  return value >= other;
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a value value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value >= other;
 };
 
 /**
@@ -533,7 +574,10 @@ is.ge = function (value, other) {
  */
 
 is.gt = function (value, other) {
-  return value > other;
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a value value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value > other;
 };
 
 /**
@@ -547,7 +591,10 @@ is.gt = function (value, other) {
  */
 
 is.le = function (value, other) {
-  return value <= other;
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a value value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value <= other;
 };
 
 /**
@@ -561,7 +608,10 @@ is.le = function (value, other) {
  */
 
 is.lt = function (value, other) {
-  return value < other;
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a value value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value < other;
 };
 
 /**
@@ -575,7 +625,13 @@ is.lt = function (value, other) {
  * @api public
  */
 is.within = function (value, start, finish) {
-  return value >= start && value <= finish;
+  if (isActualNaN(value) || isActualNaN(start) || isActualNaN(finish)) {
+    throw new TypeError('NaN is not a value value');
+  } else if (!is.number(value) || !is.number(start) || !is.number(finish)) {
+    throw new TypeError('all arguments must be numbers');
+  }
+  var isAnyInfinite = is.infinite(value) || is.infinite(start) || is.infinite(finish);
+  return isAnyInfinite || (value >= start && value <= finish);
 };
 
 /**
@@ -628,3 +684,17 @@ is.regexp = function (value) {
 is.string = function (value) {
   return '[object String]' === toString.call(value);
 };
+
+/**
+ * is.hash
+ * Test if `value` is a plain object, ie a hash.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a hash, false otherwise
+ * @api public
+ */
+
+is.hash = function (value) {
+  return is.object(value) && value.constructor === Object && !value.nodeType && !value.setInterval;
+};
+
