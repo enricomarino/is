@@ -93,6 +93,10 @@ As a component
  - is.string (value)
 
 
+## Contributors
+
+- [Jordan Harband](https://github.com/ljharb)
+
 ## License
 
 (The MIT License)
