@@ -11,7 +11,12 @@
     "type",
     "test"
   ],
-  "contributors": [],
+  "contributors": [
+    {
+      "name": "Jordan Harband",
+      "url": "https://github.com/ljharb"
+    }
+  ],
   "dependencies": {},
   "repository": {
     "type": "git",
