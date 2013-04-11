@@ -369,7 +369,7 @@ is.error = function (value) {
  */
 
 /**
- * is.function
+ * is.function / is.aFunction
  * Test if `value` is a function.
  *
  * @param {Mixed} value value to test
@@ -377,7 +377,7 @@ is.error = function (value) {
  * @api public
  */
 
-is.function = function(value) {
+is['function'] = is.aFunction = function(value) {
   return '[object Function]' === toString.call(value);
 };
 
