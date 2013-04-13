@@ -60,8 +60,8 @@ As a component
 
 ### function
 
- - is.function(value)
- - is.aFunction(value) - for ES3 browsers, where "function" is a reserved word
+ - is.fn(value)
+ - is.function(value) - deprecated, because in ES3 browsers, "function" is a reserved word
 
 ### number
 

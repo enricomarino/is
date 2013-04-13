@@ -197,16 +197,16 @@ test('is.error', function (t) {
   t.end();
 });
 
-test('is.function', function (t) {
-  t.equal(is['function'], is.aFunction, 'alias works');
-  t.true(is.aFunction(function () {}), 'function is function');
-  t.true(is.aFunction(console.log), 'console.log is function');
+test('is.fn', function (t) {
+  t.equal(is['function'], is.fn, 'alias works');
+  t.true(is.fn(function () {}), 'function is function');
+  t.true(is.fn(console.log), 'console.log is function');
   if (typeof window !== 'undefined') {
     // in IE7/8, typeof alert === 'object'
-    t.true(is.aFunction(window.alert), 'window.alert is function');
+    t.true(is.fn(window.alert), 'window.alert is function');
   }
-  t.false(is.aFunction({}), 'object is not function');
-  t.false(is.aFunction(null), 'null is not function');
+  t.false(is.fn({}), 'object is not function');
+  t.false(is.fn(null), 'null is not function');
   t.end();
 });
 
