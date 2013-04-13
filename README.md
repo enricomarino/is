@@ -60,7 +60,8 @@ As a component
 
 ### function
 
- - function (value)
+ - is.function(value)
+ - is.aFunction(value) - for ES3 browsers, where "function" is a reserved word
 
 ### number
 
