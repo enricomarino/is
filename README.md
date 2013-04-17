@@ -25,7 +25,8 @@ As a component
  - is.empty (value)
  - is.equal (value, other)
  - is.hosted (value, host)
- - is.instanceof (value, constructor)
+ - is.instance (value, constructor)
+ - is.instanceof (value, constructor) - deprecated, because in ES3 browsers, "instanceof" is a reserved word
  - is.null (value)
  - is.undefined (value)
 
