@@ -86,9 +86,10 @@ test('is.instance', function (t) {
 });
 
 test('is.null', function (t) {
-  t.true(is.null(null), 'null is null');
-  t.false(is.null(undefined), 'undefined is not null');
-  t.false(is.null({}), 'object is not null');
+  var isNull = is['null'];
+  t.true(isNull(null), 'null is null');
+  t.false(isNull(undefined), 'undefined is not null');
+  t.false(isNull({}), 'object is not null');
   t.end();
 });
 
@@ -147,22 +148,24 @@ test('is.boolean', function (t) {
 });
 
 test('is.false', function (t) {
-  t.true(is.false(false), 'false is false');
-  t.true(is.false(new Boolean(false)), 'object false is false');
-  t.false(is.false(true), 'true is not false');
-  t.false(is.false(), 'undefined is not false');
-  t.false(is.false(null), 'null is not false');
-  t.false(is.false(''), 'empty string is not false');
+  var isFalse = is['false'];
+  t.true(isFalse(false), 'false is false');
+  t.true(isFalse(new Boolean(false)), 'object false is false');
+  t.false(isFalse(true), 'true is not false');
+  t.false(isFalse(), 'undefined is not false');
+  t.false(isFalse(null), 'null is not false');
+  t.false(isFalse(''), 'empty string is not false');
   t.end();
 });
 
 test('is.true', function (t) {
-  t.true(is.true(true), 'true is true');
-  t.true(is.true(new Boolean(true)), 'object true is true');
-  t.false(is.true(false), 'false is not true');
-  t.false(is.true(), 'undefined is not true');
-  t.false(is.true(null), 'null is not true');
-  t.false(is.true(''), 'empty string is not true');
+  var isTrue = is['true'];
+  t.true(isTrue(true), 'true is true');
+  t.true(isTrue(new Boolean(true)), 'object true is true');
+  t.false(isTrue(false), 'false is not true');
+  t.false(isTrue(), 'undefined is not true');
+  t.false(isTrue(null), 'null is not true');
+  t.false(isTrue(''), 'empty string is not true');
   t.end();
 });
 

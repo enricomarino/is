@@ -27,7 +27,7 @@ As a component
  - is.hosted (value, host)
  - is.instance (value, constructor)
  - is.instanceof (value, constructor) - deprecated, because in ES3 browsers, "instanceof" is a reserved word
- - is.null (value)
+ - is.null (value) - deprecated, because in ES3 browsers, "null" is a reserved word
  - is.undefined (value)
 
 ### arguments
@@ -44,8 +44,8 @@ As a component
 ### boolean
 
  - is.boolean (value)
- - is.false (value)
- - is.true (value)
+ - is.false (value) - deprecated, because in ES3 browsers, "false" is a reserved word
+ - is.true (value) - deprecated, because in ES3 browsers, "true" is a reserved word
 
 ### date
 

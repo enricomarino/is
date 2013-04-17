@@ -174,7 +174,7 @@ is.instance = is['instanceof'] = function (value, constructor) {
  * @api public
  */
 
-is.null = function (value) {
+is['null'] = function (value) {
   return value === null;
 };
 
@@ -292,7 +292,7 @@ is.boolean = function (value) {
  * @api public
  */
 
-is.false = function (value) {
+is['false'] = function (value) {
   return is.boolean(value) && (value === false || value.valueOf() === false);
 };
 
@@ -305,7 +305,7 @@ is.false = function (value) {
  * @api public
  */
 
-is.true = function (value) {
+is['true'] = function (value) {
   return is.boolean(value) && (value === true || value.valueOf() === true);
 };
 
