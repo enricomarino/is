@@ -153,7 +153,7 @@ is.hosted = function (value, host) {
 };
 
 /**
- * is.instanceof
+ * is.instance
  * Test if `value` is an instance of `constructor`.
  *
  * @param {Mixed} value value to test
@@ -161,7 +161,7 @@ is.hosted = function (value, host) {
  * @api public
  */
 
-is.instanceof = function (value, constructor) {
+is.instance = is['instanceof'] = function (value, constructor) {
   return value instanceof constructor;
 };
 

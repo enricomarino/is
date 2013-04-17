@@ -78,10 +78,10 @@ test('is.hosted', function (t) {
   t.end();
 });
 
-test('is.instanceof', function (t) {
-  t.true(is.instanceof(new Date(), Date), 'new Date is instanceof Date');
+test('is.instance', function (t) {
+  t.true(is.instance(new Date(), Date), 'new Date is instanceof Date');
   var F = function () {};
-  t.true(is.instanceof(new F(), F), 'new constructor is instanceof constructor');
+  t.true(is.instance(new F(), F), 'new constructor is instanceof constructor');
   t.end();
 });
 
