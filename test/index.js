@@ -423,6 +423,25 @@ test('is.object', function (t) {
   t.end();
 });
 
+test('is.hash', function (t) {
+  t.true(is.hash({}), 'empty object literal is hash');
+  t.true(is.hash({1: 2, a: "b"}), 'object literal with props is hash');
+  t.false(is.hash(), 'undefined is not hash');
+  t.false(is.hash(new Date()), 'date is not hash');
+  t.false(is.hash(new String()), 'string obj is not hash');
+  t.false(is.hash(new Number()), 'number obj is not hash');
+  t.false(is.hash(new Boolean()), 'boolean obj is not hash');
+  t.false(is.hash(''), 'string literal is not hash');
+  t.false(is.hash(false), 'literal false is not hash');
+  t.false(is.hash(true), 'literal true is not hash');
+  t.false(is.hash(1), 'literal number is not hash');
+  if (typeof window !== 'undefined') {
+    t.false(is.hash(window), 'window is not hash');
+    t.false(is.hash(document.createElement('div')), 'div is not hash');
+  }
+  t.end();
+});
+
 test('is.regexp', function (t) {
   t.true(is.regexp(/a/g), 'regex literal is regex');
   t.true(is.regexp(new RegExp('a', 'g')), 'regex object is regex');
