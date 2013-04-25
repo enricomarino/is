@@ -23,7 +23,7 @@
     "url": "git://github.com/enricomarino/is.git"
   },
   "main": "index.js",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "scripts": {
     "test": "node test/index.js"
   },
