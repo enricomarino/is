@@ -1,4 +1,4 @@
-var test = require('tape');
+var test = require('tap').test;
 var is = require('../index.js');
 
 var forEach = require('foreach');
