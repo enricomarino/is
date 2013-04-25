@@ -558,7 +558,7 @@ is.odd = function (value) {
 
 is.ge = function (value, other) {
   if (isActualNaN(value) || isActualNaN(other)) {
-    throw new TypeError('NaN is not a value value');
+    throw new TypeError('NaN is not a valid value');
   }
   return !is.infinite(value) && !is.infinite(other) && value >= other;
 };
@@ -575,7 +575,7 @@ is.ge = function (value, other) {
 
 is.gt = function (value, other) {
   if (isActualNaN(value) || isActualNaN(other)) {
-    throw new TypeError('NaN is not a value value');
+    throw new TypeError('NaN is not a valid value');
   }
   return !is.infinite(value) && !is.infinite(other) && value > other;
 };
@@ -592,7 +592,7 @@ is.gt = function (value, other) {
 
 is.le = function (value, other) {
   if (isActualNaN(value) || isActualNaN(other)) {
-    throw new TypeError('NaN is not a value value');
+    throw new TypeError('NaN is not a valid value');
   }
   return !is.infinite(value) && !is.infinite(other) && value <= other;
 };
@@ -609,7 +609,7 @@ is.le = function (value, other) {
 
 is.lt = function (value, other) {
   if (isActualNaN(value) || isActualNaN(other)) {
-    throw new TypeError('NaN is not a value value');
+    throw new TypeError('NaN is not a valid value');
   }
   return !is.infinite(value) && !is.infinite(other) && value < other;
 };
@@ -626,7 +626,7 @@ is.lt = function (value, other) {
  */
 is.within = function (value, start, finish) {
   if (isActualNaN(value) || isActualNaN(start) || isActualNaN(finish)) {
-    throw new TypeError('NaN is not a value value');
+    throw new TypeError('NaN is not a valid value');
   } else if (!is.number(value) || !is.number(start) || !is.number(finish)) {
     throw new TypeError('all arguments must be numbers');
   }
