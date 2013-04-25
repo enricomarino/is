@@ -275,8 +275,9 @@ test('is.maximum', function (t) {
   t.true(is.maximum(4, [1, 2, 3]), '4 is maximum of [1,2,3]');
   t.true(is.maximum('c', ['a', 'b', 'c']), 'c is maximum of [a,b,c]');
   t.false(is.maximum(2, [1, 2, 3]), '2 is not maximum of [1,2,3]');
-  t.throws(function () { return is.maximum(2, null); }, TypeError, 'throws when second value is not array-like');
-  t.throws(function () { return is.maximum(2, {}); }, TypeError, 'throws when second value is not array-like');
+  var error = new TypeError('second argument must be array-like');
+  t.throws(function () { return is.maximum(2, null); }, error, 'throws when second value is not array-like');
+  t.throws(function () { return is.maximum(2, {}); }, error, 'throws when second value is not array-like');
   t.end();
 });
 
@@ -285,8 +286,9 @@ test('is.minimum', function (t) {
   t.true(is.minimum(0, [1, 2, 3]), '0 is minimum of [1,2,3]');
   t.true(is.minimum('a', ['a', 'b', 'c']), 'a is minimum of [a,b,c]');
   t.false(is.minimum(2, [1, 2, 3]), '2 is not minimum of [1,2,3]');
-  t.throws(function () { return is.minimum(2, null); }, TypeError, 'throws when second value is not array-like');
-  t.throws(function () { return is.minimum(2, {}); }, TypeError, 'throws when second value is not array-like');
+  var error = new TypeError('second argument must be array-like');
+  t.throws(function () { return is.minimum(2, null); }, error, 'throws when second value is not array-like');
+  t.throws(function () { return is.minimum(2, {}); }, error, 'throws when second value is not array-like');
   t.end();
 });
 
@@ -336,8 +338,9 @@ test('is.ge', function (t) {
   t.false(is.ge('a', 'abc'), 'a is not greater than abc');
   t.false(is.ge(Infinity, 0), 'infinity is not greater than anything');
   t.false(is.ge(0, Infinity), 'anything is not greater than infinity');
-  t.throws(function () { return is.ge(NaN, 2); }, TypeError, 'throws when first value is NaN');
-  t.throws(function () { return is.ge(2, NaN); }, TypeError, 'throws when second value is NaN');
+  var error = new TypeError('NaN is not a valid value');
+  t.throws(function () { return is.ge(NaN, 2); }, error, 'throws when first value is NaN');
+  t.throws(function () { return is.ge(2, NaN); }, error, 'throws when second value is NaN');
   t.end();
 });
 
@@ -350,8 +353,9 @@ test('is.gt', function (t) {
   t.false(is.gt('a', 'abc'), 'a is not greater than abc');
   t.false(is.gt(Infinity, 0), 'infinity is not greater than anything');
   t.false(is.gt(0, Infinity), 'anything is not greater than infinity');
-  t.throws(function () { return is.gt(NaN, 2); }, TypeError, 'throws when first value is NaN');
-  t.throws(function () { return is.gt(2, NaN); }, TypeError, 'throws when second value is NaN');
+  var error = new TypeError('NaN is not a valid value');
+  t.throws(function () { return is.gt(NaN, 2); }, error, 'throws when first value is NaN');
+  t.throws(function () { return is.gt(2, NaN); }, error, 'throws when second value is NaN');
   t.end();
 });
 
@@ -364,8 +368,9 @@ test('is.le', function (t) {
   t.false(is.le('abc', 'a'), 'abc is not lesser than or equal to a');
   t.false(is.le(Infinity, 0), 'infinity is not lesser than or equal to anything');
   t.false(is.le(0, Infinity), 'anything is not lesser than or equal to infinity');
-  t.throws(function () { return is.le(NaN, 2); }, TypeError, 'throws when first value is NaN');
-  t.throws(function () { return is.le(2, NaN); }, TypeError, 'throws when second value is NaN');
+  var error = new TypeError('NaN is not a valid value');
+  t.throws(function () { return is.le(NaN, 2); }, error, 'throws when first value is NaN');
+  t.throws(function () { return is.le(2, NaN); }, error, 'throws when second value is NaN');
   t.end();
 });
 
@@ -378,28 +383,32 @@ test('is.lt', function (t) {
   t.false(is.lt('abc', 'a'), 'abc is not lesser than a');
   t.false(is.lt(Infinity, 0), 'infinity is not lesser than anything');
   t.false(is.lt(0, Infinity), 'anything is not lesser than infinity');
-  t.throws(function () { return is.lt(NaN, 2); }, TypeError, 'throws when first value is NaN');
-  t.throws(function () { return is.lt(2, NaN); }, TypeError, 'throws when second value is NaN');
+  var error = new TypeError('NaN is not a valid value');
+  t.throws(function () { return is.lt(NaN, 2); }, error, 'throws when first value is NaN');
+  t.throws(function () { return is.lt(2, NaN); }, error, 'throws when second value is NaN');
   t.end();
 });
 
 test('is.within', function (t) {
   t.test('argument checking', function (st) {
-    st.throws(function () { return is.within(NaN, 0, 0); }, TypeError, 'throws when first value is NaN');
-    st.throws(function () { return is.within(0, NaN, 0); }, TypeError, 'throws when second value is NaN');
-    st.throws(function () { return is.within(0, 0, NaN); }, TypeError, 'throws when third value is NaN');
-    st.throws(function () { return is.within('', 0, 0); }, TypeError, 'throws when first value is string');
-    st.throws(function () { return is.within(0, '', 0); }, TypeError, 'throws when second value is string');
-    st.throws(function () { return is.within(0, 0, ''); }, TypeError, 'throws when third value is string');
-    st.throws(function () { return is.within({}, 0, 0); }, TypeError, 'throws when first value is object');
-    st.throws(function () { return is.within(0, {}, 0); }, TypeError, 'throws when second value is object');
-    st.throws(function () { return is.within(0, 0, {}); }, TypeError, 'throws when third value is object');
-    st.throws(function () { return is.within(null, 0, 0); }, TypeError, 'throws when first value is null');
-    st.throws(function () { return is.within(0, null, 0); }, TypeError, 'throws when second value is null');
-    st.throws(function () { return is.within(0, 0, null); }, TypeError, 'throws when third value is null');
-    st.throws(function () { return is.within(undefined, 0, 0); }, TypeError, 'throws when first value is undefined');
-    st.throws(function () { return is.within(0, undefined, 0); }, TypeError, 'throws when second value is undefined');
-    st.throws(function () { return is.within(0, 0, undefined); }, TypeError, 'throws when third value is undefined');
+    var nanError = new TypeError('NaN is not a valid value');
+    st.throws(function () { return is.within(NaN, 0, 0); }, nanError, 'throws when first value is NaN');
+    st.throws(function () { return is.within(0, NaN, 0); }, nanError, 'throws when second value is NaN');
+    st.throws(function () { return is.within(0, 0, NaN); }, nanError, 'throws when third value is NaN');
+
+    var error = new TypeError('all arguments must be numbers');
+    st.throws(function () { return is.within('', 0, 0); }, error, 'throws when first value is string');
+    st.throws(function () { return is.within(0, '', 0); }, error, 'throws when second value is string');
+    st.throws(function () { return is.within(0, 0, ''); }, error, 'throws when third value is string');
+    st.throws(function () { return is.within({}, 0, 0); }, error, 'throws when first value is object');
+    st.throws(function () { return is.within(0, {}, 0); }, error, 'throws when second value is object');
+    st.throws(function () { return is.within(0, 0, {}); }, error, 'throws when third value is object');
+    st.throws(function () { return is.within(null, 0, 0); }, error, 'throws when first value is null');
+    st.throws(function () { return is.within(0, null, 0); }, error, 'throws when second value is null');
+    st.throws(function () { return is.within(0, 0, null); }, error, 'throws when third value is null');
+    st.throws(function () { return is.within(undefined, 0, 0); }, error, 'throws when first value is undefined');
+    st.throws(function () { return is.within(0, undefined, 0); }, error, 'throws when second value is undefined');
+    st.throws(function () { return is.within(0, 0, undefined); }, error, 'throws when third value is undefined');
     st.end();
   });
   t.true(is.within(2, 1, 3), '2 is between 1 and 3');
