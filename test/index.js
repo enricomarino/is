@@ -2,6 +2,7 @@ var test = require('tape');
 var is = require('../index.js');
 
 var forEach = require('foreach');
+var now = Date.now || function () { return +new Date(); };
 
 test('is.type', function (t) {
   var booleans = [true, false];
@@ -56,8 +57,8 @@ test('is.equal', function (t) {
   t.true(is.equal([1, 2, [3, 4]], [1, 2, [3, 4]]), 'arrays are deep equal');
   t.true(is.equal({ a: 1, b: 2, c: 3 }, { a: 1, b: 2, c: 3 }), 'objects are shallowly equal');
   t.true(is.equal({ a: { b: 1 } }, { a: { b: 1 } }), 'objects are deep equal');
-  var now = Date.now();
-  t.true(is.equal(new Date(now), new Date(now)), 'two equal date objects are equal');
+  var nowTS = now();
+  t.true(is.equal(new Date(nowTS), new Date(nowTS)), 'two equal date objects are equal');
 
   var F = function () {};
   F.prototype = {};
@@ -174,7 +175,7 @@ test('is.date', function (t) {
   t.false(is.date(), 'undefined is not date');
   t.false(is.date(null), 'null is not date');
   t.false(is.date(''), 'empty string is not date');
-  t.false(is.date(Date.now()), 'timestamp is not date');
+  t.false(is.date(now()), 'timestamp is not date');
   var F = function () {};
   F.prototype = new Date();
   t.false(is.date(new F()), 'Date subtype is not date');
