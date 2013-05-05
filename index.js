@@ -7,9 +7,9 @@
  * @license MIT
  */
 
-var object = {};
-var owns = object.hasOwnProperty;
-var toString = object.toString;
+var objProto = Object.prototype;
+var owns = objProto.hasOwnProperty;
+var toString = objProto.toString;
 var isActualNaN = function (value) {
   return is.number(value) && value !== value;
 };
