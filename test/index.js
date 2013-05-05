@@ -434,19 +434,28 @@ test('is.object', function (t) {
 
 test('is.hash', function (t) {
   t.true(is.hash({}), 'empty object literal is hash');
-  t.true(is.hash({1: 2, a: "b"}), 'object literal with props is hash');
-  t.false(is.hash(), 'undefined is not hash');
-  t.false(is.hash(new Date()), 'date is not hash');
-  t.false(is.hash(new String()), 'string obj is not hash');
-  t.false(is.hash(new Number()), 'number obj is not hash');
+  t.true(is.hash({ 1: 2, a: "b" }), 'object literal is hash');
+  t.false(is.hash(), 'undefined is not a hash');
+  t.false(is.hash(null), 'null is not a hash');
+  t.false(is.hash(new Date()), 'date is not a hash');
+  t.false(is.hash(new String()), 'string object is not a hash');
+  t.false(is.hash(''), 'string literal is not a hash');
+  t.false(is.hash(new Number()), 'number object is not a hash');
+  t.false(is.hash(1), 'number literal is not a hash');
+  t.false(is.hash(true), 'true is not a hash');
+  t.false(is.hash(false), 'false is not a hash');
   t.false(is.hash(new Boolean()), 'boolean obj is not hash');
-  t.false(is.hash(''), 'string literal is not hash');
   t.false(is.hash(false), 'literal false is not hash');
   t.false(is.hash(true), 'literal true is not hash');
-  t.false(is.hash(1), 'literal number is not hash');
+  if (typeof module !== 'undefined') {
+    t.true(is.hash(module.exports), 'module.exports is a hash');
+  }
   if (typeof window !== 'undefined') {
-    t.false(is.hash(window), 'window is not hash');
-    t.false(is.hash(document.createElement('div')), 'div is not hash');
+    t.false(is.hash(window), 'window is not a hash');
+    t.false(is.hash(document.createElement('div')), 'element is not a hash');
+  } else if (typeof process !== 'undefined') {
+    t.false(is.hash(global), 'global is not a hash');
+    t.false(is.hash(process), 'process is not a hash');
   }
   t.end();
 });
@@ -468,31 +477,6 @@ test('is.string', function (t) {
   var F = function () {};
   F.prototype = new String();
   t.false(is.string(F), 'string subtype is not string');
-  t.end();
-});
-
-test('is.hash', function (t) {
-  t.true(is.hash({}), 'empty object literal is hash');
-  t.true(is.hash({ 1: 2, a: "b" }), 'object literal is hash');
-  t.false(is.hash(), 'undefined is not a hash');
-  t.false(is.hash(null), 'null is not a hash');
-  t.false(is.hash(new Date()), 'date is not a hash');
-  t.false(is.hash(new String()), 'string object is not a hash');
-  t.false(is.hash(''), 'string literal is not a hash');
-  t.false(is.hash(new Number()), 'number object is not a hash');
-  t.false(is.hash(1), 'number literal is not a hash');
-  t.false(is.hash(true), 'true is not a hash');
-  t.false(is.hash(false), 'false is not a hash');
-  if (typeof module !== 'undefined') {
-    t.true(is.hash(module.exports), 'module.exports is a hash');
-  }
-  if (typeof window !== 'undefined') {
-    t.false(is.hash(window), 'window is not a hash');
-    t.false(is.hash(document.createElement('div')), 'element is not a hash');
-  } else if (typeof process !== 'undefined') {
-    t.false(is.hash(global), 'global is not a hash');
-    t.false(is.hash(process), 'process is not a hash');
-  }
   t.end();
 });
 
