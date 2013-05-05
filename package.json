@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "tape": "~1.0.1",
-    "foreach": "~2.0.2"
+    "foreach": "~2.0.3"
   },
   "testling": {
     "files": "test.js",
