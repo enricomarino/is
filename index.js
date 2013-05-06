@@ -345,7 +345,6 @@ is.element = function (value) {
   return value !== undefined
     && typeof HTMLElement !== 'undefined'
     && value instanceof HTMLElement
-    && owns.call(value, 'nodeType')
     && value.nodeType === 1;
 };
 
