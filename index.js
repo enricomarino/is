@@ -378,8 +378,9 @@ is.error = function (value) {
  * @api public
  */
 
-is.fn = is['function'] = function(value) {
-  return '[object Function]' === toString.call(value);
+is.fn = is['function'] = function (value) {
+  var isAlert = typeof window !== 'undefined' && value === window.alert;
+  return isAlert || '[object Function]' === toString.call(value);
 };
 
 /**
