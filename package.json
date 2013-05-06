@@ -29,10 +29,10 @@
   },
   "devDependencies": {
     "tape": "~1.0.1",
-    "foreach": "~2.0.2"
+    "foreach": "~2.0.3"
   },
   "testling": {
-    "files": "test.js",
+    "files": "test/index.js",
     "browsers": [
       "iexplore/6.0..latest",
       "firefox/3.0",
@@ -45,8 +45,7 @@
       "opera/next",
       "safari/5.0.5..latest",
       "ipad/6.0..latest",
-      "iphone/6.0..latest",
-      "android-browser/4.2"
+      "iphone/6.0..latest"
     ]
   },
   "engines": {

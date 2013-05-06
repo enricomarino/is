@@ -7,11 +7,11 @@
  * @license MIT
  */
 
-var object = {};
-var owns = object.hasOwnProperty;
-var toString = object.toString;
+var objProto = Object.prototype;
+var owns = objProto.hasOwnProperty;
+var toString = objProto.toString;
 var isActualNaN = function (value) {
-  return is.number(value) && value !== value;
+  return value !== value;
 };
 var NON_HOST_TYPES = {
   "boolean": 1,
@@ -205,7 +205,9 @@ is.undefined = function (value) {
  */
 
 is.arguments = function (value) {
-  return '[object Arguments]' === toString.call(value);
+  var isStandardArguments = '[object Arguments]' === toString.call(value);
+  var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
+  return isStandardArguments || isOldArguments;
 };
 
 /**
@@ -343,7 +345,6 @@ is.element = function (value) {
   return value !== undefined
     && typeof HTMLElement !== 'undefined'
     && value instanceof HTMLElement
-    && owns.call(value, 'nodeType')
     && value.nodeType === 1;
 };
 
@@ -377,8 +378,9 @@ is.error = function (value) {
  * @api public
  */
 
-is.fn = is['function'] = function(value) {
-  return '[object Function]' === toString.call(value);
+is.fn = is['function'] = function (value) {
+  var isAlert = typeof window !== 'undefined' && value === window.alert;
+  return isAlert || '[object Function]' === toString.call(value);
 };
 
 /**
@@ -648,7 +650,7 @@ is.within = function (value, start, finish) {
  */
 
 is.object = function (value) {
-  return '[object Object]' === toString.call(value);
+  return value && '[object Object]' === toString.call(value);
 };
 
 /**
@@ -658,7 +660,7 @@ is.object = function (value) {
  * @param {Mixed} value value to test
  * @return {Boolean} true if `value` is a hash, false otherwise
  * @api public
- * /
+ */
 
 is.hash = function (value) {
   return is.object(value) && value.constructor === Object && !value.nodeType && !value.setInterval;
@@ -696,18 +698,5 @@ is.regexp = function (value) {
 
 is.string = function (value) {
   return '[object String]' === toString.call(value);
-};
-
-/**
- * is.hash
- * Test if `value` is a plain object, ie a hash.
- *
- * @param {Mixed} value value to test
- * @return {Boolean} true if `value` is a hash, false otherwise
- * @api public
- */
-
-is.hash = function (value) {
-  return is.object(value) && value.constructor === Object && !value.nodeType && !value.setInterval;
 };
 
