@@ -391,27 +391,25 @@ test('is.lt', function (t) {
 });
 
 test('is.within', function (t) {
-  t.test('argument checking', function (st) {
-    var nanError = new TypeError('NaN is not a valid value');
-    st.throws(function () { return is.within(NaN, 0, 0); }, nanError, 'throws when first value is NaN');
-    st.throws(function () { return is.within(0, NaN, 0); }, nanError, 'throws when second value is NaN');
-    st.throws(function () { return is.within(0, 0, NaN); }, nanError, 'throws when third value is NaN');
+  var nanError = new TypeError('NaN is not a valid value');
+  t.throws(function () { return is.within(NaN, 0, 0); }, nanError, 'throws when first value is NaN');
+  t.throws(function () { return is.within(0, NaN, 0); }, nanError, 'throws when second value is NaN');
+  t.throws(function () { return is.within(0, 0, NaN); }, nanError, 'throws when third value is NaN');
 
-    var error = new TypeError('all arguments must be numbers');
-    st.throws(function () { return is.within('', 0, 0); }, error, 'throws when first value is string');
-    st.throws(function () { return is.within(0, '', 0); }, error, 'throws when second value is string');
-    st.throws(function () { return is.within(0, 0, ''); }, error, 'throws when third value is string');
-    st.throws(function () { return is.within({}, 0, 0); }, error, 'throws when first value is object');
-    st.throws(function () { return is.within(0, {}, 0); }, error, 'throws when second value is object');
-    st.throws(function () { return is.within(0, 0, {}); }, error, 'throws when third value is object');
-    st.throws(function () { return is.within(null, 0, 0); }, error, 'throws when first value is null');
-    st.throws(function () { return is.within(0, null, 0); }, error, 'throws when second value is null');
-    st.throws(function () { return is.within(0, 0, null); }, error, 'throws when third value is null');
-    st.throws(function () { return is.within(undefined, 0, 0); }, error, 'throws when first value is undefined');
-    st.throws(function () { return is.within(0, undefined, 0); }, error, 'throws when second value is undefined');
-    st.throws(function () { return is.within(0, 0, undefined); }, error, 'throws when third value is undefined');
-    st.end();
-  });
+  var error = new TypeError('all arguments must be numbers');
+  t.throws(function () { return is.within('', 0, 0); }, error, 'throws when first value is string');
+  t.throws(function () { return is.within(0, '', 0); }, error, 'throws when second value is string');
+  t.throws(function () { return is.within(0, 0, ''); }, error, 'throws when third value is string');
+  t.throws(function () { return is.within({}, 0, 0); }, error, 'throws when first value is object');
+  t.throws(function () { return is.within(0, {}, 0); }, error, 'throws when second value is object');
+  t.throws(function () { return is.within(0, 0, {}); }, error, 'throws when third value is object');
+  t.throws(function () { return is.within(null, 0, 0); }, error, 'throws when first value is null');
+  t.throws(function () { return is.within(0, null, 0); }, error, 'throws when second value is null');
+  t.throws(function () { return is.within(0, 0, null); }, error, 'throws when third value is null');
+  t.throws(function () { return is.within(undefined, 0, 0); }, error, 'throws when first value is undefined');
+  t.throws(function () { return is.within(0, undefined, 0); }, error, 'throws when second value is undefined');
+  t.throws(function () { return is.within(0, 0, undefined); }, error, 'throws when third value is undefined');
+
   t.ok(is.within(2, 1, 3), '2 is between 1 and 3');
   t.ok(is.within(0, -1, 1), '0 is between -1 and 1');
   t.ok(is.within(2, 0, Infinity), 'infinity always returns true');
