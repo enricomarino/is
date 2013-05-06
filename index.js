@@ -11,7 +11,7 @@ var objProto = Object.prototype;
 var owns = objProto.hasOwnProperty;
 var toString = objProto.toString;
 var isActualNaN = function (value) {
-  return is.number(value) && value !== value;
+  return value !== value;
 };
 var NON_HOST_TYPES = {
   "boolean": 1,
