@@ -205,7 +205,9 @@ is.undefined = function (value) {
  */
 
 is.arguments = function (value) {
-  return '[object Arguments]' === toString.call(value);
+  var isStandardArguments = '[object Arguments]' === toString.call(value);
+  var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
+  return isStandardArguments || isOldArguments;
 };
 
 /**
