@@ -28,7 +28,7 @@
     "test": "node test/index.js"
   },
   "devDependencies": {
-    "tape": "~1.0.1",
+    "tape": "~1.0.4",
     "foreach": "~2.0.3"
   },
   "testling": {
