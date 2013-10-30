@@ -21,6 +21,14 @@ var NON_HOST_TYPES = {
 };
 
 /**
+ * converter- this will avoid typing long string names like [object Array]
+ * @param  {Object} obj
+ * @return {String}
+ */
+function converter(obj) {
+  return toString.call(obj).slice(8, -1).toLowerCase();
+}
+/**
  * Expose `is`
  */
 
@@ -68,19 +76,19 @@ is.defined = function (value) {
  */
 
 is.empty = function (value) {
-  var type = toString.call(value);
+  var type = converter(value);
   var key;
 
-  if ('[object Array]' === type || '[object Arguments]' === type) {
+  if ('array' === type || 'arguments' === type) {
     return value.length === 0;
   }
 
-  if ('[object Object]' === type) {
+  if ('object' === type) {
     for (key in value) if (owns.call(value, key)) return false;
     return true;
   }
 
-  if ('[object String]' === type) {
+  if ('string' === type) {
     return '' === value;
   }
 
@@ -97,14 +105,14 @@ is.empty = function (value) {
  */
 
 is.equal = function (value, other) {
-  var type = toString.call(value)
+  var type = converter(value)
   var key;
 
-  if (type !== toString.call(other)) {
+  if (type !== converter(other)) {
     return false;
   }
 
-  if ('[object Object]' === type) {
+  if ('object' === type) {
     for (key in value) {
       if (!is.equal(value[key], other[key])) {
         return false;
@@ -113,7 +121,7 @@ is.equal = function (value, other) {
     return true;
   }
 
-  if ('[object Array]' === type) {
+  if ('array' === type) {
     key = value.length;
     if (key !== other.length) {
       return false;
@@ -126,11 +134,11 @@ is.equal = function (value, other) {
     return true;
   }
 
-  if ('[object Function]' === type) {
+  if ('function' === type) {
     return value.prototype === other.prototype;
   }
 
-  if ('[object Date]' === type) {
+  if ('date' === type) {
     return value.getTime() === other.getTime();
   }
 
@@ -205,7 +213,7 @@ is.undefined = function (value) {
  */
 
 is.arguments = function (value) {
-  var isStandardArguments = '[object Arguments]' === toString.call(value);
+  var isStandardArguments = 'arguments' === converter(value);
   var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
   return isStandardArguments || isOldArguments;
 };
@@ -224,7 +232,7 @@ is.arguments = function (value) {
  */
 
 is.array = function (value) {
-  return '[object Array]' === toString.call(value);
+  return 'array' === converter(value);
 };
 
 /**
@@ -282,7 +290,7 @@ is.arraylike = function (value) {
  */
 
 is.boolean = function (value) {
-  return '[object Boolean]' === toString.call(value);
+  return 'boolean' === converter(value);
 };
 
 /**
@@ -325,7 +333,7 @@ is['true'] = function (value) {
  */
 
 is.date = function (value) {
-  return '[object Date]' === toString.call(value);
+  return 'date' === converter(value);
 };
 
 /**
@@ -362,7 +370,7 @@ is.element = function (value) {
  */
 
 is.error = function (value) {
-  return '[object Error]' === toString.call(value);
+  return 'error' === converter(value);
 };
 
 /**
@@ -380,7 +388,7 @@ is.error = function (value) {
 
 is.fn = is['function'] = function (value) {
   var isAlert = typeof window !== 'undefined' && value === window.alert;
-  return isAlert || '[object Function]' === toString.call(value);
+  return isAlert || 'function' === converter(value);
 };
 
 /**
@@ -397,7 +405,7 @@ is.fn = is['function'] = function (value) {
  */
 
 is.number = function (value) {
-  return '[object Number]' === toString.call(value);
+  return 'number' === converter(value);
 };
 
 /**
@@ -650,7 +658,7 @@ is.within = function (value, start, finish) {
  */
 
 is.object = function (value) {
-  return value && '[object Object]' === toString.call(value);
+  return value && 'object' === converter(value);
 };
 
 /**
@@ -680,7 +688,7 @@ is.hash = function (value) {
  */
 
 is.regexp = function (value) {
-  return '[object RegExp]' === toString.call(value);
+  return 'regexp' === converter(value);
 };
 
 /**
@@ -697,6 +705,6 @@ is.regexp = function (value) {
  */
 
 is.string = function (value) {
-  return '[object String]' === toString.call(value);
+  return 'string' === converter(value);
 };
 
