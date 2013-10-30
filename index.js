@@ -11,7 +11,8 @@
  * wrap everything inside an immediate function to avoid polluting the global scope if we are in the browser
  * @return {[type]} [description]
  */
-(function () { var objProto = Object.prototype;
+(function () {
+  var objProto = Object.prototype;
   var owns = objProto.hasOwnProperty;
   var toString = objProto.toString;
   var isActualNaN = function (value) {
