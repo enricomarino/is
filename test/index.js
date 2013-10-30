@@ -479,3 +479,32 @@ test('is.string', function (t) {
   t.end();
 });
 
+test('is.all', function (t) {
+  var objs = [{}, {a:1}, {c: 'some'}];
+
+  t.ok(is.all(objs[0], objs[1], objs[2], 'object'), 'they are all objects');
+  t.ok(is.all(objs[0], objs[1], objs[2], new Object(), 'object'), 'they are all objects even with constructor');
+  t.notOk(is.all(objs[0], objs[1], objs[2], [], 'object'), 'one of them is an array');
+  t.notOk(is.all(objs[0], objs[1], objs[2], [], function () {}, 'object'), 'some are arrays and functions');
+  t.end();
+});
+
+test('is.some', function (t) {
+  var objs = [[], [1,3,4], [{c: 'some'}], function () {}, /\w+/];
+
+  t.ok(is.some(objs[0], objs[1], objs[2].c, 'array'), 'some are arrays');
+  t.ok(is.some(objs[0], objs[1], objs[3], new Object(), function ab() {}, 'function'), 'some are functions');
+  t.notOk(is.some(objs[0], objs[1], objs[4], /\s+/, 'function'), 'any of them is not functions');
+  t.notOk(is.some(objs[0], objs[1], objs[2], [], new   Array(), 'regexp'), 'none is a regular expression');
+  t.end();
+});
+
+test('is.one', function (t) {
+  var objs = [{}, [4], [{a: 'one'}], function () { return 2;}, /\w+/,];
+
+  t.ok(is.one(objs[0], objs[1], objs[2].c, 'array'), 'one of them is an array');
+  t.ok(is.one(objs[0], objs[1], objs[4], new Object(), function ab() {}, 'function'), 'one is a function');
+  t.notOk(is.one(objs[0], objs[1], objs[2], new Date(), 'regexp'), 'none is a regular expression');
+  t.notOk(is.one(objs[0], objs[1], objs[2], [], new   Array(), new Date, 'string'), 'none is a string');
+  t.end();
+});

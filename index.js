@@ -13,8 +13,10 @@
  */
 (function () {
   var objProto = Object.prototype;
+  var arrProto = Array.prototype;
   var owns = objProto.hasOwnProperty;
   var toString = objProto.toString;
+  var slice = arrProto.slice;
   var isActualNaN = function (value) {
     return value !== value;
   };
@@ -29,6 +31,7 @@
    * converter- this will avoid typing long string names like [object Array]
    * @param  {Object} obj
    * @return {String}
+   * @api private
    */
   function converter(obj) {
     return toString.call(obj).slice(8, -1).toLowerCase();
@@ -715,10 +718,63 @@
   };
 
   /**
+   * all - check if all are of a similar type
+   *   example:
+   *     is.all({}, {a:1}, 'object') // -> true 
+   *     is.all({}, {a:1}, [], 'object') // -> false 
+   * @return {Boolean}
+   * @api public
+   */
+  is.all = function () {
+    var args = slice.call(arguments);
+    var type = args.pop();
+
+    return args.every(function (value) {
+      return converter(value) === type;
+    });
+  };
+
+  /**
+   * some - check if all are of a similar type
+   *   example:
+   *     is.some({}, {a:1}, function () {},'object') // -> true 
+   * @return {Boolean}
+   * @api public
+   */
+  is.some = function () {
+    var args = slice.call(arguments);
+    var type = args.pop();
+
+    return args.some(function (value) {
+      return converter(value) === type;
+    });
+  };
+
+  /**
+   * one - check to see if at least one is of a similar type
+   * example:
+   *     is.one({}, {a:1}, /\w+/, function () {}, 'regexp') // -> true
+   * @return {Boolean}
+   * @api public
+   */
+  is.one = function () {
+    var args = slice.call(arguments);
+    var type = args.pop();
+    var i = 0;
+    var len = args.length;
+
+    for (i; i < len; i++) {
+      if (converter(args[i]) === type) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+  /**
    * expose is
    * make it compatible with CommonJS, AMD, browser
    */
-
   if (module && is.object(module) && is.object(module.exports)) {
     module.exports = exports.is = is;
   } else if (define && is.function(define.amd)) {
