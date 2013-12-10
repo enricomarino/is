@@ -241,6 +241,7 @@ test('is.decimal', function (t) {
   t.notOk(is.decimal(0), 'zero is not decimal');
   t.notOk(is.decimal(1), 'integer is not decimal');
   t.notOk(is.decimal(NaN), 'NaN is not decimal');
+  t.notOk(is.decimal(Infinity), 'Infinity is not decimal');
   t.end();
 });
 
