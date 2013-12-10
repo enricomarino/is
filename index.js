@@ -422,7 +422,7 @@ is.infinite = function (value) {
  */
 
 is.decimal = function (value) {
-  return is.number(value) && !isActualNaN(value) && value % 1 !== 0;
+  return is.number(value) && !isActualNaN(value) && !is.infinite(value) && value % 1 !== 0;
 };
 
 /**
