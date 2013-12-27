@@ -159,6 +159,11 @@ test('is.arguments', function (t) {
   t.notOk(is.arguments([]), 'array is not arguments');
   (function () { t.ok(is.arguments(arguments), 'arguments is arguments'); }());
   (function () { t.notOk(is.arguments(Array.prototype.slice.call(arguments)), 'sliced arguments is not arguments'); }());
+  var fakeOldArguments = {
+    length: 3,
+    callee: function () {}
+  };
+  t.ok(is.arguments(fakeOldArguments), 'old-style arguments object is arguments');
   t.end();
 });
 
