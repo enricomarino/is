@@ -183,6 +183,7 @@ test('is.date', function (t) {
 });
 
 test('is.element', function (t) {
+  t.notOk(is.element(), 'undefined is not element');
   if (typeof HTMLElement !== 'undefined') {
     var element = document.createElement('div');
     t.ok(is.element(element), 'HTMLElement is element');
