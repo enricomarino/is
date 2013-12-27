@@ -106,7 +106,12 @@ is.equal = function (value, other) {
 
   if ('[object Object]' === type) {
     for (key in value) {
-      if (!is.equal(value[key], other[key])) {
+      if (!is.equal(value[key], other[key]) || !(key in other)) {
+        return false;
+      }
+    }
+    for (key in other) {
+      if (!is.equal(value[key], other[key]) || !(key in value)) {
         return false;
       }
     }
