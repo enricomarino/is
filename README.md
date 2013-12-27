@@ -28,7 +28,8 @@ As a component
  - is.instance (value, constructor)
  - is.instanceof (value, constructor) - deprecated, because in ES3 browsers, "instanceof" is a reserved word
  - is.null (value) - deprecated, because in ES3 browsers, "null" is a reserved word
- - is.undefined (value)
+ - is.undef (value)
+ - is.undefined (value) - deprecated, because in ES3 browsers, "undefined" is a reserved word
 
 ### arguments
 

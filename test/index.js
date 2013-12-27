@@ -29,10 +29,11 @@ test('is.type', function (t) {
   t.end();
 });
 
-test('is.undefined', function (t) {
-  t.ok(is.undefined(), 'undefined is undefined');
-  t.notOk(is.undefined(null), 'null is not undefined');
-  t.notOk(is.undefined({}), 'object is not undefined');
+test('is.undef', function (t) {
+  t.ok(is.undef(), 'absent undefined is undefined');
+  t.ok(is.undef(undefined), 'literal undefined is undefined');
+  t.notOk(is.undef(null), 'null is not undefined');
+  t.notOk(is.undef({}), 'object is not undefined');
   t.end();
 });
 

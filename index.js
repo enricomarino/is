@@ -189,7 +189,7 @@ is['null'] = function (value) {
 };
 
 /**
- * is.undefined
+ * is.undef
  * Test if `value` is undefined.
  *
  * @param {Mixed} value value to test
@@ -197,7 +197,7 @@ is['null'] = function (value) {
  * @api public
  */
 
-is.undefined = function (value) {
+is.undef = is['undefined'] = function (value) {
   return value === undefined;
 };
 
