@@ -340,6 +340,10 @@ test('is.maximum', function (t) {
   t.ok(is.maximum(4, [1, 2, 3]), '4 is maximum of [1,2,3]');
   t.ok(is.maximum('c', ['a', 'b', 'c']), 'c is maximum of [a,b,c]');
   t.notOk(is.maximum(2, [1, 2, 3]), '2 is not maximum of [1,2,3]');
+
+  var nanError = new TypeError('NaN is not a valid value');
+  t.throws(function () { return is.maximum(NaN); }, nanError, 'throws when first value is NaN');
+
   var error = new TypeError('second argument must be array-like');
   t.throws(function () { return is.maximum(2, null); }, error, 'throws when second value is not array-like');
   t.throws(function () { return is.maximum(2, {}); }, error, 'throws when second value is not array-like');
@@ -351,6 +355,10 @@ test('is.minimum', function (t) {
   t.ok(is.minimum(0, [1, 2, 3]), '0 is minimum of [1,2,3]');
   t.ok(is.minimum('a', ['a', 'b', 'c']), 'a is minimum of [a,b,c]');
   t.notOk(is.minimum(2, [1, 2, 3]), '2 is not minimum of [1,2,3]');
+
+  var nanError = new TypeError('NaN is not a valid value');
+  t.throws(function () { return is.minimum(NaN); }, nanError, 'throws when first value is NaN');
+
   var error = new TypeError('second argument must be array-like');
   t.throws(function () { return is.minimum(2, null); }, error, 'throws when second value is not array-like');
   t.throws(function () { return is.minimum(2, {}); }, error, 'throws when second value is not array-like');
