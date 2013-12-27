@@ -25,11 +25,14 @@
   "main": "index.js",
   "version": "0.2.7",
   "scripts": {
-    "test": "node test/index.js"
+    "test": "node test/index.js",
+    "coverage": "covert test/index.js",
+    "coverage-quiet": "covert test/index.js --quiet"
   },
   "devDependencies": {
     "tape": "~2.3.2",
-    "foreach": "~2.0.4"
+    "foreach": "~2.0.4",
+    "covert": "~0.2.0"
   },
   "testling": {
     "files": "test/index.js",
