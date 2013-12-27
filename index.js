@@ -206,7 +206,7 @@ is.undef = is['undefined'] = function (value) {
  */
 
 /**
- * is.arguments
+ * is.args
  * Test if `value` is an arguments object.
  *
  * @param {Mixed} value value to test
@@ -214,7 +214,7 @@ is.undef = is['undefined'] = function (value) {
  * @api public
  */
 
-is.arguments = function (value) {
+is.args = is['arguments'] = function (value) {
   var isStandardArguments = '[object Arguments]' === toString.call(value);
   var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
   return isStandardArguments || isOldArguments;
@@ -245,8 +245,8 @@ is.array = function (value) {
  * @return {Boolean} true if `value` is an empty arguments object, false otherwise
  * @api public
  */
-is.arguments.empty = function (value) {
-  return is.arguments(value) && value.length === 0;
+is.args.empty = function (value) {
+  return is.args(value) && value.length === 0;
 };
 
 /**

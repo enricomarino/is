@@ -33,8 +33,9 @@ As a component
 
 ### arguments
 
- - is.arguments (value)
- - is.arguments.empty (value)
+ - is.args (value)
+ - is.arguments (value) - deprecated, because "arguments" is a reserved word
+ - is.args.empty (value)
 
 ### array
 

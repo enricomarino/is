@@ -156,17 +156,25 @@ test('is.null', function (t) {
   t.end();
 });
 
-test('is.arguments', function (t) {
-  t.notOk(is.arguments([]), 'array is not arguments');
-  (function () { t.ok(is.arguments(arguments), 'arguments is arguments'); }());
-  (function () { t.notOk(is.arguments(Array.prototype.slice.call(arguments)), 'sliced arguments is not arguments'); }());
+test('is.args', function (t) {
+  t.notOk(is.args([]), 'array is not arguments');
+  (function () { t.ok(is.args(arguments), 'arguments is arguments'); }());
+  (function () { t.notOk(is.args(Array.prototype.slice.call(arguments)), 'sliced arguments is not arguments'); }());
   var fakeOldArguments = {
     length: 3,
     callee: function () {}
   };
-  t.ok(is.arguments(fakeOldArguments), 'old-style arguments object is arguments');
+  t.ok(is.args(fakeOldArguments), 'old-style arguments object is arguments');
   t.end();
 });
+
+test('is.args.empty', function (t) {
+  t.notOk(is.args.empty([]), 'empty array is not empty arguments');
+  (function () { t.ok(is.args.empty(arguments), 'empty arguments is empty arguments'); }());
+  (function () { t.notOk(is.args.empty(Array.prototype.slice.call(arguments)), 'empty sliced arguments is not empty arguments'); }());
+  t.end();
+});
+
 
 test('is.array', function (t) {
   t.ok(is.array([]), 'array is array');
@@ -178,13 +186,6 @@ test('is.array.empty', function (t) {
   t.ok(is.array.empty([]), 'empty array is empty array');
   (function () { t.notOk(is.array.empty(arguments), 'empty arguments is not empty array'); }());
   (function () { t.ok(is.array.empty(Array.prototype.slice.call(arguments)), 'empty sliced arguments is empty array'); }());
-  t.end();
-});
-
-test('is.arguments.empty', function (t) {
-  t.notOk(is.arguments.empty([]), 'empty array is not empty arguments');
-  (function () { t.ok(is.arguments.empty(arguments), 'empty arguments is empty arguments'); }());
-  (function () { t.notOk(is.arguments.empty(Array.prototype.slice.call(arguments)), 'empty sliced arguments is not empty arguments'); }());
   t.end();
 });
 
