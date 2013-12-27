@@ -97,7 +97,12 @@ is.empty = function (value) {
  */
 
 is.equal = function (value, other) {
-  var type = toString.call(value)
+  var strictlyEqual = value === other;
+  if (strictlyEqual) {
+    return true;
+  }
+
+  var type = toString.call(value);
   var key;
 
   if (type !== toString.call(other)) {
@@ -139,7 +144,7 @@ is.equal = function (value, other) {
     return value.getTime() === other.getTime();
   }
 
-  return value === other;
+  return strictlyEqual;
 };
 
 /**
