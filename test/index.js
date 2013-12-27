@@ -53,16 +53,78 @@ test('is.empty', function (t) {
 });
 
 test('is.equal', function (t) {
-  t.ok(is.equal([1, 2, 3], [1, 2, 3]), 'arrays are shallowly equal');
-  t.ok(is.equal([1, 2, [3, 4]], [1, 2, [3, 4]]), 'arrays are deep equal');
-  t.ok(is.equal({ a: 1, b: 2, c: 3 }, { a: 1, b: 2, c: 3 }), 'objects are shallowly equal');
-  t.ok(is.equal({ a: { b: 1 } }, { a: { b: 1 } }), 'objects are deep equal');
-  var nowTS = now();
-  t.ok(is.equal(new Date(nowTS), new Date(nowTS)), 'two equal date objects are equal');
+  t.test('primitives', function (pt) {
+    var primitives = [true, false, undefined, null, '', 'foo', 0, Infinity, -Infinity];
+    pt.plan(primitives.length);
+    for (var i = 0; i < primitives.length; ++i) {
+      pt.ok(is.equal(primitives[i], primitives[i]), 'primitives are equal to themselves: ' + primitives[i]);
+    }
+    pt.end();
+  });
 
-  var F = function () {};
-  F.prototype = {};
-  t.ok(is.equal(new F(), new F()), 'two object instances are equal when the prototype is the same');
+  t.test('arrays', function (at) {
+    at.ok(is.equal([1, 2, 3], [1, 2, 3]), 'arrays are shallowly equal');
+    at.ok(is.equal([1, 2, [3, 4]], [1, 2, [3, 4]]), 'arrays are deep equal');
+    at.notOk(is.equal([1, 2], [2, 3]), 'inequal arrays are not equal');
+
+    var arr = [1, 2];
+    at.ok(is.equal(arr, arr), 'array is equal to itself');
+
+    at.end();
+  });
+
+  t.test('dates', function (dt) {
+    var now = new Date();
+    dt.ok(is.equal(now, new Date(now.getTime())), 'two equal date objects are equal');
+    dt.notOk(is.equal(now, new Date()), 'two inequal date objects are not equal');
+    dt.end();
+  });
+
+  t.test('plain objects', function (ot) {
+    ot.ok(is.equal({ a: 1, b: 2, c: 3 }, { a: 1, b: 2, c: 3 }), 'objects are shallowly equal');
+    ot.ok(is.equal({ a: { b: 1 } }, { a: { b: 1 } }), 'objects are deep equal');
+    ot.notOk(is.equal({ a: 1 }, { a: 2 }), 'inequal objects are not equal');
+    ot.end();
+  });
+
+  t.test('object instances', function (ot) {
+    var F = function F() {
+      this.foo = 'bar';
+    };
+    F.prototype = {};
+    var G = function G() {
+      this.foo = 'bar';
+    };
+    var f = new F();
+    var g = new G();
+
+    ot.ok(is.equal(f, f), 'the same object instances are equal');
+    ot.ok(is.equal(f, new F()), 'two object instances are equal when the prototype and props are the same');
+    ot.ok(is.equal(f, new G()), 'two object instances are equal when the prototype is not the same, but props are');
+
+    g.bar = 'baz';
+    ot.notOk(is.equal(f, g), 'object instances are not equal when the prototype and props are not the same');
+    ot.notOk(is.equal(g, f), 'object instances are not equal when the prototype and props are not the same');
+    ot.end();
+  });
+
+  t.test('functions', function (ft) {
+    var F = function () {};
+    F.prototype = {};
+    var G = function () {};
+    G.prototype = new Date();
+
+    ft.notEqual(F.prototype, G.prototype, 'F and G have different prototypes');
+    ft.notOk(is.equal(F, G), 'two functions are not equal when the prototype is not the same');
+
+    var H = function () {};
+    H.prototype = F.prototype;
+
+    ft.equal(F.prototype, H.prototype, 'F and H have the same prototype');
+    ft.ok(is.equal(F, H), 'two functions are equal when the prototype is the same');
+    ft.end();
+  });
+
   t.end();
 });
 
