@@ -2,7 +2,6 @@ var test = require('tape');
 var is = require('../index.js');
 
 var forEach = require('foreach');
-var now = Date.now || function () { return +new Date(); };
 
 test('is.type', function (t) {
   var booleans = [true, false];
@@ -237,7 +236,8 @@ test('is.date', function (t) {
   t.notOk(is.date(), 'undefined is not date');
   t.notOk(is.date(null), 'null is not date');
   t.notOk(is.date(''), 'empty string is not date');
-  t.notOk(is.date(now()), 'timestamp is not date');
+  var nowTS = (new Date()).getTime();
+  t.notOk(is.date(nowTS), 'timestamp is not date');
   var F = function () {};
   F.prototype = new Date();
   t.notOk(is.date(new F()), 'Date subtype is not date');
