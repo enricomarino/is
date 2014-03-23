@@ -2,6 +2,7 @@ var test = require('tape');
 var is = require('../index.js');
 
 var forEach = require('foreach');
+var toStr = Object.prototype.toString;
 
 test('is.type', function (t) {
   var booleans = [true, false];
@@ -49,6 +50,11 @@ test('is.empty', function (t) {
   t.ok(is.empty([]), 'empty array is empty');
   t.ok(is.empty({}), 'empty object is empty');
   (function () { t.ok(is.empty(arguments), 'empty arguments is empty'); }());
+  t.notOk(is.empty({ a: 1 }), 'nonempty object is not empty');
+  t.notOk(is.empty(true), 'true is not empty');
+  t.notOk(is.empty(false), 'false is not empty');
+  t.notOk(is.empty(/a/g), 'regex is not empty');
+  t.notOk(is.empty(new Date()), 'date is not empty');
   t.end();
 });
 
@@ -66,6 +72,7 @@ test('is.equal', function (t) {
     at.ok(is.equal([1, 2, 3], [1, 2, 3]), 'arrays are shallowly equal');
     at.ok(is.equal([1, 2, [3, 4]], [1, 2, [3, 4]]), 'arrays are deep equal');
     at.notOk(is.equal([1, 2], [2, 3]), 'inequal arrays are not equal');
+    at.notOk(is.equal([1, 2, 3], [2, 3]), 'inequal length arrays are not equal');
 
     var arr = [1, 2];
     at.ok(is.equal(arr, arr), 'array is equal to itself');
@@ -267,7 +274,9 @@ test('is.error', function (t) {
   var err = new Error('foo');
   t.ok(is.error(err), 'Error is error');
   t.notOk(is.error({}), 'object is not error');
-  t.notOk(is.error({ toString: function () { return '[object Error]'; } }), 'object with error\'s toString is not error');
+  var objWithErrorToString = { toString: function () { return '[object Error]'; } };
+  t.equal(String(objWithErrorToString), toStr.call(new Error()), 'obj has Error\'s toString');
+  t.notOk(is.error(objWithErrorToString), 'object with Error\'s toString is not error');
   t.end();
 });
 
