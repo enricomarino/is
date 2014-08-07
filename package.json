@@ -1,11 +1,22 @@
 {
   "name": "is",
+  "version": "0.3.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/index.js",
+    "coverage": "covert test/index.js",
+    "coverage-quiet": "covert test/index.js --quiet"
+  },
   "author": {
     "name": "Enrico Marino",
     "url": "http://onirame.com"
   },
   "description": "the definitive JavaScript type testing library",
   "homepage": "https://github.com/enricomarino/is",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enricomarino/is.git"
+  },
   "keywords": [
     "util",
     "type",
@@ -18,17 +29,6 @@
     }
   ],
   "dependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/enricomarino/is.git"
-  },
-  "main": "index.js",
-  "version": "0.3.0",
-  "scripts": {
-    "test": "node test/index.js",
-    "coverage": "covert test/index.js",
-    "coverage-quiet": "covert test/index.js --quiet"
-  },
   "devDependencies": {
     "tape": "~2.14.0",
     "foreach": "~2.0.4",
