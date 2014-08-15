@@ -2,7 +2,7 @@
 /**!
  * is
  * the definitive JavaScript type testing library
- * 
+ *
  * @copyright 2013 Enrico Marino
  * @license MIT
  */
@@ -14,10 +14,10 @@ var isActualNaN = function (value) {
   return value !== value;
 };
 var NON_HOST_TYPES = {
-  "boolean": 1,
-  "number": 1,
-  "string": 1,
-  "undefined": 1
+  boolean: 1,
+  number: 1,
+  string: 1,
+  undefined: 1
 };
 
 /**
@@ -76,7 +76,9 @@ is.empty = function (value) {
   }
 
   if ('[object Object]' === type) {
-    for (key in value) if (owns.call(value, key)) return false;
+    for (key in value) {
+      if (owns.call(value, key)) { return false; }
+    }
     return true;
   }
 
