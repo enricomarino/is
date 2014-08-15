@@ -5,7 +5,8 @@
   "scripts": {
     "test": "node test/index.js",
     "coverage": "covert test/index.js",
-    "coverage-quiet": "covert test/index.js --quiet"
+    "coverage-quiet": "covert test/index.js --quiet",
+    "lint": "jscs *.js */*.js"
   },
   "author": {
     "name": "Enrico Marino",
@@ -32,7 +33,8 @@
   "devDependencies": {
     "tape": "~2.14.0",
     "foreach": "~2.0.4",
-    "covert": "~1.0.0"
+    "covert": "~1.0.0",
+    "jscs": "~1.5.9"
   },
   "testling": {
     "files": "test/index.js",
