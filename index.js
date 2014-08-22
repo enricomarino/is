@@ -307,7 +307,7 @@ is.boolean = function (value) {
  */
 
 is['false'] = function (value) {
-  return is.boolean(value) && (value === false || value.valueOf() === false);
+  return is.boolean(value) && Boolean(Number(value)) === false;
 };
 
 /**
@@ -320,7 +320,7 @@ is['false'] = function (value) {
  */
 
 is['true'] = function (value) {
-  return is.boolean(value) && (value === true || value.valueOf() === true);
+  return is.boolean(value) && Boolean(Number(value)) === true;
 };
 
 /**
