@@ -155,8 +155,9 @@ test('is.instance', function (t) {
   t.end();
 });
 
-test('is.null', function (t) {
-  var isNull = is['null'];
+test('is.nil', function (t) {
+  var isNull = is.nil;
+  t.equal(isNull, is['null'], 'is.nil is the same as is.null');
   t.ok(isNull(null), 'null is null');
   t.notOk(isNull(undefined), 'undefined is not null');
   t.notOk(isNull({}), 'object is not null');

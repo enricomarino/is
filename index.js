@@ -178,7 +178,7 @@ is.instance = is['instanceof'] = function (value, constructor) {
 };
 
 /**
- * is.null
+ * is.nil / is.null
  * Test if `value` is null.
  *
  * @param {Mixed} value value to test
@@ -186,12 +186,12 @@ is.instance = is['instanceof'] = function (value, constructor) {
  * @api public
  */
 
-is['null'] = function (value) {
+is.nil = is['null'] = function (value) {
   return value === null;
 };
 
 /**
- * is.undef
+ * is.undef / is.undefined
  * Test if `value` is undefined.
  *
  * @param {Mixed} value value to test

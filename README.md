@@ -34,6 +34,7 @@ $ component install enricomarino/is
  - ``is.hosted`` (value, host)
  - ``is.instance`` (value, constructor)
  - ``is.instanceof`` (value, constructor) - deprecated, because in ES3 browsers, "instanceof" is a reserved word
+ - ``is.nil`` (value)
  - ``is.null`` (value) - deprecated, because in ES3 browsers, "null" is a reserved word
  - ``is.undef`` (value)
  - ``is.undefined`` (value) - deprecated, because in ES3 browsers, "undefined" is a reserved word
