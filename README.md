@@ -10,11 +10,14 @@ To be or not to be? This is the library!
 
 As a node.js module
 
-    $ npm install is
+```shell
+$ npm install is
+```
 
 As a component
-
-    $ component install enricomarino/is
+```shell
+$ component install enricomarino/is
+```
 
 ## API
 
