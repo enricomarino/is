@@ -1,10 +1,14 @@
-# is
+# is <sup>[![Version Badge][2]][1]</sup>
+
+[![Build Status][3]][4] [![dependency status][5]][6] [![dev dependency status][7]][8]
+
+[![npm badge][11]][1]
+
+[![browser support][9]][10]
 
 The definitive JavaScript type testing library
 
 To be or not to be? This is the library!
-
-[![browser support][1]][2]
 
 ## Installation
 
@@ -130,6 +134,15 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[1]: https://ci.testling.com/enricomarino/is.png
-[2]: https://ci.testling.com/enricomarino/is
+[1]: https://npmjs.org/package/is
+[2]: http://vb.teelaun.ch/enricomarino/is.svg
+[3]: https://travis-ci.org/enricomarino/is.svg
+[4]: https://travis-ci.org/enricomarino/is
+[5]: https://david-dm.org/enricomarino/is.svg
+[6]: https://david-dm.org/enricomarino/is
+[7]: https://david-dm.org/enricomarino/is/dev-status.svg
+[8]: https://david-dm.org/enricomarino/is#info=devDependencies
+[9]: https://ci.testling.com/enricomarino/is.png
+[10]: https://ci.testling.com/enricomarino/is
+[11]: https://nodei.co/npm/is.png?downloads=true&stars=true
 
