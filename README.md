@@ -27,42 +27,42 @@ $ component install enricomarino/is
 
 ### general
 
- - is.a (value, type) or is.type (value, type)
- - is.defined (value)
- - is.empty (value)
- - is.equal (value, other)
- - is.hosted (value, host)
- - is.instance (value, constructor)
- - is.instanceof (value, constructor) - deprecated, because in ES3 browsers, "instanceof" is a reserved word
- - is.null (value) - deprecated, because in ES3 browsers, "null" is a reserved word
- - is.undef (value)
- - is.undefined (value) - deprecated, because in ES3 browsers, "undefined" is a reserved word
+ - ``is.a`` (value, type) or ``is.type`` (value, type)
+ - ``is.defined`` (value)
+ - ``is.empty`` (value)
+ - ``is.equal`` (value, other)
+ - ``is.hosted`` (value, host)
+ - ``is.instance`` (value, constructor)
+ - ``is.instanceof`` (value, constructor) - deprecated, because in ES3 browsers, "instanceof" is a reserved word
+ - ``is.null`` (value) - deprecated, because in ES3 browsers, "null" is a reserved word
+ - ``is.undef`` (value)
+ - ``is.undefined`` (value) - deprecated, because in ES3 browsers, "undefined" is a reserved word
 
 ### arguments
 
- - is.args (value)
- - is.arguments (value) - deprecated, because "arguments" is a reserved word
- - is.args.empty (value)
+ - ``is.args`` (value)
+ - ``is.arguments`` (value) - deprecated, because "arguments" is a reserved word
+ - ``is.args.empty`` (value)
 
 ### array
 
- - is.array (value)
- - is.array.empty (value)
- - is.arraylike (value)
+ - ``is.array`` (value)
+ - ``is.array.empty`` (value)
+ - ``is.arraylike`` (value)
 
 ### boolean
 
- - is.boolean (value)
- - is.false (value) - deprecated, because in ES3 browsers, "false" is a reserved word
- - is.true (value) - deprecated, because in ES3 browsers, "true" is a reserved word
+ - ``is.boolean`` (value)
+ - ``is.false`` (value) - deprecated, because in ES3 browsers, "false" is a reserved word
+ - ``is.true`` (value) - deprecated, because in ES3 browsers, "true" is a reserved word
 
 ### date
 
- - is.date (value)
+ - ``is.date`` (value)
 
 ### element
 
- - is.element (value)
+ - ``is.element`` (value)
 
 ### error
 
@@ -70,38 +70,38 @@ $ component install enricomarino/is
 
 ### function
 
- - is.fn(value)
- - is.function(value) - deprecated, because in ES3 browsers, "function" is a reserved word
+ - ``is.fn`` (value)
+ - ``is.function`` (value) - deprecated, because in ES3 browsers, "function" is a reserved word
 
 ### number
 
- - is.number (value)
- - is.infinite (value)
- - is.decimal (value)
- - is.divisibleBy (value, n)
- - is.int (value)
- - is.maximum (value, others)
- - is.minimum (value, others)
- - is.nan (value)
- - is.even (value)
- - is.odd (value)
- - is.ge (value, other)
- - is.gt (value, other)
- - is.le (value, other)
- - is.lt (value, other)
- - is.within (value, start, finish)
+ - ``is.number`` (value)
+ - ``is.infinite`` (value)
+ - ``is.decimal`` (value)
+ - ``is.divisibleBy`` (value, n)
+ - ``is.int`` (value)
+ - ``is.maximum`` (value, others)
+ - ``is.minimum`` (value, others)
+ - ``is.nan`` (value)
+ - ``is.even`` (value)
+ - ``is.odd`` (value)
+ - ``is.ge`` (value, other)
+ - ``is.gt`` (value, other)
+ - ``is.le`` (value, other)
+ - ``is.lt`` (value, other)
+ - ``is.within`` (value, start, finish)
 
 ### object
 
- - is.object (value)
+ - ``is.object`` (value)
 
 ### regexp
 
- - is.regexp (value)
+ - ``is.regexp`` (value)
 
 ### string
 
- - is.string (value)
+ - ``is.string`` (value)
 
 
 ## Contributors
