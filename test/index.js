@@ -47,6 +47,7 @@ test('is.defined', function (t) {
 
 test('is.empty', function (t) {
   t.ok(is.empty(''), 'empty string is empty');
+  t.ok(is.empty(new String()), 'empty String object is empty');
   t.ok(is.empty([]), 'empty array is empty');
   t.ok(is.empty({}), 'empty object is empty');
   (function () { t.ok(is.empty(arguments), 'empty arguments is empty'); }());
