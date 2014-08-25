@@ -71,7 +71,7 @@ is.empty = function (value) {
   var type = toString.call(value);
   var key;
 
-  if ('[object Array]' === type || '[object Arguments]' === type) {
+  if ('[object Array]' === type || '[object Arguments]' === type || '[object String]' === type) {
     return value.length === 0;
   }
 
@@ -80,10 +80,6 @@ is.empty = function (value) {
       if (owns.call(value, key)) { return false; }
     }
     return true;
-  }
-
-  if ('[object String]' === type) {
-    return '' === value;
   }
 
   return false;
