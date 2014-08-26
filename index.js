@@ -3,7 +3,7 @@
  * is
  * the definitive JavaScript type testing library
  *
- * @copyright 2013 Enrico Marino
+ * @copyright 2013-2014 Enrico Marino / Jordan Harband
  * @license MIT
  */
 
