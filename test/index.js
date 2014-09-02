@@ -82,10 +82,13 @@ test('is.equal', function (t) {
   });
 
   t.test('dates', function (dt) {
+    dt.plan(2);
     var now = new Date();
     dt.ok(is.equal(now, new Date(now.getTime())), 'two equal date objects are equal');
-    dt.notOk(is.equal(now, new Date()), 'two inequal date objects are not equal');
-    dt.end();
+    setTimeout(function () {
+      dt.notOk(is.equal(now, new Date()), 'two inequal date objects are not equal');
+      dt.end();
+    }, 1);
   });
 
   t.test('plain objects', function (ot) {
