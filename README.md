@@ -1,6 +1,10 @@
 # is <sup>[![Version Badge][2]][1]</sup>
 
-[![Build Status][3]][4] [![dependency status][5]][6] [![dev dependency status][7]][8]
+[![Build Status][3]][4]
+[![dependency status][5]][6]
+[![dev dependency status][7]][8]
+[![License][license-image]][license-url]
+[![Downloads][downloads-image]][downloads-url]
 
 [![npm badge][11]][1]
 
@@ -120,4 +124,8 @@ $ component install enricomarino/is
 [9]: https://ci.testling.com/enricomarino/is.png
 [10]: https://ci.testling.com/enricomarino/is
 [11]: https://nodei.co/npm/is.png?downloads=true&stars=true
+[license-image]: http://img.shields.io/npm/l/is.svg
+[license-url]: LICENSE.md
+[downloads-image]: http://img.shields.io/npm/dm/is.svg
+[downloads-url]: http://npm-stat.com/charts.html?package=is
 
