@@ -14,6 +14,7 @@
   },
   "description": "the definitive JavaScript type testing library",
   "homepage": "https://github.com/enricomarino/is",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/enricomarino/is.git"
