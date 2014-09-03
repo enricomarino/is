@@ -35,7 +35,7 @@
     "tape": "~2.14.0",
     "foreach": "~2.0.4",
     "covert": "~1.0.0",
-    "jscs": "~1.6.0"
+    "jscs": "~1.6.1"
   },
   "testling": {
     "files": "test/index.js",
