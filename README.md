@@ -1,6 +1,6 @@
 # is <sup>[![Version Badge][npm-version-svg]][npm-url]</sup>
 
-[![Build Status][3]][4]
+[![Build Status][travis-svg]][travis-url]
 [![dependency status][5]][6]
 [![dev dependency status][7]][8]
 [![License][license-image]][license-url]
@@ -115,8 +115,8 @@ $ component install enricomarino/is
 
 [npm-url]: https://npmjs.org/package/is
 [npm-version-svg]: http://vb.teelaun.ch/enricomarino/is.svg
-[3]: https://travis-ci.org/enricomarino/is.svg
-[4]: https://travis-ci.org/enricomarino/is
+[travis-svg]: https://travis-ci.org/enricomarino/is.svg
+[travis-url]: https://travis-ci.org/enricomarino/is
 [5]: https://david-dm.org/enricomarino/is.svg
 [6]: https://david-dm.org/enricomarino/is
 [7]: https://david-dm.org/enricomarino/is/dev-status.svg
