@@ -1,4 +1,4 @@
-# is <sup>[![Version Badge][2]][npm-url]</sup>
+# is <sup>[![Version Badge][npm-version-svg]][npm-url]</sup>
 
 [![Build Status][3]][4]
 [![dependency status][5]][6]
@@ -114,7 +114,7 @@ $ component install enricomarino/is
 - [Jordan Harband](https://github.com/ljharb)
 
 [npm-url]: https://npmjs.org/package/is
-[2]: http://vb.teelaun.ch/enricomarino/is.svg
+[npm-version-svg]: http://vb.teelaun.ch/enricomarino/is.svg
 [3]: https://travis-ci.org/enricomarino/is.svg
 [4]: https://travis-ci.org/enricomarino/is
 [5]: https://david-dm.org/enricomarino/is.svg
