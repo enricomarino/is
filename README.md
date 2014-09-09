@@ -1,8 +1,8 @@
 # is <sup>[![Version Badge][npm-version-svg]][npm-url]</sup>
 
 [![Build Status][travis-svg]][travis-url]
-[![dependency status][5]][6]
-[![dev dependency status][7]][8]
+[![dependency status][deps-svg]][deps-url]
+[![dev dependency status][dev-deps-svg]][dev-deps-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
@@ -117,10 +117,10 @@ $ component install enricomarino/is
 [npm-version-svg]: http://vb.teelaun.ch/enricomarino/is.svg
 [travis-svg]: https://travis-ci.org/enricomarino/is.svg
 [travis-url]: https://travis-ci.org/enricomarino/is
-[5]: https://david-dm.org/enricomarino/is.svg
-[6]: https://david-dm.org/enricomarino/is
-[7]: https://david-dm.org/enricomarino/is/dev-status.svg
-[8]: https://david-dm.org/enricomarino/is#info=devDependencies
+[deps-svg]: https://david-dm.org/enricomarino/is.svg
+[deps-url]: https://david-dm.org/enricomarino/is
+[dev-deps-svg]: https://david-dm.org/enricomarino/is/dev-status.svg
+[dev-deps-url]: https://david-dm.org/enricomarino/is#info=devDependencies
 [9]: https://ci.testling.com/enricomarino/is.png
 [10]: https://ci.testling.com/enricomarino/is
 [11]: https://nodei.co/npm/is.png?downloads=true&stars=true
