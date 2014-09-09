@@ -8,7 +8,7 @@
 
 [![npm badge][11]][npm-url]
 
-[![browser support][9]][10]
+[![browser support][testling-png]][testling-url]
 
 The definitive JavaScript type testing library
 
@@ -121,8 +121,8 @@ $ component install enricomarino/is
 [deps-url]: https://david-dm.org/enricomarino/is
 [dev-deps-svg]: https://david-dm.org/enricomarino/is/dev-status.svg
 [dev-deps-url]: https://david-dm.org/enricomarino/is#info=devDependencies
-[9]: https://ci.testling.com/enricomarino/is.png
-[10]: https://ci.testling.com/enricomarino/is
+[testling-png]: https://ci.testling.com/enricomarino/is.png
+[testling-url]: https://ci.testling.com/enricomarino/is
 [11]: https://nodei.co/npm/is.png?downloads=true&stars=true
 [license-image]: http://img.shields.io/npm/l/is.svg
 [license-url]: LICENSE.md
