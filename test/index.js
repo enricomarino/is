@@ -526,7 +526,7 @@ test('is.object', function (t) {
 
 test('is.hash', function (t) {
   t.ok(is.hash({}), 'empty object literal is hash');
-  t.ok(is.hash({ 1: 2, a: "b" }), 'object literal is hash');
+  t.ok(is.hash({ 1: 2, a: 'b' }), 'object literal is hash');
   t.notOk(is.hash(), 'undefined is not a hash');
   t.notOk(is.hash(null), 'null is not a hash');
   t.notOk(is.hash(new Date()), 'date is not a hash');
