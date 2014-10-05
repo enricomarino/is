@@ -196,7 +196,7 @@ is.nil = is['null'] = function (value) {
  */
 
 is.undef = is['undefined'] = function (value) {
-  return value === undefined;
+  return typeof value === 'undefined';
 };
 
 /**
