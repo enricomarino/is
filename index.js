@@ -40,8 +40,7 @@ var is = module.exports = {};
  * @api public
  */
 
-is.a =
-is.type = function (value, type) {
+is.a = is.type = function (value, type) {
   return typeof value === type;
 };
 
