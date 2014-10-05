@@ -55,7 +55,7 @@ is.type = function (value, type) {
  */
 
 is.defined = function (value) {
-  return value !== undefined;
+  return typeof value !== 'undefined';
 };
 
 /**
