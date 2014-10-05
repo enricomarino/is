@@ -658,7 +658,7 @@ is.within = function (value, start, finish) {
  */
 
 is.object = function (value) {
-  return value && '[object Object]' === toString.call(value);
+  return '[object Object]' === toString.call(value);
 };
 
 /**
