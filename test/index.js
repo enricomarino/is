@@ -585,7 +585,6 @@ test('is.base64', function (t) {
 test('is.hex', function (t) {
   t.ok(is.hex('abcdABCD1234'), 'string is hex encoded');
   t.notOk(is.hex(''), 'zero length string is not hex encoded');
-  t.notOk(is.hex('abcdABCD123'), 'odd length string is not hex encoded');
   t.notOk(is.hex('wxyzWXYZ1234/+=='), 'string with invalid characters is not hex encoded');
   t.end();
 });

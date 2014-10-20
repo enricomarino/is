@@ -21,7 +21,7 @@ var NON_HOST_TYPES = {
 };
 
 var base64Regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
-var hexRegex = /^([A-Fa-f0-9]{2})+$/;
+var hexRegex = /^[A-Fa-f0-9]+$/;
 
 /**
  * Expose `is`

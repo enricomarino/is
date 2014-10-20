@@ -111,7 +111,7 @@ $ component install enricomarino/is
 ### encoded binary
 
  - ``is.base64`` (value)
- - ``is.hdex`` (value)
+ - ``is.hex`` (value)
 
 
 ## Contributors
