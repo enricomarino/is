@@ -1,3 +1,10 @@
+2.1.0 / 2014-10-21
+==================
+  * Add `CHANGELOG.md`
+  * Add `is.hex` and `is.base64` [#12](https://github.com/enricomarino/is/issues/12)
+  * Update `tape`, `jscs`
+  * Lock `covert` to v1.0.0 [substack/covert#9](https://github.com/substack/covert/issues/9)
+
 2.0.2 / 2014-10-05
 ==================
   * `undefined` can be redefined in ES3 browsers.
