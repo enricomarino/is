@@ -572,3 +572,19 @@ test('is.string', function (t) {
   t.end();
 });
 
+test('is.base64', function (t) {
+  t.ok(is.base64('wxyzWXYZ/+=='), 'string is base64 encoded');
+  t.ok(is.base64(''), 'zero length string is base64 encoded');
+  t.notOk(is.base64('wxyzWXYZ123/+=='), 'string length not a multiple of four is not base64 encoded');
+  t.notOk(is.base64('wxyzWXYZ1234|]=='), 'string with invalid characters is not base64 encoded');
+  t.notOk(is.base64('wxyzWXYZ1234==/+'), 'string with = not at end is not base64 encoded');
+  t.notOk(is.base64('wxyzWXYZ1234/==='), 'string ending with === is not base64 encoded');
+  t.end();
+});
+
+test('is.hex', function (t) {
+  t.ok(is.hex('abcdABCD1234'), 'string is hex encoded');
+  t.ok(is.hex(''), 'zero length string is hex encoded');
+  t.notOk(is.hex('wxyzWXYZ1234/+=='), 'string with invalid characters is not hex encoded');
+  t.end();
+});

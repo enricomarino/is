@@ -108,6 +108,11 @@ $ component install enricomarino/is
 
  - ``is.string`` (value)
 
+### encoded binary
+
+ - ``is.base64`` (value)
+ - ``is.hex`` (value)
+
 
 ## Contributors
 
@@ -128,4 +133,3 @@ $ component install enricomarino/is
 [license-url]: LICENSE.md
 [downloads-image]: http://img.shields.io/npm/dm/is.svg
 [downloads-url]: http://npm-stat.com/charts.html?package=is
-
