@@ -724,7 +724,7 @@ is.string = function (value) {
  */
 
 is.base64 = function (value) {
-  return is.string(value) && base64Regex.test(value);
+  return is.string(value) && (!value.length || base64Regex.test(value));
 };
 
 /**
@@ -741,5 +741,5 @@ is.base64 = function (value) {
  */
 
 is.hex = function (value) {
-  return is.string(value) && hexRegex.test(value);
+  return is.string(value) && (!value.length || hexRegex.test(value));
 };
