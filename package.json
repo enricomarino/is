@@ -32,10 +32,10 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "tape": "~3.0.2",
+    "tape": "~3.0.3",
     "foreach": "~2.0.5",
     "covert": "1.0.0",
-    "jscs": "~1.7.3"
+    "jscs": "~1.8.1"
   },
   "testling": {
     "files": "test/index.js",
