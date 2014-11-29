@@ -10,6 +10,10 @@
 var objProto = Object.prototype;
 var owns = objProto.hasOwnProperty;
 var toString = objProto.toString;
+var symbolValueOf;
+if (typeof Symbol === 'function') {
+  symbolValueOf = Symbol.prototype.valueOf;
+}
 var isActualNaN = function (value) {
   return value !== value;
 };
@@ -743,3 +747,17 @@ is.base64 = function (value) {
 is.hex = function (value) {
   return is.string(value) && (!value.length || hexRegex.test(value));
 };
+
+/**
+ * is.symbol
+ * Test if `value` is an ES6 Symbol
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a Symbol, false otherise
+ * @api public
+ */
+
+is.symbol = function (value) {
+  return typeof Symbol === 'function' && toString.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
+};
+

@@ -588,3 +588,31 @@ test('is.hex', function (t) {
   t.notOk(is.hex('wxyzWXYZ1234/+=='), 'string with invalid characters is not hex encoded');
   t.end();
 });
+
+test('is.symbol', function (t) {
+  t.test('not symbols', function (t) {
+    var notSymbols = [true, false, null, undefined, {}, [], function () {}, 42, NaN, Infinity, /a/g, '', 0, -0, new Error('error')];
+    forEach(notSymbols, function (notSymbol) {
+      t.notOk(is.symbol(notSymbol), notSymbol + ' is not symbol');
+    });
+
+    t.end();
+  });
+
+  t.test('symbols', { skip: typeof Symbol !== 'function' }, function (t) {
+    t.ok(is.symbol(Symbol('foo')), 'Symbol("foo") is symbol');
+
+    var notKnownSymbolProperties = ['length', 'name', 'arguments', 'caller', 'prototype', 'for', 'keyFor'];
+    var symbolKeys = Object.getOwnPropertyNames(Symbol).filter(function (name) {
+      return notKnownSymbolProperties.indexOf(name) < 0;
+    });
+    forEach(symbolKeys, function (symbolKey) {
+      t.ok(is.symbol(Symbol[symbolKey]), symbolKey + ' is symbol');
+    });
+
+    t.end();
+  });
+
+  t.end();
+});
+
