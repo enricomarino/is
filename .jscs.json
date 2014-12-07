@@ -52,6 +52,8 @@
 
 	"disallowMultipleLineStrings": true,
 
+	"requireDotNotation": true,
+
 	"requireParenthesesAroundIIFE": true,
 
 	"validateLineBreaks": "LF",

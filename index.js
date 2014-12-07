@@ -201,7 +201,7 @@ is.nil = is['null'] = function (value) {
  * @api public
  */
 
-is.undef = is['undefined'] = function (value) {
+is.undef = is.undefined = function (value) {
   return typeof value === 'undefined';
 };
 
@@ -218,7 +218,7 @@ is.undef = is['undefined'] = function (value) {
  * @api public
  */
 
-is.args = is['arguments'] = function (value) {
+is.args = is.arguments = function (value) {
   var isStandardArguments = '[object Arguments]' === toString.call(value);
   var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
   return isStandardArguments || isOldArguments;
