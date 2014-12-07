@@ -9,7 +9,7 @@
 
 var objProto = Object.prototype;
 var owns = objProto.hasOwnProperty;
-var toString = objProto.toString;
+var toStr = objProto.toString;
 var symbolValueOf;
 if (typeof Symbol === 'function') {
   symbolValueOf = Symbol.prototype.valueOf;
@@ -74,7 +74,7 @@ is.defined = function (value) {
  */
 
 is.empty = function (value) {
-  var type = toString.call(value);
+  var type = toStr.call(value);
   var key;
 
   if ('[object Array]' === type || '[object Arguments]' === type || '[object String]' === type) {
@@ -106,10 +106,10 @@ is.equal = function (value, other) {
     return true;
   }
 
-  var type = toString.call(value);
+  var type = toStr.call(value);
   var key;
 
-  if (type !== toString.call(other)) {
+  if (type !== toStr.call(other)) {
     return false;
   }
 
@@ -219,7 +219,7 @@ is.undef = is.undefined = function (value) {
  */
 
 is.args = is.arguments = function (value) {
-  var isStandardArguments = '[object Arguments]' === toString.call(value);
+  var isStandardArguments = '[object Arguments]' === toStr.call(value);
   var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
   return isStandardArguments || isOldArguments;
 };
@@ -238,7 +238,7 @@ is.args = is.arguments = function (value) {
  */
 
 is.array = function (value) {
-  return '[object Array]' === toString.call(value);
+  return '[object Array]' === toStr.call(value);
 };
 
 /**
@@ -296,7 +296,7 @@ is.arraylike = function (value) {
  */
 
 is.boolean = function (value) {
-  return '[object Boolean]' === toString.call(value);
+  return '[object Boolean]' === toStr.call(value);
 };
 
 /**
@@ -339,7 +339,7 @@ is['true'] = function (value) {
  */
 
 is.date = function (value) {
-  return '[object Date]' === toString.call(value);
+  return '[object Date]' === toStr.call(value);
 };
 
 /**
@@ -376,7 +376,7 @@ is.element = function (value) {
  */
 
 is.error = function (value) {
-  return '[object Error]' === toString.call(value);
+  return '[object Error]' === toStr.call(value);
 };
 
 /**
@@ -394,7 +394,7 @@ is.error = function (value) {
 
 is.fn = is['function'] = function (value) {
   var isAlert = typeof window !== 'undefined' && value === window.alert;
-  return isAlert || '[object Function]' === toString.call(value);
+  return isAlert || '[object Function]' === toStr.call(value);
 };
 
 /**
@@ -411,7 +411,7 @@ is.fn = is['function'] = function (value) {
  */
 
 is.number = function (value) {
-  return '[object Number]' === toString.call(value);
+  return '[object Number]' === toStr.call(value);
 };
 
 /**
@@ -664,7 +664,7 @@ is.within = function (value, start, finish) {
  */
 
 is.object = function (value) {
-  return '[object Object]' === toString.call(value);
+  return '[object Object]' === toStr.call(value);
 };
 
 /**
@@ -694,7 +694,7 @@ is.hash = function (value) {
  */
 
 is.regexp = function (value) {
-  return '[object RegExp]' === toString.call(value);
+  return '[object RegExp]' === toStr.call(value);
 };
 
 /**
@@ -711,7 +711,7 @@ is.regexp = function (value) {
  */
 
 is.string = function (value) {
-  return '[object String]' === toString.call(value);
+  return '[object String]' === toStr.call(value);
 };
 
 /**
@@ -758,6 +758,6 @@ is.hex = function (value) {
  */
 
 is.symbol = function (value) {
-  return typeof Symbol === 'function' && toString.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
+  return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 };
 
