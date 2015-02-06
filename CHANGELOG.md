@@ -1,3 +1,8 @@
+2.2.1 / 2015-02-06
+==================
+  * Update `tape`, `jscs`
+  * `toString` breaks in some browsers; using `toStr` instead.
+
 2.2.0 / 2014-11-29
 ==================
   * Update `tape`, `jscs`
