@@ -52,6 +52,7 @@ test('is.empty', function (t) {
   t.ok(is.empty({}), 'empty object is empty');
   t.ok(is.empty(null), 'null is empty');
   t.ok(is.empty(), 'undefined is empty');
+  t.ok(is.empty(undefined), 'undefined is empty');
   t.ok(is.empty(false), 'false is empty');
   t.ok(is.empty(0), '0 is empty');
   t.ok(is.empty(NaN), 'nan is empty');
