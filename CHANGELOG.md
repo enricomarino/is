@@ -1,3 +1,10 @@
+3.0.0 / 2015-02-21
+==================
+  * is.empty should return true for falsy values ([#13](https://github.com/enricomarino/is/issues/13), [#14](https://github.com/enricomarino/is/issues/14))
+  * All grade A-supported `node`/`iojs` versions now ship with an `npm` that understands `^`.
+  * Test on `iojs` `v1.2` and `v1.3`, `node` `v0.12`; speed up builds; allow failures on all but two latest minor versions.
+  * Update `jscs`
+
 2.2.1 / 2015-02-06
 ==================
   * Update `tape`, `jscs`
