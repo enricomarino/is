@@ -88,11 +88,7 @@ is.empty = function (value) {
     return true;
   }
 
-  if (is.nil(value)) {
-    return true;
-  }
-
-  return false;
+  return !value;
 };
 
 /**

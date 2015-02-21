@@ -47,14 +47,17 @@ test('is.defined', function (t) {
 
 test('is.empty', function (t) {
   t.ok(is.empty(''), 'empty string is empty');
-  t.ok(is.empty(null), 'null is empty');
   t.ok(is.empty(new String()), 'empty String object is empty');
   t.ok(is.empty([]), 'empty array is empty');
   t.ok(is.empty({}), 'empty object is empty');
+  t.ok(is.empty(null), 'null is empty');
+  t.ok(is.empty(), 'undefined is empty');
+  t.ok(is.empty(false), 'false is empty');
+  t.ok(is.empty(0), '0 is empty');
+  t.ok(is.empty(NaN), 'nan is empty');
   (function () { t.ok(is.empty(arguments), 'empty arguments is empty'); }());
   t.notOk(is.empty({ a: 1 }), 'nonempty object is not empty');
   t.notOk(is.empty(true), 'true is not empty');
-  t.notOk(is.empty(false), 'false is not empty');
   t.notOk(is.empty(/a/g), 'regex is not empty');
   t.notOk(is.empty(new Date()), 'date is not empty');
   t.end();
