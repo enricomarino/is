@@ -88,6 +88,10 @@ is.empty = function (value) {
     return true;
   }
 
+  if (is.nil(value)) {
+    return true;
+  }
+
   return false;
 };
 
@@ -760,4 +764,3 @@ is.hex = function (value) {
 is.symbol = function (value) {
   return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 };
-
