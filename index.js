@@ -88,7 +88,7 @@ is.empty = function (value) {
     return true;
   }
 
-  return false;
+  return !value;
 };
 
 /**
@@ -760,4 +760,3 @@ is.hex = function (value) {
 is.symbol = function (value) {
   return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 };
-
