@@ -1,3 +1,7 @@
+3.0.1 / 2015-02-22
+==================
+  * Version bump to resolve npm bug with v3.0.0
+
 3.0.0 / 2015-02-21
 ==================
   * is.empty should return true for falsy values ([#13](https://github.com/enricomarino/is/issues/13), [#14](https://github.com/enricomarino/is/issues/14))
