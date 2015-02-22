@@ -93,7 +93,7 @@ test('is.equal', function (t) {
     setTimeout(function () {
       dt.notOk(is.equal(now, new Date()), 'two inequal date objects are not equal');
       dt.end();
-    }, 1);
+    }, 10);
   });
 
   t.test('plain objects', function (ot) {
