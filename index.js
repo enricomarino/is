@@ -101,8 +101,7 @@ is.empty = function (value) {
  */
 
 is.equal = function (value, other) {
-  var strictlyEqual = value === other;
-  if (strictlyEqual) {
+  if (value === other) {
     return true;
   }
 
@@ -148,7 +147,7 @@ is.equal = function (value, other) {
     return value.getTime() === other.getTime();
   }
 
-  return strictlyEqual;
+  return false;
 };
 
 /**
