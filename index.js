@@ -456,7 +456,7 @@ is.divisibleBy = function (value, n) {
 };
 
 /**
- * is.int
+ * is.integer
  * Test if `value` is an integer.
  *
  * @param value to test
@@ -464,7 +464,7 @@ is.divisibleBy = function (value, n) {
  * @api public
  */
 
-is.int = function (value) {
+is.integer = is['int'] = function (value) {
   return is.number(value) && !isActualNaN(value) && value % 1 === 0;
 };
 

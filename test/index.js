@@ -349,14 +349,14 @@ test('is.divisibleBy', function (t) {
   t.end();
 });
 
-test('is.int', function (t) {
-  t.ok(is.int(0), '0 is integer');
-  t.ok(is.int(3), '3 is integer');
-  t.notOk(is.int(1.1), '1.1 is not integer');
-  t.notOk(is.int(NaN), 'NaN is not integer');
-  t.notOk(is.int(Infinity), 'infinity is not integer');
-  t.notOk(is.int(null), 'null is not integer');
-  t.notOk(is.int(), 'undefined is not integer');
+test('is.integer', function (t) {
+  t.ok(is.integer(0), '0 is integer');
+  t.ok(is.integer(3), '3 is integer');
+  t.notOk(is.integer(1.1), '1.1 is not integer');
+  t.notOk(is.integer(NaN), 'NaN is not integer');
+  t.notOk(is.integer(Infinity), 'infinity is not integer');
+  t.notOk(is.integer(null), 'null is not integer');
+  t.notOk(is.integer(), 'undefined is not integer');
   t.end();
 });
 

@@ -85,7 +85,8 @@ $ component install enricomarino/is
  - ``is.infinite`` (value)
  - ``is.decimal`` (value)
  - ``is.divisibleBy`` (value, n)
- - ``is.int`` (value)
+ - ``is.integer`` (value)
+ - ``is.int`` (value) - deprecated, because in ES3 browsers, "int" is a reserved word
  - ``is.maximum`` (value, others)
  - ``is.minimum`` (value, others)
  - ``is.nan`` (value)
