@@ -47,7 +47,7 @@ test('is.defined', function (t) {
 
 test('is.empty', function (t) {
   t.ok(is.empty(''), 'empty string is empty');
-  t.ok(is.empty(new String()), 'empty String object is empty');
+  t.ok(is.empty(Object('')), 'empty String object is empty');
   t.ok(is.empty([]), 'empty array is empty');
   t.ok(is.empty({}), 'empty object is empty');
   t.ok(is.empty(null), 'null is empty');
@@ -226,8 +226,8 @@ test('is.isarraylike', function (t) {
 test('is.bool', function (t) {
   t.ok(is.bool(true), 'literal true is a boolean');
   t.ok(is.bool(false), 'literal false is a boolean');
-  t.ok(is.bool(new Boolean(true)), 'object true is a boolean');
-  t.ok(is.bool(new Boolean(false)), 'object false is a boolean');
+  t.ok(is.bool(Object(true)), 'object true is a boolean');
+  t.ok(is.bool(Object(false)), 'object false is a boolean');
   t.notOk(is.bool(), 'undefined is not a boolean');
   t.notOk(is.bool(null), 'null is not a boolean');
   t.end();
@@ -236,7 +236,7 @@ test('is.bool', function (t) {
 test('is.false', function (t) {
   var isFalse = is['false'];
   t.ok(isFalse(false), 'false is false');
-  t.ok(isFalse(new Boolean(false)), 'object false is false');
+  t.ok(isFalse(Object(false)), 'object false is false');
   t.notOk(isFalse(true), 'true is not false');
   t.notOk(isFalse(), 'undefined is not false');
   t.notOk(isFalse(null), 'null is not false');
@@ -247,7 +247,7 @@ test('is.false', function (t) {
 test('is.true', function (t) {
   var isTrue = is['true'];
   t.ok(isTrue(true), 'true is true');
-  t.ok(isTrue(new Boolean(true)), 'object true is true');
+  t.ok(isTrue(Object(true)), 'object true is true');
   t.notOk(isTrue(false), 'false is not true');
   t.notOk(isTrue(), 'undefined is not true');
   t.notOk(isTrue(null), 'null is not true');
@@ -310,7 +310,7 @@ test('is.number', function (t) {
   t.ok(is.number(NaN), 'NaN is number');
   t.ok(is.number(Infinity), 'infinity is number');
   t.ok(is.number(-Infinity), 'negative infinity is number');
-  t.ok(is.number(new Number(42)), 'object number is number');
+  t.ok(is.number(Object(42)), 'object number is number');
   t.notOk(is.number(), 'undefined is not number');
   t.notOk(is.number(null), 'null is not number');
   t.notOk(is.number(true), 'true is not number');
@@ -535,13 +535,13 @@ test('is.hash', function (t) {
   t.notOk(is.hash(), 'undefined is not a hash');
   t.notOk(is.hash(null), 'null is not a hash');
   t.notOk(is.hash(new Date()), 'date is not a hash');
-  t.notOk(is.hash(new String()), 'string object is not a hash');
+  t.notOk(is.hash(Object('')), 'string object is not a hash');
   t.notOk(is.hash(''), 'string literal is not a hash');
-  t.notOk(is.hash(new Number()), 'number object is not a hash');
+  t.notOk(is.hash(Object(0)), 'number object is not a hash');
   t.notOk(is.hash(1), 'number literal is not a hash');
   t.notOk(is.hash(true), 'true is not a hash');
   t.notOk(is.hash(false), 'false is not a hash');
-  t.notOk(is.hash(new Boolean()), 'boolean obj is not hash');
+  t.notOk(is.hash(Object(false)), 'boolean obj is not hash');
   t.notOk(is.hash(false), 'literal false is not hash');
   t.notOk(is.hash(true), 'literal true is not hash');
   if (typeof module !== 'undefined') {
@@ -568,11 +568,11 @@ test('is.regexp', function (t) {
 
 test('is.string', function (t) {
   t.ok(is.string('foo'), 'string literal is string');
-  t.ok(is.string(new String('foo')), 'string literal is string');
+  t.ok(is.string(Object('foo')), 'string object is string');
   t.notOk(is.string(), 'undefined is not string');
   t.notOk(is.string(String), 'string constructor is not string');
   var F = function () {};
-  F.prototype = new String();
+  F.prototype = Object('');
   t.notOk(is.string(F), 'string subtype is not string');
   t.end();
 });
