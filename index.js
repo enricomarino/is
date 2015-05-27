@@ -77,11 +77,11 @@ is.empty = function (value) {
   var type = toStr.call(value);
   var key;
 
-  if ('[object Array]' === type || '[object Arguments]' === type || '[object String]' === type) {
+  if (type === '[object Array]' || type === '[object Arguments]' || type === '[object String]') {
     return value.length === 0;
   }
 
-  if ('[object Object]' === type) {
+  if (type === '[object Object]') {
     for (key in value) {
       if (owns.call(value, key)) { return false; }
     }
@@ -112,7 +112,7 @@ is.equal = function (value, other) {
     return false;
   }
 
-  if ('[object Object]' === type) {
+  if (type === '[object Object]') {
     for (key in value) {
       if (!is.equal(value[key], other[key]) || !(key in other)) {
         return false;
@@ -126,7 +126,7 @@ is.equal = function (value, other) {
     return true;
   }
 
-  if ('[object Array]' === type) {
+  if (type === '[object Array]') {
     key = value.length;
     if (key !== other.length) {
       return false;
@@ -139,11 +139,11 @@ is.equal = function (value, other) {
     return true;
   }
 
-  if ('[object Function]' === type) {
+  if (type === '[object Function]') {
     return value.prototype === other.prototype;
   }
 
-  if ('[object Date]' === type) {
+  if (type === '[object Date]') {
     return value.getTime() === other.getTime();
   }
 
@@ -218,7 +218,7 @@ is.undef = is.undefined = function (value) {
  */
 
 is.args = is.arguments = function (value) {
-  var isStandardArguments = '[object Arguments]' === toStr.call(value);
+  var isStandardArguments = toStr.call(value) === '[object Arguments]';
   var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
   return isStandardArguments || isOldArguments;
 };
@@ -237,7 +237,7 @@ is.args = is.arguments = function (value) {
  */
 
 is.array = function (value) {
-  return '[object Array]' === toStr.call(value);
+  return toStr.call(value) === '[object Array]';
 };
 
 /**
@@ -295,7 +295,7 @@ is.arraylike = function (value) {
  */
 
 is.bool = is['boolean'] = function (value) {
-  return '[object Boolean]' === toStr.call(value);
+  return toStr.call(value) === '[object Boolean]';
 };
 
 /**
@@ -338,7 +338,7 @@ is['true'] = function (value) {
  */
 
 is.date = function (value) {
-  return '[object Date]' === toStr.call(value);
+  return toStr.call(value) === '[object Date]';
 };
 
 /**
@@ -375,7 +375,7 @@ is.element = function (value) {
  */
 
 is.error = function (value) {
-  return '[object Error]' === toStr.call(value);
+  return toStr.call(value) === '[object Error]';
 };
 
 /**
@@ -393,7 +393,7 @@ is.error = function (value) {
 
 is.fn = is['function'] = function (value) {
   var isAlert = typeof window !== 'undefined' && value === window.alert;
-  return isAlert || '[object Function]' === toStr.call(value);
+  return isAlert || toStr.call(value) === '[object Function]';
 };
 
 /**
@@ -410,7 +410,7 @@ is.fn = is['function'] = function (value) {
  */
 
 is.number = function (value) {
-  return '[object Number]' === toStr.call(value);
+  return toStr.call(value) === '[object Number]';
 };
 
 /**
@@ -663,7 +663,7 @@ is.within = function (value, start, finish) {
  */
 
 is.object = function (value) {
-  return '[object Object]' === toStr.call(value);
+  return toStr.call(value) === '[object Object]';
 };
 
 /**
@@ -693,7 +693,7 @@ is.hash = function (value) {
  */
 
 is.regexp = function (value) {
-  return '[object RegExp]' === toStr.call(value);
+  return toStr.call(value) === '[object RegExp]';
 };
 
 /**
@@ -710,7 +710,7 @@ is.regexp = function (value) {
  */
 
 is.string = function (value) {
-  return '[object String]' === toStr.call(value);
+  return toStr.call(value) === '[object String]';
 };
 
 /**
