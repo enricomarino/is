@@ -223,13 +223,13 @@ test('is.isarraylike', function (t) {
   t.end();
 });
 
-test('is.boolean', function (t) {
-  t.ok(is.boolean(true), 'literal true is a boolean');
-  t.ok(is.boolean(false), 'literal false is a boolean');
-  t.ok(is.boolean(new Boolean(true)), 'object true is a boolean');
-  t.ok(is.boolean(new Boolean(false)), 'object false is a boolean');
-  t.notOk(is.boolean(), 'undefined is not a boolean');
-  t.notOk(is.boolean(null), 'null is not a boolean');
+test('is.bool', function (t) {
+  t.ok(is.bool(true), 'literal true is a boolean');
+  t.ok(is.bool(false), 'literal false is a boolean');
+  t.ok(is.bool(new Boolean(true)), 'object true is a boolean');
+  t.ok(is.bool(new Boolean(false)), 'object false is a boolean');
+  t.notOk(is.bool(), 'undefined is not a boolean');
+  t.notOk(is.bool(null), 'null is not a boolean');
   t.end();
 });
 

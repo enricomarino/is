@@ -57,7 +57,8 @@ $ component install enricomarino/is
 
 ### boolean
 
- - ``is.boolean`` (value)
+ - ``is.bool`` (value)
+ - ``is.boolean`` (value) - deprecated, because in ES3 browsers, "boolean" is a reserved word
  - ``is.false`` (value) - deprecated, because in ES3 browsers, "false" is a reserved word
  - ``is.true`` (value) - deprecated, because in ES3 browsers, "true" is a reserved word
 

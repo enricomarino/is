@@ -18,7 +18,7 @@ var isActualNaN = function (value) {
   return value !== value;
 };
 var NON_HOST_TYPES = {
-  boolean: 1,
+  'boolean': 1,
   number: 1,
   string: 1,
   undefined: 1
@@ -274,7 +274,7 @@ is.array.empty = function (value) {
  */
 
 is.arraylike = function (value) {
-  return !!value && !is.boolean(value)
+  return !!value && !is.bool(value)
     && owns.call(value, 'length')
     && isFinite(value.length)
     && is.number(value.length)
@@ -286,7 +286,7 @@ is.arraylike = function (value) {
  */
 
 /**
- * is.boolean
+ * is.bool
  * Test if `value` is a boolean.
  *
  * @param {Mixed} value value to test
@@ -294,7 +294,7 @@ is.arraylike = function (value) {
  * @api public
  */
 
-is.boolean = function (value) {
+is.bool = is['boolean'] = function (value) {
   return '[object Boolean]' === toStr.call(value);
 };
 
@@ -308,7 +308,7 @@ is.boolean = function (value) {
  */
 
 is['false'] = function (value) {
-  return is.boolean(value) && Boolean(Number(value)) === false;
+  return is.bool(value) && Boolean(Number(value)) === false;
 };
 
 /**
@@ -321,7 +321,7 @@ is['false'] = function (value) {
  */
 
 is['true'] = function (value) {
-  return is.boolean(value) && Boolean(Number(value)) === true;
+  return is.bool(value) && Boolean(Number(value)) === true;
 };
 
 /**
