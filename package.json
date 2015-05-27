@@ -6,7 +6,9 @@
     "test": "npm run lint && node test/index.js",
     "coverage": "covert test/index.js",
     "coverage-quiet": "covert test/index.js --quiet",
-    "lint": "jscs *.js */*.js"
+    "lint": "npm run jscs && npm run eslint",
+    "jscs": "jscs *.js */*.js",
+    "eslint": "eslint *.js */*.js"
   },
   "author": {
     "name": "Enrico Marino",
@@ -35,7 +37,8 @@
     "tape": "^4.0.0",
     "foreach": "^2.0.5",
     "covert": "^1.1.0",
-    "jscs": "^1.13.1"
+    "jscs": "^1.13.1",
+    "eslint": "^0.21.2"
   },
   "testling": {
     "files": "test/index.js",

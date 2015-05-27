@@ -1,4 +1,4 @@
-
+/*globals window, HTMLElement */
 /**!
  * is
  * the definitive JavaScript type testing library
