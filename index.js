@@ -1,4 +1,4 @@
-/*globals window, HTMLElement */
+/* globals window, HTMLElement */
 /**!
  * is
  * the definitive JavaScript type testing library
@@ -100,7 +100,7 @@ is.empty = function (value) {
  * @return {Boolean} true if `value` is equal to `other`, false otherwise
  */
 
-is.equal = function (value, other) {
+is.equal = function equal(value, other) {
   if (value === other) {
     return true;
   }

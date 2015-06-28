@@ -1,4 +1,4 @@
-/*globals window, document */
+/* globals window, document */
 
 var test = require('tape');
 var is = require('../index.js');
@@ -489,24 +489,30 @@ test('is.lt', function (t) {
 });
 
 test('is.within', function (t) {
-  var nanError = new TypeError('NaN is not a valid value');
-  t['throws'](function () { return is.within(NaN, 0, 0); }, nanError, 'throws when first value is NaN');
-  t['throws'](function () { return is.within(0, NaN, 0); }, nanError, 'throws when second value is NaN');
-  t['throws'](function () { return is.within(0, 0, NaN); }, nanError, 'throws when third value is NaN');
+  t.test('throws on NaN', function (st) {
+    var nanError = new TypeError('NaN is not a valid value');
+    st['throws'](function () { return is.within(NaN, 0, 0); }, nanError, 'throws when first value is NaN');
+    st['throws'](function () { return is.within(0, NaN, 0); }, nanError, 'throws when second value is NaN');
+    st['throws'](function () { return is.within(0, 0, NaN); }, nanError, 'throws when third value is NaN');
+    st.end();
+  });
 
-  var error = new TypeError('all arguments must be numbers');
-  t['throws'](function () { return is.within('', 0, 0); }, error, 'throws when first value is string');
-  t['throws'](function () { return is.within(0, '', 0); }, error, 'throws when second value is string');
-  t['throws'](function () { return is.within(0, 0, ''); }, error, 'throws when third value is string');
-  t['throws'](function () { return is.within({}, 0, 0); }, error, 'throws when first value is object');
-  t['throws'](function () { return is.within(0, {}, 0); }, error, 'throws when second value is object');
-  t['throws'](function () { return is.within(0, 0, {}); }, error, 'throws when third value is object');
-  t['throws'](function () { return is.within(null, 0, 0); }, error, 'throws when first value is null');
-  t['throws'](function () { return is.within(0, null, 0); }, error, 'throws when second value is null');
-  t['throws'](function () { return is.within(0, 0, null); }, error, 'throws when third value is null');
-  t['throws'](function () { return is.within(undefined, 0, 0); }, error, 'throws when first value is undefined');
-  t['throws'](function () { return is.within(0, undefined, 0); }, error, 'throws when second value is undefined');
-  t['throws'](function () { return is.within(0, 0, undefined); }, error, 'throws when third value is undefined');
+  t.test('throws on non-number', function (st) {
+    var error = new TypeError('all arguments must be numbers');
+    st['throws'](function () { return is.within('', 0, 0); }, error, 'throws when first value is string');
+    st['throws'](function () { return is.within(0, '', 0); }, error, 'throws when second value is string');
+    st['throws'](function () { return is.within(0, 0, ''); }, error, 'throws when third value is string');
+    st['throws'](function () { return is.within({}, 0, 0); }, error, 'throws when first value is object');
+    st['throws'](function () { return is.within(0, {}, 0); }, error, 'throws when second value is object');
+    st['throws'](function () { return is.within(0, 0, {}); }, error, 'throws when third value is object');
+    st['throws'](function () { return is.within(null, 0, 0); }, error, 'throws when first value is null');
+    st['throws'](function () { return is.within(0, null, 0); }, error, 'throws when second value is null');
+    st['throws'](function () { return is.within(0, 0, null); }, error, 'throws when third value is null');
+    st['throws'](function () { return is.within(undefined, 0, 0); }, error, 'throws when first value is undefined');
+    st['throws'](function () { return is.within(0, undefined, 0); }, error, 'throws when second value is undefined');
+    st['throws'](function () { return is.within(0, 0, undefined); }, error, 'throws when third value is undefined');
+    st.end();
+  });
 
   t.ok(is.within(2, 1, 3), '2 is between 1 and 3');
   t.ok(is.within(0, -1, 1), '0 is between -1 and 1');
@@ -544,16 +550,24 @@ test('is.hash', function (t) {
   t.notOk(is.hash(Object(false)), 'boolean obj is not hash');
   t.notOk(is.hash(false), 'literal false is not hash');
   t.notOk(is.hash(true), 'literal true is not hash');
-  if (typeof module !== 'undefined') {
-    t.ok(is.hash(module.exports), 'module.exports is a hash');
-  }
-  if (typeof window !== 'undefined') {
-    t.notOk(is.hash(window), 'window is not a hash');
-    t.notOk(is.hash(document.createElement('div')), 'element is not a hash');
-  } else if (typeof process !== 'undefined') {
-    t.notOk(is.hash(global), 'global is not a hash');
-    t.notOk(is.hash(process), 'process is not a hash');
-  }
+
+  t.test('commonJS environment', { skip: typeof module === 'undefined' }, function (st) {
+    st.ok(is.hash(module.exports), 'module.exports is a hash');
+    st.end();
+  });
+
+  t.test('browser stuff', { skip: typeof window === 'undefined' }, function (st) {
+    st.notOk(is.hash(window), 'window is not a hash');
+    st.notOk(is.hash(document.createElement('div')), 'element is not a hash');
+    st.end();
+  });
+
+  t.test('node stuff', { skip: typeof process === 'undefined' }, function (st) {
+    st.notOk(is.hash(global), 'global is not a hash');
+    st.notOk(is.hash(process), 'process is not a hash');
+    st.end();
+  });
+
   t.end();
 });
 
