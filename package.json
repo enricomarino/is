@@ -34,11 +34,12 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "tape": "^4.0.0",
+    "tape": "^4.0.1",
     "foreach": "^2.0.5",
     "covert": "^1.1.0",
     "jscs": "^1.13.1",
-    "eslint": "^0.24.0"
+    "eslint": "^1.0.0-rc-3",
+    "@ljharb/eslint-config": "^1.0.3"
   },
   "testling": {
     "files": "test/index.js",
