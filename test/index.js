@@ -621,9 +621,9 @@ test('is.symbol', function (t) {
   t.test('symbols', { skip: typeof Symbol !== 'function' }, function (st) {
     st.ok(is.symbol(Symbol('foo')), 'Symbol("foo") is symbol');
 
-    var notKnownSymbolProperties = ['length', 'name', 'arguments', 'caller', 'prototype', 'for', 'keyFor'];
+    var notKnownSymbols = ['length', 'name', 'arguments', 'caller', 'prototype', 'for', 'keyFor'];
     var symbolKeys = Object.getOwnPropertyNames(Symbol).filter(function (name) {
-      return notKnownSymbolProperties.indexOf(name) < 0;
+      return notKnownSymbols.indexOf(name) < 0;
     });
     forEach(symbolKeys, function (symbolKey) {
       st.ok(is.symbol(Symbol[symbolKey]), symbolKey + ' is symbol');
