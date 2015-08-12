@@ -124,7 +124,7 @@ $ component install enricomarino/is
 - [Jordan Harband](https://github.com/ljharb)
 
 [npm-url]: https://npmjs.org/package/is
-[npm-version-svg]: http://vb.teelaun.ch/enricomarino/is.svg
+[npm-version-svg]: http://versionbadg.es/enricomarino/is.svg
 [travis-svg]: https://travis-ci.org/enricomarino/is.svg
 [travis-url]: https://travis-ci.org/enricomarino/is
 [deps-svg]: https://david-dm.org/enricomarino/is.svg
