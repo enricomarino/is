@@ -34,7 +34,7 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "tape": "^4.0.3",
+    "tape": "^4.2.0",
     "foreach": "^2.0.5",
     "covert": "^1.1.0",
     "jscs": "^2.1.0",
