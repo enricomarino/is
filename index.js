@@ -759,3 +759,18 @@ is.hex = function (value) {
 is.symbol = function (value) {
   return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 };
+
+
+/**
+ * is.promise
+ * Test if `value` is an ES6 Promise
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a Promise, false otherise
+ * @api public
+ */
+
+is.promise = function (value) {
+  return (Promise && value instanceof Promise) || (value && typeof value === "object" && typeof value.then === "function");
+};
+
