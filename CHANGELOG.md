@@ -1,3 +1,15 @@
+3.1.0 / 2015-09-20
+==================
+  * [Enhancement]: `is.array`: Prefer `Array.isArray` when present
+  * [Fix] Deprecate `is.boolean`/`is.int` (ES3 syntax errors)
+  * [Docs] Switch from vb.teelaun.ch to versionbadg.es for the npm version badge SVG
+  * [Refactor] Don't use yoda conditions
+  * [Refactor] `is.equal` can return earlier in some cases (#16)
+  * [Tests] Quote "throws" (ES3 syntax error)
+  * [Tests] up to `io.js` `v3.3`, up to `node` `v4.1`
+  * [Dev Deps] add `npm run eslint`
+  * [Dev Deps] update `tape`, `covert`, `jscs`
+
 3.0.1 / 2015-02-22
 ==================
   * Version bump to resolve npm bug with v3.0.0
