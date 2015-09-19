@@ -236,7 +236,7 @@ is.args = is.arguments = function (value) {
  * @api public
  */
 
-is.array = function (value) {
+is.array = Array.isArray || function (value) {
   return toStr.call(value) === '[object Array]';
 };
 
