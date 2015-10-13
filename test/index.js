@@ -43,7 +43,7 @@ test('is.undef', function (t) {
 test('is.defined', function (t) {
   t.notOk(is.defined(), 'undefined is not defined');
   t.ok(is.defined(null), 'null is defined');
-  t.ok(is.defined({}), 'object is undefined');
+  t.ok(is.defined({}), 'object is defined');
   t.end();
 });
 
