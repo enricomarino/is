@@ -634,3 +634,25 @@ test('is.symbol', function (t) {
 
   t.end();
 });
+
+test('is.promise', function (t) {
+  t.test('not promises', function (st) {
+    var notPromises = [true, false, null, undefined, {}, [], function () {}, 42, NaN, Infinity, /a/g, '', 0, -0, new Error('error')];
+    forEach(notPromises, function (notPromise) {
+      st.notOk(is.promise(notPromise), notPromise + ' is not promise');
+    });
+
+    st.end();
+  });
+
+  t.test("promises", function (st) {
+    var promises = [Promise.resolve(), Promise.reject()];
+    forEach(promises, function (promise) {
+      st.ok(is.promise(promise), promise + " is promise");
+    });
+
+    st.end();
+  });
+
+  t.end();
+})
