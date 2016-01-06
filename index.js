@@ -349,7 +349,7 @@ is.date = function (value) {
  * @returns {Boolean} true if `value` is a valid date, false otherwise
  */
 is.date.valid = function(value) {
-  return is.date(value) && !isNaN(value.valueOf());
+  return is.date(value) && !isNaN(+value);
 };
 
 /**

@@ -266,6 +266,10 @@ test('is.date', function (t) {
   var F = function () {};
   F.prototype = new Date();
   t.notOk(is.date(new F()), 'Date subtype is not date');
+  t.end();
+});
+
+test('is.date.valid', function(t) {
   t.ok(is.date.valid(new Date()), 'new Date() is a valid date');
   t.notOk(is.date.valid(new Date('')), 'new Date("") is not a valid date');
   t.end();
