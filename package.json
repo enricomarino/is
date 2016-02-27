@@ -32,7 +32,9 @@
       "url": "https://github.com/ljharb"
     }
   ],
-  "dependencies": {},
+  "dependencies": {
+    "for-each": "^0.3.2"
+  },
   "devDependencies": {
     "tape": "^4.2.0",
     "foreach": "^2.0.5",
@@ -62,4 +64,3 @@
     "node": "*"
   }
 }
-

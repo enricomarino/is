@@ -7,6 +7,8 @@
  * @license MIT
  */
 
+var forEach = require('for-each');
+
 var objProto = Object.prototype;
 var owns = objProto.hasOwnProperty;
 var toStr = objProto.toString;
@@ -19,8 +21,8 @@ var isActualNaN = function (value) {
 };
 var NON_HOST_TYPES = {
   'boolean': 1,
-  number: 1,
-  string: 1,
+  number:    1,
+  string:    1,
   undefined: 1
 };
 
@@ -237,8 +239,8 @@ is.args = is.arguments = function (value) {
  */
 
 is.array = Array.isArray || function (value) {
-  return toStr.call(value) === '[object Array]';
-};
+    return toStr.call(value) === '[object Array]';
+  };
 
 /**
  * is.arguments.empty
@@ -275,10 +277,10 @@ is.array.empty = function (value) {
 
 is.arraylike = function (value) {
   return !!value && !is.bool(value)
-    && owns.call(value, 'length')
-    && isFinite(value.length)
-    && is.number(value.length)
-    && value.length >= 0;
+         && owns.call(value, 'length')
+         && isFinite(value.length)
+         && is.number(value.length)
+         && value.length >= 0;
 };
 
 /**
@@ -356,9 +358,9 @@ is.date = function (value) {
 
 is.element = function (value) {
   return value !== undefined
-    && typeof HTMLElement !== 'undefined'
-    && value instanceof HTMLElement
-    && value.nodeType === 1;
+         && typeof HTMLElement !== 'undefined'
+         && value instanceof HTMLElement
+         && value.nodeType === 1;
 };
 
 /**
@@ -763,24 +765,18 @@ is.symbol = function (value) {
 is.not = negateMethods(is);
 
 function negateMethods(source) {
-	var negatedMethods = {};
-	Object.keys(source).forEach(function (key) {
-		var value;
+  var negatedMethods = {};
+  forEach(source, function (value, key) {
     var negatedMethod;
-		if ( source.hasOwnProperty(key) ) {
-			value = source[ key ];
-			if ( is.fn(value) ) {
-				negatedMethod = negatedMethods[ key ] = function () {
-					return !value.apply(this, arguments);
-				};
-			}
-      if ( Object.keys(value).length > 0 ) {
-        var subMethods = negateMethods(value);
-        Object.keys(subMethods).forEach(function (key) {
-          negatedMethod[key] = subMethods[key];
-        });
-			}
-		}
-	});
-	return negatedMethods;
+    if (value instanceof Function) {
+      negatedMethod = negatedMethods[key] = function () {
+        return !value.apply(this, arguments);
+      };
+    }
+    var subMethods = negateMethods(value);
+    forEach(value, function (value, key) {
+      negatedMethod[key] = subMethods[key];
+    });
+  });
+  return negatedMethods;
 }
