@@ -634,3 +634,16 @@ test('is.symbol', function (t) {
 
   t.end();
 });
+
+// no need to exhaustively test all negated methods. just need to test structure.
+test('is.not', function (t) {
+  t.test('.hex', function (st) {
+    st.ok(is.not.hex('qwerty'), 'non-hex string.');
+    st.end();
+  });
+  t.test('.array.empty', function (st) {
+    st.ok(is.not.array.empty([1]), 'non-empty array.');
+    st.end();
+  });
+  t.end();
+});

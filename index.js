@@ -759,3 +759,28 @@ is.hex = function (value) {
 is.symbol = function (value) {
   return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 };
+
+is.not = negateMethods(is);
+
+function negateMethods(source) {
+	var negatedMethods = {};
+	Object.keys(source).forEach(function (key) {
+		var value;
+    var negatedMethod;
+		if ( source.hasOwnProperty(key) ) {
+			value = source[ key ];
+			if ( is.fn(value) ) {
+				negatedMethod = negatedMethods[ key ] = function () {
+					return !value.apply(this, arguments);
+				};
+			}
+      if ( Object.keys(value).length > 0 ) {
+        var subMethods = negateMethods(value);
+        Object.keys(subMethods).forEach(function (key) {
+          negatedMethod[key] = subMethods[key];
+        });
+			}
+		}
+	});
+	return negatedMethods;
+}
