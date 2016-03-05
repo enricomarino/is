@@ -13,6 +13,7 @@ var objProto = Object.prototype;
 var owns = objProto.hasOwnProperty;
 var toStr = objProto.toString;
 var symbolValueOf;
+var isCallable = require('is-callable');
 if (typeof Symbol === 'function') {
   symbolValueOf = Symbol.prototype.valueOf;
 }
@@ -21,8 +22,8 @@ var isActualNaN = function (value) {
 };
 var NON_HOST_TYPES = {
   'boolean': 1,
-  number:    1,
-  string:    1,
+  number: 1,
+  string: 1,
   undefined: 1
 };
 
@@ -239,8 +240,8 @@ is.args = is.arguments = function (value) {
  */
 
 is.array = Array.isArray || function (value) {
-    return toStr.call(value) === '[object Array]';
-  };
+  return toStr.call(value) === '[object Array]';
+};
 
 /**
  * is.arguments.empty
@@ -277,10 +278,10 @@ is.array.empty = function (value) {
 
 is.arraylike = function (value) {
   return !!value && !is.bool(value)
-         && owns.call(value, 'length')
-         && isFinite(value.length)
-         && is.number(value.length)
-         && value.length >= 0;
+    && owns.call(value, 'length')
+    && isFinite(value.length)
+    && is.number(value.length)
+    && value.length >= 0;
 };
 
 /**
@@ -358,9 +359,9 @@ is.date = function (value) {
 
 is.element = function (value) {
   return value !== undefined
-         && typeof HTMLElement !== 'undefined'
-         && value instanceof HTMLElement
-         && value.nodeType === 1;
+    && typeof HTMLElement !== 'undefined'
+    && value instanceof HTMLElement
+    && value.nodeType === 1;
 };
 
 /**
@@ -768,7 +769,7 @@ function negateMethods(source) {
   var negatedMethods = {};
   forEach(source, function (value, key) {
     var negatedMethod;
-    if (value instanceof Function) {
+    if (isCallable(value)) {
       negatedMethod = negatedMethods[key] = function () {
         return !value.apply(this, arguments);
       };
