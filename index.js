@@ -764,20 +764,33 @@ is.symbol = function (value) {
 };
 
 is.not = negateMethods(is);
+fixAliases();
 
 function negateMethods(source) {
   var negatedMethods = {};
   forEach(source, function (value, key) {
     var negatedMethod;
+    var subMethods;
     if (isCallable(value)) {
       negatedMethod = negatedMethods[key] = function () {
-        return !value.apply(this, arguments);
+        return !value.apply(null, arguments);
       };
     }
-    var subMethods = negateMethods(value);
+    subMethods = negateMethods(value);
     forEach(value, function (value, key) {
       negatedMethod[key] = subMethods[key];
     });
   });
   return negatedMethods;
+}
+
+function fixAliases() {
+  var aliases = {
+    alias: ['null', 'function', 'boolean', 'int', 'instanceof'],
+    src: ['nil', 'fn', 'bool', 'integer', 'instance']
+    };
+  forEach(aliases.alias, function (alias, i) {
+    var src = aliases.src[i];
+    is.not[alias] = is.not[src];
+  });
 }
