@@ -760,17 +760,22 @@ is.symbol = function (value) {
   return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 };
 
-is.oneOf = function (value) {
-  for (var _len = arguments.length, types = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    types[_key - 1] = arguments[_key];
-  }
-
-  if (!types.length) {
-    throw 'err: no types';
+/**
+ * is.oneOf
+ * Test if `value` is one of the provided `types`
+ *
+ * @param {Mixed} value value to test
+ * @param {Mixed|String[]} types types to test against
+ * @returns {boolean}
+ */
+is.oneOf = function (value, types) {
+  if (!is.array(types) || is.array.empty(types)) {
+    throw new TypeError('second argument must be an array with at least one type');
   }
 
   for (var i = 0; i < types.length; i++) {
-    if (typeof is[types[i]] === 'function' && is[types[i]](value)) {
+    var fn = is[types[i]];
+    if (is.function(fn) && fn(value)) {
       return true;
     }
   }
