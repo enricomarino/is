@@ -759,3 +759,20 @@ is.hex = function (value) {
 is.symbol = function (value) {
   return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 };
+
+is.oneOf = function (value) {
+  for (var _len = arguments.length, types = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    types[_key - 1] = arguments[_key];
+  }
+
+  if (!types.length) {
+    throw 'err: no types';
+  }
+
+  for (var i = 0; i < types.length; i++) {
+    if (typeof is[types[i]] === 'function' && is[types[i]](value)) {
+      return true;
+    }
+  }
+  return false;
+};
