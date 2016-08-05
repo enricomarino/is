@@ -269,6 +269,12 @@ test('is.date', function (t) {
   t.end();
 });
 
+test('is.date.valid', function(t) {
+  t.ok(is.date.valid(new Date()), 'new Date() is a valid date');
+  t.notOk(is.date.valid(new Date('')), 'new Date("") is not a valid date');
+  t.end();
+});
+
 test('is.element', function (t) {
   t.notOk(is.element(), 'undefined is not element');
   if (typeof HTMLElement !== 'undefined') {

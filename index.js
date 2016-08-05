@@ -342,6 +342,17 @@ is.date = function (value) {
 };
 
 /**
+ * is.date.valid
+ * Test if `value` is a valid date.
+ *
+ * @param {Mixed} value value to test
+ * @returns {Boolean} true if `value` is a valid date, false otherwise
+ */
+is.date.valid = function(value) {
+  return is.date(value) && !isNaN(+value);
+};
+
+/**
  * Test element.
  */
 
