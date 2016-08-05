@@ -1,4 +1,6 @@
-/* globals window, document */
+/* globals window, document, HTMLElement */
+
+'use strict';
 
 var test = require('tape');
 var is = require('../index.js');
@@ -58,7 +60,9 @@ test('is.empty', function (t) {
   t.ok(is.empty(false), 'false is empty');
   t.ok(is.empty(0), '0 is empty');
   t.ok(is.empty(NaN), 'nan is empty');
-  (function () { t.ok(is.empty(arguments), 'empty arguments is empty'); }());
+  (function () {
+    t.ok(is.empty(arguments), 'empty arguments is empty');
+  }());
   t.notOk(is.empty({ a: 1 }), 'nonempty object is not empty');
   t.notOk(is.empty(true), 'true is not empty');
   t.notOk(is.empty(/a/g), 'regex is not empty');
@@ -177,8 +181,12 @@ test('is.nil', function (t) {
 
 test('is.args', function (t) {
   t.notOk(is.args([]), 'array is not arguments');
-  (function () { t.ok(is.args(arguments), 'arguments is arguments'); }());
-  (function () { t.notOk(is.args(Array.prototype.slice.call(arguments)), 'sliced arguments is not arguments'); }());
+  (function () {
+    t.ok(is.args(arguments), 'arguments is arguments');
+  }());
+  (function () {
+    t.notOk(is.args(Array.prototype.slice.call(arguments)), 'sliced arguments is not arguments');
+  }());
   var fakeOldArguments = {
     callee: function () {},
     length: 3
@@ -189,21 +197,31 @@ test('is.args', function (t) {
 
 test('is.args.empty', function (t) {
   t.notOk(is.args.empty([]), 'empty array is not empty arguments');
-  (function () { t.ok(is.args.empty(arguments), 'empty arguments is empty arguments'); }());
-  (function () { t.notOk(is.args.empty(Array.prototype.slice.call(arguments)), 'empty sliced arguments is not empty arguments'); }());
+  (function () {
+    t.ok(is.args.empty(arguments), 'empty arguments is empty arguments');
+  }());
+  (function () {
+    t.notOk(is.args.empty(Array.prototype.slice.call(arguments)), 'empty sliced arguments is not empty arguments');
+  }());
   t.end();
 });
 
 test('is.array', function (t) {
   t.ok(is.array([]), 'array is array');
-  (function () { t.ok(is.array(Array.prototype.slice.call(arguments)), 'sliced arguments is array'); }());
+  (function () {
+    t.ok(is.array(Array.prototype.slice.call(arguments)), 'sliced arguments is array');
+  }());
   t.end();
 });
 
 test('is.array.empty', function (t) {
   t.ok(is.array.empty([]), 'empty array is empty array');
-  (function () { t.notOk(is.array.empty(arguments), 'empty arguments is not empty array'); }());
-  (function () { t.ok(is.array.empty(Array.prototype.slice.call(arguments)), 'empty sliced arguments is empty array'); }());
+  (function () {
+    t.notOk(is.array.empty(arguments), 'empty arguments is not empty array');
+  }());
+  (function () {
+    t.ok(is.array.empty(Array.prototype.slice.call(arguments)), 'empty sliced arguments is empty array');
+  }());
   t.end();
 });
 
@@ -219,8 +237,12 @@ test('is.isarraylike', function (t) {
   t.notOk(is.arraylike({ length: 'foo' }), 'object with string length is not array-like');
   t.notOk(is.arraylike({ length: '' }), 'object with empty string length is not array-like');
   t.ok(is.arraylike([]), 'array is array-like');
-  (function () { t.ok(is.arraylike(arguments), 'empty arguments is array-like'); }());
-  (function () { t.ok(is.arraylike(arguments), 'nonempty arguments is array-like'); }(1, 2, 3));
+  (function () {
+    t.ok(is.arraylike(arguments), 'empty arguments is array-like');
+  }());
+  (function () {
+    t.ok(is.arraylike(arguments), 'nonempty arguments is array-like');
+  }(1, 2, 3));
   t.end();
 });
 
@@ -269,7 +291,7 @@ test('is.date', function (t) {
   t.end();
 });
 
-test('is.date.valid', function(t) {
+test('is.date.valid', function (t) {
   t.ok(is.date.valid(new Date()), 'new Date() is a valid date');
   t.notOk(is.date.valid(new Date('')), 'new Date("") is not a valid date');
   t.end();
@@ -277,13 +299,14 @@ test('is.date.valid', function(t) {
 
 test('is.element', function (t) {
   t.notOk(is.element(), 'undefined is not element');
-  if (typeof HTMLElement !== 'undefined') {
+
+  t.test('when HTMLElement exists', { skip: typeof HTMLElement === 'undefined' }, function (st) {
     var element = document.createElement('div');
-    t.ok(is.element(element), 'HTMLElement is element');
-    t.notOk(is.element({ nodeType: 1 }), 'object with nodeType is not element');
-  } else {
-    t.ok(true, 'Skipping is.element test in a non-browser environment');
-  }
+    st.ok(is.element(element), 'HTMLElement is element');
+    st.notOk(is.element({ nodeType: 1 }), 'object with nodeType is not element');
+    st.end();
+  });
+
   t.end();
 });
 
@@ -291,7 +314,11 @@ test('is.error', function (t) {
   var err = new Error('foo');
   t.ok(is.error(err), 'Error is error');
   t.notOk(is.error({}), 'object is not error');
-  var objWithErrorToString = { toString: function () { return '[object Error]'; } };
+  var objWithErrorToString = {
+    toString: function () {
+      return '[object Error]';
+    }
+  };
   t.equal(String(objWithErrorToString), toStr.call(new Error()), 'obj has Error\'s toString');
   t.notOk(is.error(objWithErrorToString), 'object with Error\'s toString is not error');
   t.end();

@@ -1,4 +1,7 @@
 /* globals window, HTMLElement */
+
+'use strict';
+
 /**!
  * is
  * the definitive JavaScript type testing library
@@ -31,7 +34,7 @@ var hexRegex = /^[A-Fa-f0-9]+$/;
  * Expose `is`
  */
 
-var is = module.exports = {};
+var is = {};
 
 /**
  * Test general.
@@ -83,7 +86,9 @@ is.empty = function (value) {
 
   if (type === '[object Object]') {
     for (key in value) {
-      if (owns.call(value, key)) { return false; }
+      if (owns.call(value, key)) {
+        return false;
+      }
     }
     return true;
   }
@@ -348,8 +353,8 @@ is.date = function (value) {
  * @param {Mixed} value value to test
  * @returns {Boolean} true if `value` is a valid date, false otherwise
  */
-is.date.valid = function(value) {
-  return is.date(value) && !isNaN(+value);
+is.date.valid = function (value) {
+  return is.date(value) && !isNaN(Number(value));
 };
 
 /**
@@ -770,3 +775,5 @@ is.hex = function (value) {
 is.symbol = function (value) {
   return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 };
+
+module.exports = is;
