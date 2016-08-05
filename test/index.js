@@ -639,5 +639,6 @@ test('is.oneOf', function (t) {
   t.ok(is.oneOf('foo', ['object', 'array', 'string']), 'oneOf returns true when a match is found');
   t.notOk(is.oneOf('foo', ['number', 'fn', 'regexp']), 'oneOf returns false when no match is found');
   t.throws(function() { is.oneOf('foo') }, /array with at least one type/i, 'throws when called with no types');
+  t.throws(function() { is.oneOf('foo', []) }, /array with at least one type/i, 'throws when called with empty types');
   t.end();
 });
