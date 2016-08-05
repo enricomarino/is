@@ -770,3 +770,25 @@ is.hex = function (value) {
 is.symbol = function (value) {
   return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 };
+
+/**
+ * is.oneOf
+ * Test if `value` is one of the provided `types`
+ *
+ * @param {Mixed} value value to test
+ * @param {Mixed|String[]} types types to test against
+ * @returns {boolean}
+ */
+is.oneOf = function (value, types) {
+  if (!is.array(types) || is.array.empty(types)) {
+    throw new TypeError('second argument must be an array with at least one type');
+  }
+
+  for (var i = 0; i < types.length; i++) {
+    var fn = is[types[i]];
+    if (is.function(fn) && fn(value)) {
+      return true;
+    }
+  }
+  return false;
+};
