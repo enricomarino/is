@@ -7,10 +7,13 @@
  * @license MIT
  */
 
+var forEach = require('for-each');
+
 var objProto = Object.prototype;
 var owns = objProto.hasOwnProperty;
 var toStr = objProto.toString;
 var symbolValueOf;
+var isCallable = require('is-callable');
 if (typeof Symbol === 'function') {
   symbolValueOf = Symbol.prototype.valueOf;
 }
@@ -770,3 +773,35 @@ is.hex = function (value) {
 is.symbol = function (value) {
   return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 };
+
+is.not = negateMethods(is);
+fixAliases();
+
+function negateMethods(source) {
+  var negatedMethods = {};
+  forEach(source, function (value, key) {
+    var negatedMethod;
+    var subMethods;
+    if (isCallable(value)) {
+      negatedMethod = negatedMethods[key] = function () {
+        return !value.apply(null, arguments);
+      };
+    }
+    subMethods = negateMethods(value);
+    forEach(value, function (value, key) {
+      negatedMethod[key] = subMethods[key];
+    });
+  });
+  return negatedMethods;
+}
+
+function fixAliases() {
+  var aliases = {
+    alias: ['null', 'function', 'boolean', 'int', 'instanceof'],
+    src: ['nil', 'fn', 'bool', 'integer', 'instance']
+    };
+  forEach(aliases.alias, function (alias, i) {
+    var src = aliases.src[i];
+    is.not[alias] = is.not[src];
+  });
+}
