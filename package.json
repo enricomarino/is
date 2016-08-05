@@ -3,7 +3,9 @@
   "version": "3.1.0",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && node test/index.js",
+    "pretest": "npm run lint",
+    "test": "npm run --silent tests-only",
+    "tests-only": "node test/index.js",
     "coverage": "covert test/index.js",
     "coverage-quiet": "covert test/index.js --quiet",
     "lint": "npm run jscs && npm run eslint",
