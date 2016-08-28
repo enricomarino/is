@@ -83,8 +83,10 @@ test('is.equal', function (t) {
   t.test('arrays', function (at) {
     at.ok(is.equal([1, 2, 3], [1, 2, 3]), 'arrays are shallowly equal');
     at.ok(is.equal([1, 2, [3, 4]], [1, 2, [3, 4]]), 'arrays are deep equal');
+    at.notOk(is.equal([1, 2, 3], [5, 2, 3]), 'inequal arrays are not equal');
     at.notOk(is.equal([1, 2], [2, 3]), 'inequal arrays are not equal');
     at.notOk(is.equal([1, 2, 3], [2, 3]), 'inequal length arrays are not equal');
+    at.ok(is.equal([], []), 'empty arrays are equal');
 
     var arr = [1, 2];
     at.ok(is.equal(arr, arr), 'array is equal to itself');
