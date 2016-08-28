@@ -136,8 +136,7 @@ is.equal = function equal(value, other) {
     if (key !== other.length) {
       return false;
     }
-    while (key > 0) {
-      --key;
+    while (key--) {
       if (!is.equal(value[key], other[key])) {
         return false;
       }
