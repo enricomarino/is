@@ -677,9 +677,26 @@ is.within = function (value, start, finish) {
  * @return {Boolean} true if `value` is an object, false otherwise
  * @api public
  */
-
 is.object = function (value) {
   return toStr.call(value) === '[object Object]';
+};
+
+/**
+ * is.primitive
+ * Test if `value` is a primitive.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a primitive, false otherwise
+ * @api public
+ */
+is.primitive = function isPrimitive(value) {
+  if (!value) {
+    return true;
+  }
+  if (typeof value === 'object' || is.object(value) || is.fn(value) || is.array(value)) {
+    return false;
+  }
+  return true;
 };
 
 /**

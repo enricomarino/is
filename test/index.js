@@ -567,6 +567,31 @@ test('is.object', function (t) {
   t.notOk(is.object(NaN), 'NaN is not an object');
   t.notOk(is.object(Object), 'object constructor is not an object');
   t.notOk(is.object(function () {}), 'function is not an object');
+
+  t.test('Symbols', { skip: typeof Symbol !== 'function' }, function (st) {
+    st.notOk(is.object(Symbol('foo')), 'symbol is not an object');
+    st.end();
+  });
+
+  t.end();
+});
+
+test('is.primitive', function (t) {
+  t.notOk(is.primitive({}), 'object literal is not a primitive');
+  t.notOk(is.primitive([]), 'array is not a primitive');
+  t.ok(is.primitive(), 'undefined is a primitive');
+  t.ok(is.primitive(null), 'null is a primitive');
+  t.ok(is.primitive(true), 'true is a primitive');
+  t.ok(is.primitive(''), 'string is a primitive');
+  t.ok(is.primitive(NaN), 'NaN is a primitive');
+  t.notOk(is.primitive(Object), 'object constructor is not a primitive');
+  t.notOk(is.primitive(function () {}), 'function is not a primitive');
+
+  t.test('Symbols', { skip: typeof Symbol !== 'function' }, function (st) {
+    st.ok(is.primitive(Symbol('foo')), 'symbol is a primitive');
+    st.end();
+  });
+
   t.end();
 });
 
