@@ -1,3 +1,13 @@
+3.2.0 / 2016-10-24
+==================
+  * [Fix] fix infinite loop when comparing two empty arrays + fix skipping first element (#24, #25)
+  * [New] add `is.primitive`
+  * [New] Add `is.date.valid` function and tests (#19)
+  * [Tests] use `pretest` for `npm run lint`; add `npm run tests-only`
+  * [Tests] up to `node` `v4.6`, `v5.12`, `v6.9`; improve test matrix
+  * [Tests] fix description (#18)
+  * [Dev Deps] update `tape`, `jscs`, `eslint`, `@ljharb/eslint-config`
+
 3.1.0 / 2015-09-20
 ==================
   * [Enhancement]: `is.array`: Prefer `Array.isArray` when present
