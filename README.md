@@ -72,7 +72,7 @@ $ component install enricomarino/is
 
 ### error
 
- - is.error (value)
+ - ``is.error`` (value)
 
 ### function
 
