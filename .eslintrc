@@ -6,10 +6,12 @@
 	"rules": {
 		"complexity": [2, 16],
 		"dot-notation": [2, { "allowKeywords": false }],
+		"func-name-matching": 0,
 		"indent": [2, 2],
 		"max-nested-callbacks": [2, 3],
 		"max-params": [2, 3],
 		"max-statements": [2, 30],
+		"no-multi-assign": 1,
 		"no-extra-parens": [0],
 		"no-magic-numbers": [0],
 		"no-plusplus": [1],
