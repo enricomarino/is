@@ -335,6 +335,21 @@ test('is.fn', function (t) {
   }
   t.notOk(is.fn({}), 'object is not function');
   t.notOk(is.fn(null), 'null is not function');
+
+  try {
+    var generatorFn = eval('(function*(){})')
+    t.ok(is.fn(generatorFn), 'generator function is function')
+  } catch (e) {
+    t.skip('generator function is unsupported')
+  }
+
+  try {
+    var asyncFn = eval('(async function(){})')
+    t.ok(is.fn(generatorFn), 'async function is function')
+  } catch (e) {
+    t.skip('async function is unsupported')
+  }
+
   t.end();
 });
 

@@ -408,8 +408,13 @@ is.error = function (value) {
  */
 
 is.fn = is['function'] = function (value) {
-  var isAlert = typeof window !== 'undefined' && value === window.alert;
-  return isAlert || toStr.call(value) === '[object Function]';
+  if (typeof window !== 'undefined' && value === window.alert) {
+    return true
+  }
+
+  var type = toStr.call(value)
+
+  return type === '[object Function]' || type === '[object GeneratorFunction]' || type === '[object AsyncFunction]';
 };
 
 /**
