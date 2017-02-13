@@ -1,5 +1,11 @@
 language: node_js
 node_js:
+  - "7.5"
+  - "7.4"
+  - "7.3"
+  - "7.2"
+  - "7.1"
+  - "7.0"
   - "6.9"
   - "6.8"
   - "6.7"
@@ -72,6 +78,11 @@ matrix:
     - node_js: "node"
       env: LINT=true
   allow_failures:
+    - node_js: "7.4"
+    - node_js: "7.3"
+    - node_js: "7.2"
+    - node_js: "7.1"
+    - node_js: "7.0"
     - node_js: "6.8"
     - node_js: "6.7"
     - node_js: "6.6"
