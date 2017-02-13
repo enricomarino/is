@@ -8,6 +8,8 @@ var is = require('../index.js');
 var forEach = require('foreach');
 var toStr = Object.prototype.toString;
 
+var genFn = require('make-generator-function');
+
 test('is.type', function (t) {
   var booleans = [true, false];
   forEach(booleans, function (boolean) {
@@ -335,6 +337,12 @@ test('is.fn', function (t) {
   }
   t.notOk(is.fn({}), 'object is not function');
   t.notOk(is.fn(null), 'null is not function');
+
+  t.test('generator functions', { skip: !genFn }, function (st) {
+    t.ok(is.fn(genFn), 'generator function is function');
+    st.end();
+  });
+
   t.end();
 });
 
