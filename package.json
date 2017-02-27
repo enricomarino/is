@@ -3,6 +3,7 @@
   "version": "3.2.0",
   "main": "index.js",
   "scripts": {
+    "prepublish": "safe-publish-latest",
     "pretest": "npm run lint",
     "test": "npm run --silent tests-only",
     "tests-only": "node test/index.js",
@@ -42,6 +43,7 @@
     "foreach": "^2.0.5",
     "jscs": "^3.0.7",
     "make-generator-function": "^1.1.0",
+    "safe-publish-latest": "^1.1.1",
     "tape": "^4.6.3"
   },
   "testling": {
