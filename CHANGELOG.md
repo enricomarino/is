@@ -1,3 +1,10 @@
+3.2.1 / 2017-02-27
+==================
+  * [Fix] `is.fn`: recognize generator and async functions too (#28)
+  * [Tests] up to `node` `v7.5`, `v4.7`; improve test matrix
+  * [Dev Deps] update `@ljharb/eslint-config`, `eslint`, `tape`
+  * [Docs] improve readme formatting (#27)
+
 3.2.0 / 2016-10-24
 ==================
   * [Fix] fix infinite loop when comparing two empty arrays + fix skipping first element (#24, #25)
