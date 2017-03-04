@@ -39,7 +39,7 @@
   "devDependencies": {
     "@ljharb/eslint-config": "^11.0.0",
     "covert": "^1.1.0",
-    "eslint": "^3.16.1",
+    "eslint": "^3.17.0",
     "foreach": "^2.0.5",
     "jscs": "^3.0.7",
     "make-generator-function": "^1.1.0",
