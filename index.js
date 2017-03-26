@@ -686,6 +686,18 @@ is.object = function (value) {
 };
 
 /**
+ * is.objectlike
+ * Test if `value` is an objectlike.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an objectlike, false otherwise
+ * @api public
+ */
+is.objectlike = function (value) {
+  return value === Object(value);
+};
+
+/**
  * is.primitive
  * Test if `value` is a primitive.
  *
