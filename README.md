@@ -101,6 +101,7 @@ $ component install enricomarino/is
 ### object
 
  - ``is.object`` (value)
+ - ``is.objectlike`` (value)
 
 ### regexp
 

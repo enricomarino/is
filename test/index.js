@@ -584,6 +584,27 @@ test('is.object', function (t) {
   t.end();
 });
 
+test('is.objectlike', function (t) {
+  t.ok(is.objectlike({}), 'object literal is objectlike');
+  t.notOk(is.objectlike(), 'undefined is not an objectlike');
+  t.notOk(is.objectlike(null), 'null is not an objectlike');
+  t.notOk(is.objectlike(true), 'true is not an objectlike');
+  t.notOk(is.objectlike(''), 'string is not an objectlike');
+  t.notOk(is.objectlike(NaN), 'NaN is not an objectlike');
+  t.notOk(is.objectlike(Infinity), 'Infinity is not an objectlike');
+  t.ok(is.objectlike(Object), 'object constructor is an objectlike');
+  t.ok(is.objectlike(function () {}), 'function is an objectlike');
+  t.ok(is.objectlike(new Date()), 'new Date() is an objectlike');
+  t.ok(is.objectlike(/test/), 'regexp is an objectlike');
+
+  t.test('Symbols', { skip: typeof Symbol !== 'function' }, function (st) {
+    t.notOk(is.objectlike(Symbol('foo')), 'symbol is not an objectlike');
+    st.end();
+  });
+
+  t.end();
+});
+
 test('is.primitive', function (t) {
   t.notOk(is.primitive({}), 'object literal is not a primitive');
   t.notOk(is.primitive([]), 'array is not a primitive');
