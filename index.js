@@ -282,7 +282,7 @@ is.arraylike = function (value) {
   return !!value && !is.bool(value)
     && owns.call(value, 'length')
     && isFinite(value.length)
-    && is.number(value.length)
+    && is.integer(value.length)
     && value.length >= 0;
 };
 
