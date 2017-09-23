@@ -44,7 +44,7 @@ var is = {};
  * is.type
  * Test if `value` is a type of `type`.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @param {String} type type
  * @return {Boolean} true if `value` is a type of `type`, false otherwise
  * @api public
@@ -58,7 +58,7 @@ is.a = is.type = function (value, type) {
  * is.defined
  * Test if `value` is defined.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if 'value' is defined, false otherwise
  * @api public
  */
@@ -71,7 +71,7 @@ is.defined = function (value) {
  * is.empty
  * Test if `value` is empty.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is empty, false otherwise
  * @api public
  */
@@ -100,8 +100,8 @@ is.empty = function (value) {
  * is.equal
  * Test if `value` is equal to `other`.
  *
- * @param {Mixed} value value to test
- * @param {Mixed} other value to compare with
+ * @param {*} value value to test
+ * @param {*} other value to compare with
  * @return {Boolean} true if `value` is equal to `other`, false otherwise
  */
 
@@ -159,8 +159,8 @@ is.equal = function equal(value, other) {
  * is.hosted
  * Test if `value` is hosted by `host`.
  *
- * @param {Mixed} value to test
- * @param {Mixed} host host to test with
+ * @param {*} value to test
+ * @param {*} host host to test with
  * @return {Boolean} true if `value` is hosted by `host`, false otherwise
  * @api public
  */
@@ -174,7 +174,7 @@ is.hosted = function (value, host) {
  * is.instance
  * Test if `value` is an instance of `constructor`.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is an instance of `constructor`
  * @api public
  */
@@ -187,7 +187,7 @@ is.instance = is['instanceof'] = function (value, constructor) {
  * is.nil / is.null
  * Test if `value` is null.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is null, false otherwise
  * @api public
  */
@@ -200,7 +200,7 @@ is.nil = is['null'] = function (value) {
  * is.undef / is.undefined
  * Test if `value` is undefined.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is undefined, false otherwise
  * @api public
  */
@@ -217,7 +217,7 @@ is.undef = is.undefined = function (value) {
  * is.args
  * Test if `value` is an arguments object.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is an arguments object, false otherwise
  * @api public
  */
@@ -236,7 +236,7 @@ is.args = is.arguments = function (value) {
  * is.array
  * Test if 'value' is an array.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is an array, false otherwise
  * @api public
  */
@@ -249,7 +249,7 @@ is.array = Array.isArray || function (value) {
  * is.arguments.empty
  * Test if `value` is an empty arguments object.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is an empty arguments object, false otherwise
  * @api public
  */
@@ -261,7 +261,7 @@ is.args.empty = function (value) {
  * is.array.empty
  * Test if `value` is an empty array.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is an empty array, false otherwise
  * @api public
  */
@@ -273,7 +273,7 @@ is.array.empty = function (value) {
  * is.arraylike
  * Test if `value` is an arraylike object.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is an arguments object, false otherwise
  * @api public
  */
@@ -294,7 +294,7 @@ is.arraylike = function (value) {
  * is.bool
  * Test if `value` is a boolean.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is a boolean, false otherwise
  * @api public
  */
@@ -307,7 +307,7 @@ is.bool = is['boolean'] = function (value) {
  * is.false
  * Test if `value` is false.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is false, false otherwise
  * @api public
  */
@@ -320,7 +320,7 @@ is['false'] = function (value) {
  * is.true
  * Test if `value` is true.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is true, false otherwise
  * @api public
  */
@@ -337,7 +337,7 @@ is['true'] = function (value) {
  * is.date
  * Test if `value` is a date.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is a date, false otherwise
  * @api public
  */
@@ -350,7 +350,7 @@ is.date = function (value) {
  * is.date.valid
  * Test if `value` is a valid date.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @returns {Boolean} true if `value` is a valid date, false otherwise
  */
 is.date.valid = function (value) {
@@ -365,7 +365,7 @@ is.date.valid = function (value) {
  * is.element
  * Test if `value` is an html element.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is an HTML Element, false otherwise
  * @api public
  */
@@ -385,7 +385,7 @@ is.element = function (value) {
  * is.error
  * Test if `value` is an error object.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is an error object, false otherwise
  * @api public
  */
@@ -402,7 +402,7 @@ is.error = function (value) {
  * is.fn / is.function (deprecated)
  * Test if `value` is a function.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is a function, false otherwise
  * @api public
  */
@@ -424,7 +424,7 @@ is.fn = is['function'] = function (value) {
  * is.number
  * Test if `value` is a number.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is a number, false otherwise
  * @api public
  */
@@ -437,7 +437,7 @@ is.number = function (value) {
  * is.infinite
  * Test if `value` is positive or negative infinity.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is positive or negative Infinity, false otherwise
  * @api public
  */
@@ -449,7 +449,7 @@ is.infinite = function (value) {
  * is.decimal
  * Test if `value` is a decimal number.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is a decimal number, false otherwise
  * @api public
  */
@@ -546,7 +546,7 @@ is.minimum = function (value, others) {
  * is.nan
  * Test if `value` is not a number.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is not a number, false otherwise
  * @api public
  */
@@ -677,7 +677,7 @@ is.within = function (value, start, finish) {
  * is.object
  * Test if `value` is an object.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is an object, false otherwise
  * @api public
  */
@@ -689,7 +689,7 @@ is.object = function (value) {
  * is.primitive
  * Test if `value` is a primitive.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is a primitive, false otherwise
  * @api public
  */
@@ -707,7 +707,7 @@ is.primitive = function isPrimitive(value) {
  * is.hash
  * Test if `value` is a hash - a plain object literal.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is a hash, false otherwise
  * @api public
  */
@@ -724,7 +724,7 @@ is.hash = function (value) {
  * is.regexp
  * Test if `value` is a regular expression.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is a regexp, false otherwise
  * @api public
  */
@@ -741,7 +741,7 @@ is.regexp = function (value) {
  * is.string
  * Test if `value` is a string.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if 'value' is a string, false otherwise
  * @api public
  */
@@ -758,7 +758,7 @@ is.string = function (value) {
  * is.base64
  * Test if `value` is a valid base64 encoded string.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if 'value' is a base64 encoded string, false otherwise
  * @api public
  */
@@ -775,7 +775,7 @@ is.base64 = function (value) {
  * is.hex
  * Test if `value` is a valid hex encoded string.
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if 'value' is a hex encoded string, false otherwise
  * @api public
  */
@@ -788,7 +788,7 @@ is.hex = function (value) {
  * is.symbol
  * Test if `value` is an ES6 Symbol
  *
- * @param {Mixed} value value to test
+ * @param {*} value value to test
  * @return {Boolean} true if `value` is a Symbol, false otherise
  * @api public
  */
