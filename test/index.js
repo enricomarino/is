@@ -702,3 +702,41 @@ test('is.symbol', function (t) {
 
   t.end();
 });
+
+test('is.class', function (t) {
+  t.notOk(is.class(), 'undefined is not a class');
+  t.notOk(is.class({}), 'object literal is not a class');
+  t.notOk(is.class(null), 'null is not a class');
+  t.notOk(is.class(true), 'true is not a class');
+  t.notOk(is.object(''), 'string is not a class');
+  t.notOk(is.object(NaN), 'NaN is not a class');
+  t.notOk(is.object(Object), 'object constructor is not a class');
+  t.notOk(is.object(function () {}), 'function is not a class');
+
+  t.test('Symbols', { skip: typeof Symbol !== 'function' }, function (st) {
+    st.notOk(is.class(Symbol('foo')), 'symbol is not a class');
+    st.end();
+  });
+  
+  t.test('Classes', {}, function (st) {
+    class A {}
+    class B extends A {}
+    function C() {}
+    
+    st.ok(is.class(A), 'class is a class');
+    st.ok(is.class(new A()), 'instance of class is a class');
+    st.ok(is.class(B), 'class is a class');
+    st.ok(is.class(new B()), 'instance of class is a class');
+    
+    st.notOk(is.class(C), 'pseudo function is not a real class');
+    st.notOk(is.class(new C), 'pseudo function instance is not a real class');
+    
+    st.notOk(is.class(Date), 'pseudo function is not a real class');
+    st.notOk(is.class(new Date()), 'pseudo function instance is not a real class');
+    
+    st.end();
+  });
+
+  t.end();
+});
+
