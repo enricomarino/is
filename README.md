@@ -62,6 +62,10 @@ $ component install enricomarino/is
  - ``is.false`` (value) - deprecated, because in ES3 browsers, "false" is a reserved word
  - ``is.true`` (value) - deprecated, because in ES3 browsers, "true" is a reserved word
 
+### class
+
+ - ``is.class`` (value)
+
 ### date
 
  - ``is.date`` (value)
