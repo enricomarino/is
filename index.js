@@ -55,6 +55,26 @@ is.a = is.type = function (value, type) {
 };
 
 /**
+ * is.class
+ * Test if `value` is real `class`.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if 'value' is `class`, false otherwise
+ * @api public
+ */
+
+is.class = function (value) {
+  if ( value.constructor && (value.constructor.toString().substring(0, 5) === 'class') ) {
+    const isCtorClass = true;
+  }
+  if ( value.prototype.constructor.toString && (value.prototype.constructor.toString().substring(0, 5) === 'class') ) {
+    const isPrototypeCtorClass = true;
+  }
+  
+  return isCtorClass || isPrototypeCtorClass;
+};
+
+/**
  * is.defined
  * Test if `value` is defined.
  *
