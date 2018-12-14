@@ -11,7 +11,7 @@
     "coverage-quiet": "covert test/index.js --quiet",
     "lint": "npm run jscs && npm run eslint",
     "jscs": "jscs *.js */*.js",
-    "eslint": "eslint *.js */*.js"
+    "eslint": "eslint ."
   },
   "author": {
     "name": "Enrico Marino",
@@ -37,14 +37,14 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@ljharb/eslint-config": "^11.0.0",
+    "@ljharb/eslint-config": "^13.0.0",
     "covert": "^1.1.0",
-    "eslint": "^3.17.0",
+    "eslint": "^5.10.0",
     "foreach": "^2.0.5",
     "jscs": "^3.0.7",
     "make-generator-function": "^1.1.0",
-    "safe-publish-latest": "^1.1.1",
-    "tape": "^4.6.3"
+    "safe-publish-latest": "^1.1.2",
+    "tape": "^4.9.1"
   },
   "testling": {
     "files": "test/index.js",

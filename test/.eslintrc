@@ -1,6 +1,9 @@
 {
 	"rules": {
-		"max-lines": [0],
-		"max-statements-per-line": [2, { "max": 2 }]
+		"array-bracket-newline": 0,
+		"max-lines": 0,
+		"max-lines-per-function": 0,
+		"max-statements-per-line": [2, { "max": 2 }],
+		"object-curly-newline": 0,
 	}
 }
