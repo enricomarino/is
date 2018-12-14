@@ -17,6 +17,10 @@ var symbolValueOf;
 if (typeof Symbol === 'function') {
   symbolValueOf = Symbol.prototype.valueOf;
 }
+var bigIntValueOf;
+if (typeof BigInt === 'function') {
+  bigIntValueOf = BigInt.prototype.valueOf;
+}
 var isActualNaN = function (value) {
   return value !== value;
 };
@@ -795,6 +799,20 @@ is.hex = function (value) {
 
 is.symbol = function (value) {
   return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
+};
+
+/**
+ * is.bigint
+ * Test if `value` is an ES-proposed BigInt
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a BigInt, false otherise
+ * @api public
+ */
+
+is.bigint = function (value) {
+  // eslint-disable-next-line valid-typeof
+  return typeof BigInt === 'function' && toStr.call(value) === '[object BigInt]' && typeof bigIntValueOf.call(value) === 'bigint';
 };
 
 module.exports = is;

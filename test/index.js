@@ -702,3 +702,28 @@ test('is.symbol', function (t) {
 
   t.end();
 });
+
+test('is.bigint', function (t) {
+  t.test('not bigints', function (st) {
+    var notBigints = [true, false, null, undefined, {}, [], function () {}, 42, NaN, Infinity, /a/g, '', 0, -0, new Error('error')];
+    forEach(notBigints, function (notBigint) {
+      st.notOk(is.bigint(notBigint), notBigint + ' is not bigint');
+    });
+
+    st.end();
+  });
+
+  t.test('bigints', { skip: typeof BigInt !== 'function' }, function (st) {
+    var bigInts = [
+      Function('return 42n')(), // eslint-disable-line no-new-func
+      BigInt(42)
+    ];
+    forEach(bigInts, function (bigInt) {
+      st.ok(is.bigint(bigInt), bigInt + ' is bigint');
+    });
+
+    st.end();
+  });
+
+  t.end();
+});

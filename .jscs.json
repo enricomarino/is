@@ -152,7 +152,7 @@
 	"requireEarlyReturn": false,
 
 	"requireCapitalizedConstructorsNew": {
-		"allExcept": ["Function", "String", "Object", "Symbol", "Number", "Date", "RegExp", "Error", "Boolean", "Array"]
+		"allExcept": ["Function", "String", "Object", "Symbol", "Number", "Date", "RegExp", "Error", "Boolean", "Array", "BigInt"]
 	},
 
 	"requireImportAlphabetized": false,

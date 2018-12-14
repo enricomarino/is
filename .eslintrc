@@ -12,6 +12,7 @@
 		"max-params": [2, 3],
 		"max-statements": [2, 30],
 		"multiline-comment-style": 1,
+		"new-cap": [2, { "capIsNewExceptions": ["BigInt"] }],
 		"no-multi-assign": 1,
 		"no-extra-parens": 0,
 		"no-magic-numbers": 0,
@@ -20,5 +21,9 @@
 		"operator-linebreak": [2, "before"],
 		"spaced-comment": 0,
 		"strict": 0,
-	}
+	},
+
+    globals: {
+      BigInt: false,
+    },
 }
