@@ -1,3 +1,10 @@
+3.3.0 / 2018-12-14
+==================
+  * [New] add `is.bigint` (#36)
+  * [Docs] change jsdoc comments "Mixed" to wildcards (#34)
+  * [Tests] up to `node` `v11.4`, `v10.14`, `v9.11`, `v8.14`, `v7.10`, `v6.15`, `v4.9`; use `nvm install-latest-npm`
+  * [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `safe-publish-latest`, `tape`
+
 3.2.1 / 2017-02-27
 ==================
   * [Fix] `is.fn`: recognize generator and async functions too (#28)
