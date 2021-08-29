@@ -1,8 +1,7 @@
-/* globals window, HTMLElement */
+/* globals window, document, HTMLElement */
+/* eslint-disable promise/prefer-await-to-then */
 
-'use strict';
-
-/**!
+/** !
  * is
  * the definitive JavaScript type testing library
  *
@@ -10,42 +9,32 @@
  * @license MIT
  */
 
-var objProto = Object.prototype;
-var owns = objProto.hasOwnProperty;
-var toStr = objProto.toString;
-var symbolValueOf;
-if (typeof Symbol === 'function') {
-  symbolValueOf = Symbol.prototype.valueOf;
-}
-var bigIntValueOf;
-if (typeof BigInt === 'function') {
-  bigIntValueOf = BigInt.prototype.valueOf;
-}
-var isActualNaN = function (value) {
-  return value !== value;
-};
-var NON_HOST_TYPES = {
-  'boolean': 1,
+const objectProto = Object.prototype;
+const owns = objectProto.hasOwnProperty;
+const toString_ = objectProto.toString;
+
+const NON_HOST_TYPES = {
+  boolean: 1,
   number: 1,
   string: 1,
-  undefined: 1
+  undefined: 1,
 };
 
-var base64Regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
-var hexRegex = /^[A-Fa-f0-9]+$/;
+const base64Regex =
+  /^([A-Za-z\d+/]{4})*([A-Za-z\d+/]{4}|[A-Za-z\d+/]{3}=|[A-Za-z\d+/]{2}==)$/;
+const hexRegex = /^[A-Fa-f\d]+$/;
 
 /**
  * Expose `is`
  */
 
-var is = {};
+const is = {};
 
 /**
  * Test general.
  */
 
 /**
- * is.type
  * Test if `value` is a type of `type`.
  *
  * @param {*} value value to test
@@ -54,12 +43,20 @@ var is = {};
  * @api public
  */
 
-is.a = is.type = function (value, type) {
-  return typeof value === type;
-};
+is.a = (value, type) => typeof value === type;
 
 /**
- * is.defined
+ * Test if `value` is a type of `type`.
+ *
+ * @param {*} value value to test
+ * @param {String} type type
+ * @return {Boolean} true if `value` is a type of `type`, false otherwise
+ * @api public
+ */
+
+is.type = (value, type) => typeof value === type;
+
+/**
  * Test if `value` is defined.
  *
  * @param {*} value value to test
@@ -67,12 +64,9 @@ is.a = is.type = function (value, type) {
  * @api public
  */
 
-is.defined = function (value) {
-  return typeof value !== 'undefined';
-};
+is.defined = value => typeof value !== 'undefined';
 
 /**
- * is.empty
  * Test if `value` is empty.
  *
  * @param {*} value value to test
@@ -81,10 +75,14 @@ is.defined = function (value) {
  */
 
 is.empty = function (value) {
-  var type = toStr.call(value);
-  var key;
+  const type = toString_.call(value);
+  let key;
 
-  if (type === '[object Array]' || type === '[object Arguments]' || type === '[object String]') {
+  if (
+    type === '[object Array]' ||
+    type === '[object Arguments]' ||
+    type === '[object String]'
+  ) {
     return value.length === 0;
   }
 
@@ -94,6 +92,7 @@ is.empty = function (value) {
         return false;
       }
     }
+
     return true;
   }
 
@@ -101,7 +100,6 @@ is.empty = function (value) {
 };
 
 /**
- * is.equal
  * Test if `value` is equal to `other`.
  *
  * @param {*} value value to test
@@ -109,15 +107,15 @@ is.empty = function (value) {
  * @return {Boolean} true if `value` is equal to `other`, false otherwise
  */
 
-is.equal = function equal(value, other) {
+is.equal = (value, other) => {
   if (value === other) {
     return true;
   }
 
-  var type = toStr.call(value);
-  var key;
+  const type = toString_.call(value);
+  let key;
 
-  if (type !== toStr.call(other)) {
+  if (type !== toString_.call(other)) {
     return false;
   }
 
@@ -127,11 +125,13 @@ is.equal = function equal(value, other) {
         return false;
       }
     }
+
     for (key in other) {
       if (!is.equal(value[key], other[key]) || !(key in value)) {
         return false;
       }
     }
+
     return true;
   }
 
@@ -140,11 +140,13 @@ is.equal = function equal(value, other) {
     if (key !== other.length) {
       return false;
     }
+
     while (key--) {
       if (!is.equal(value[key], other[key])) {
         return false;
       }
     }
+
     return true;
   }
 
@@ -160,7 +162,6 @@ is.equal = function equal(value, other) {
 };
 
 /**
- * is.hosted
  * Test if `value` is hosted by `host`.
  *
  * @param {*} value to test
@@ -170,12 +171,11 @@ is.equal = function equal(value, other) {
  */
 
 is.hosted = function (value, host) {
-  var type = typeof host[value];
-  return type === 'object' ? !!host[value] : !NON_HOST_TYPES[type];
+  const type = typeof host[value];
+  return type === 'object' ? Boolean(host[value]) : !NON_HOST_TYPES[type];
 };
 
 /**
- * is.instance
  * Test if `value` is an instance of `constructor`.
  *
  * @param {*} value value to test
@@ -183,12 +183,19 @@ is.hosted = function (value, host) {
  * @api public
  */
 
-is.instance = is['instanceof'] = function (value, constructor) {
-  return value instanceof constructor;
-};
+is.instance = (value, constructor) => value instanceof constructor;
 
 /**
- * is.nil / is.null
+ * Test if `value` is an instance of `constructor`.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an instance of `constructor`
+ * @api public
+ */
+
+is.instanceof = (value, constructor) => value instanceof constructor;
+
+/**
  * Test if `value` is null.
  *
  * @param {*} value value to test
@@ -196,12 +203,19 @@ is.instance = is['instanceof'] = function (value, constructor) {
  * @api public
  */
 
-is.nil = is['null'] = function (value) {
-  return value === null;
-};
+is.nil = value => value === null;
 
 /**
- * is.undef / is.undefined
+ * Test if `value` is null.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is null, false otherwise
+ * @api public
+ */
+
+is.null = value => value === null;
+
+/**
  * Test if `value` is undefined.
  *
  * @param {*} value value to test
@@ -209,16 +223,23 @@ is.nil = is['null'] = function (value) {
  * @api public
  */
 
-is.undef = is.undefined = function (value) {
-  return typeof value === 'undefined';
-};
+is.undef = value => typeof value === 'undefined';
+
+/**
+ * Test if `value` is undefined.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is undefined, false
+ * @api public
+ */
+
+is.undefined = value => typeof value === 'undefined';
 
 /**
  * Test arguments.
  */
 
 /**
- * is.args
  * Test if `value` is an arguments object.
  *
  * @param {*} value value to test
@@ -226,9 +247,31 @@ is.undef = is.undefined = function (value) {
  * @api public
  */
 
-is.args = is.arguments = function (value) {
-  var isStandardArguments = toStr.call(value) === '[object Arguments]';
-  var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
+is.args = value => {
+  const isStandardArguments = toString_.call(value) === '[object Arguments]';
+  const isOldArguments =
+    !is.array(value) &&
+    is.arraylike(value) &&
+    is.object(value) &&
+    is.fn(value.callee);
+  return isStandardArguments || isOldArguments;
+};
+
+/**
+ * Test if `value` is an arguments object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an arguments object, false otherwise
+ * @api public
+ */
+
+is.arguments = value => {
+  const isStandardArguments = toString_.call(value) === '[object Arguments]';
+  const isOldArguments =
+    !is.array(value) &&
+    is.arraylike(value) &&
+    is.object(value) &&
+    is.fn(value.callee);
   return isStandardArguments || isOldArguments;
 };
 
@@ -237,7 +280,6 @@ is.args = is.arguments = function (value) {
  */
 
 /**
- * is.array
  * Test if 'value' is an array.
  *
  * @param {*} value value to test
@@ -245,36 +287,30 @@ is.args = is.arguments = function (value) {
  * @api public
  */
 
-is.array = Array.isArray || function (value) {
-  return toStr.call(value) === '[object Array]';
-};
+is.array = value =>
+  Array.isArray(value) || toString_.call(value) === '[object Array]';
 
 /**
- * is.arguments.empty
  * Test if `value` is an empty arguments object.
  *
  * @param {*} value value to test
  * @return {Boolean} true if `value` is an empty arguments object, false otherwise
  * @api public
  */
-is.args.empty = function (value) {
-  return is.args(value) && value.length === 0;
-};
+
+is.args.empty = value => is.args(value) && value.length === 0;
 
 /**
- * is.array.empty
  * Test if `value` is an empty array.
  *
  * @param {*} value value to test
  * @return {Boolean} true if `value` is an empty array, false otherwise
  * @api public
  */
-is.array.empty = function (value) {
-  return is.array(value) && value.length === 0;
-};
+
+is.array.empty = value => is.array(value) && value.length === 0;
 
 /**
- * is.arraylike
  * Test if `value` is an arraylike object.
  *
  * @param {*} value value to test
@@ -283,11 +319,14 @@ is.array.empty = function (value) {
  */
 
 is.arraylike = function (value) {
-  return !!value && !is.bool(value)
-    && owns.call(value, 'length')
-    && isFinite(value.length)
-    && is.number(value.length)
-    && value.length >= 0;
+  return (
+    Boolean(value) &&
+    !is.bool(value) &&
+    owns.call(value, 'length') &&
+    Number.isFinite(value.length) &&
+    is.number(value.length) &&
+    value.length >= 0
+  );
 };
 
 /**
@@ -295,7 +334,6 @@ is.arraylike = function (value) {
  */
 
 /**
- * is.bool
  * Test if `value` is a boolean.
  *
  * @param {*} value value to test
@@ -303,12 +341,19 @@ is.arraylike = function (value) {
  * @api public
  */
 
-is.bool = is['boolean'] = function (value) {
-  return toStr.call(value) === '[object Boolean]';
-};
+is.bool = value => toString_.call(value) === '[object Boolean]';
 
 /**
- * is.false
+ * Test if `value` is a boolean.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a boolean, false otherwise
+ * @api public
+ */
+
+is.boolean = value => toString_.call(value) === '[object Boolean]';
+
+/**
  * Test if `value` is false.
  *
  * @param {*} value value to test
@@ -316,12 +361,9 @@ is.bool = is['boolean'] = function (value) {
  * @api public
  */
 
-is['false'] = function (value) {
-  return is.bool(value) && Boolean(Number(value)) === false;
-};
+is.false = value => is.bool(value) && Boolean(Number(value)) === false;
 
 /**
- * is.true
  * Test if `value` is true.
  *
  * @param {*} value value to test
@@ -329,16 +371,13 @@ is['false'] = function (value) {
  * @api public
  */
 
-is['true'] = function (value) {
-  return is.bool(value) && Boolean(Number(value)) === true;
-};
+is.true = value => is.bool(value) && Boolean(Number(value)) === true;
 
 /**
  * Test date.
  */
 
 /**
- * is.date
  * Test if `value` is a date.
  *
  * @param {*} value value to test
@@ -346,27 +385,22 @@ is['true'] = function (value) {
  * @api public
  */
 
-is.date = function (value) {
-  return toStr.call(value) === '[object Date]';
-};
+is.date = value => toString_.call(value) === '[object Date]';
 
 /**
- * is.date.valid
  * Test if `value` is a valid date.
  *
  * @param {*} value value to test
  * @returns {Boolean} true if `value` is a valid date, false otherwise
  */
-is.date.valid = function (value) {
-  return is.date(value) && !isNaN(Number(value));
-};
+
+is.date.valid = value => is.date(value) && !Number.isNaN(Number(value));
 
 /**
  * Test element.
  */
 
 /**
- * is.element
  * Test if `value` is an html element.
  *
  * @param {*} value value to test
@@ -374,19 +408,17 @@ is.date.valid = function (value) {
  * @api public
  */
 
-is.element = function (value) {
-  return value !== undefined
-    && typeof HTMLElement !== 'undefined'
-    && value instanceof HTMLElement
-    && value.nodeType === 1;
-};
+is.element = value =>
+  value !== undefined &&
+  typeof HTMLElement !== 'undefined' &&
+  value instanceof HTMLElement &&
+  value.nodeType === 1;
 
 /**
  * Test error.
  */
 
 /**
- * is.error
  * Test if `value` is an error object.
  *
  * @param {*} value value to test
@@ -394,16 +426,13 @@ is.element = function (value) {
  * @api public
  */
 
-is.error = function (value) {
-  return toStr.call(value) === '[object Error]';
-};
+is.error = value => toString_.call(value) === '[object Error]';
 
 /**
  * Test function.
  */
 
 /**
- * is.fn / is.function (deprecated)
  * Test if `value` is a function.
  *
  * @param {*} value value to test
@@ -411,21 +440,43 @@ is.error = function (value) {
  * @api public
  */
 
-is.fn = is['function'] = function (value) {
-  var isAlert = typeof window !== 'undefined' && value === window.alert;
-  if (isAlert) {
-    return true;
-  }
-  var str = toStr.call(value);
-  return str === '[object Function]' || str === '[object GeneratorFunction]' || str === '[object AsyncFunction]';
-};
+is.fn = value => typeof value === 'function';
+
+/**
+ * Test if `value` is a function.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a function, false otherwise
+ * @api public
+ */
+
+is.function = value => typeof value === 'function';
+
+/**
+ * Test if `value` is a function and `then` can be called
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a thenable function, false otherwise
+ * @api public
+ */
+
+is.thenable = value => value && is.function(value.then);
+
+/**
+ * Test if `value` is a promise.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a promise, false otherwise
+ * @api public
+ */
+
+is.promise = value => is.thenable(value) && is.function(value.catch);
 
 /**
  * Test number.
  */
 
 /**
- * is.number
  * Test if `value` is a number.
  *
  * @param {*} value value to test
@@ -433,24 +484,30 @@ is.fn = is['function'] = function (value) {
  * @api public
  */
 
-is.number = function (value) {
-  return toStr.call(value) === '[object Number]';
-};
+is.number = value => toString_.call(value) === '[object Number]';
 
 /**
- * is.infinite
+ * Test if `value` is a number.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a number, false otherwise
+ * @api public
+ */
+
+is.num = value => toString_.call(value) === '[object Number]';
+
+/**
  * Test if `value` is positive or negative infinity.
  *
  * @param {*} value value to test
  * @return {Boolean} true if `value` is positive or negative Infinity, false otherwise
  * @api public
  */
-is.infinite = function (value) {
-  return value === Infinity || value === -Infinity;
-};
+
+is.infinite = value =>
+  value === Number.POSITIVE_INFINITY || value === Number.NEGATIVE_INFINITY;
 
 /**
- * is.decimal
  * Test if `value` is a decimal number.
  *
  * @param {*} value value to test
@@ -458,12 +515,13 @@ is.infinite = function (value) {
  * @api public
  */
 
-is.decimal = function (value) {
-  return is.number(value) && !isActualNaN(value) && !is.infinite(value) && value % 1 !== 0;
-};
+is.decimal = value =>
+  is.num(value) &&
+  !is.infinite(value) &&
+  !Number.isNaN(value) &&
+  value % 1 !== 0;
 
 /**
- * is.divisibleBy
  * Test if `value` is divisible by `n`.
  *
  * @param {Number} value value to test
@@ -473,14 +531,22 @@ is.decimal = function (value) {
  */
 
 is.divisibleBy = function (value, n) {
-  var isDividendInfinite = is.infinite(value);
-  var isDivisorInfinite = is.infinite(n);
-  var isNonZeroNumber = is.number(value) && !isActualNaN(value) && is.number(n) && !isActualNaN(n) && n !== 0;
-  return isDividendInfinite || isDivisorInfinite || (isNonZeroNumber && value % n === 0);
+  const isDividendInfinite = is.infinite(value);
+  const isDivisorInfinite = is.infinite(n);
+  const isNonZeroNumber =
+    is.number(value) &&
+    !Number.isNaN(value) &&
+    is.number(n) &&
+    !Number.isNaN(n) &&
+    n !== 0;
+  return (
+    isDividendInfinite ||
+    isDivisorInfinite ||
+    (isNonZeroNumber && value % n === 0)
+  );
 };
 
 /**
- * is.integer
  * Test if `value` is an integer.
  *
  * @param value to test
@@ -488,12 +554,40 @@ is.divisibleBy = function (value, n) {
  * @api public
  */
 
-is.integer = is['int'] = function (value) {
-  return is.number(value) && !isActualNaN(value) && value % 1 === 0;
-};
+is.integer = value => is.num(value) && !Number.isNaN(value) && value % 1 === 0;
 
 /**
- * is.maximum
+ * Test if `value` is a 'safe' integer.
+ *
+ * @param value to test
+ * @return {Boolean} true if `value` is a 'safe' integer, false otherwise
+ * @api public
+ */
+
+is.safeInteger = value => Number.isSafeInteger(value) && !Number.isNaN(value);
+
+/**
+ * Test if `value` is a BigInt
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a BigInt, false otherwise
+ * @api public
+ */
+
+is.bigInt = value => typeof value === 'bigint';
+
+/**
+ * Test if `value` is a float.
+ *
+ * @param value to test
+ * @return {Boolean} true if `value` is a float, false otherwise
+ * @api public
+ */
+
+is.float = value =>
+  is.num(value) && !Number.isNaN(value) && Math.floor(value) !== value;
+
+/**
  * Test if `value` is greater than 'others' values.
  *
  * @param {Number} value value to test
@@ -503,15 +597,16 @@ is.integer = is['int'] = function (value) {
  */
 
 is.maximum = function (value, others) {
-  if (isActualNaN(value)) {
+  if (Number.isNaN(value)) {
     throw new TypeError('NaN is not a valid value');
   } else if (!is.arraylike(others)) {
     throw new TypeError('second argument must be array-like');
   }
-  var len = others.length;
 
-  while (--len >= 0) {
-    if (value < others[len]) {
+  let {length} = others;
+
+  while (--length >= 0) {
+    if (value < others[length]) {
       return false;
     }
   }
@@ -520,7 +615,6 @@ is.maximum = function (value, others) {
 };
 
 /**
- * is.minimum
  * Test if `value` is less than `others` values.
  *
  * @param {Number} value value to test
@@ -530,15 +624,16 @@ is.maximum = function (value, others) {
  */
 
 is.minimum = function (value, others) {
-  if (isActualNaN(value)) {
+  if (Number.isNaN(value)) {
     throw new TypeError('NaN is not a valid value');
   } else if (!is.arraylike(others)) {
     throw new TypeError('second argument must be array-like');
   }
-  var len = others.length;
 
-  while (--len >= 0) {
-    if (value > others[len]) {
+  let {length} = others;
+
+  while (--length >= 0) {
+    if (value > others[length]) {
       return false;
     }
   }
@@ -547,7 +642,6 @@ is.minimum = function (value, others) {
 };
 
 /**
- * is.nan
  * Test if `value` is not a number.
  *
  * @param {*} value value to test
@@ -555,12 +649,9 @@ is.minimum = function (value, others) {
  * @api public
  */
 
-is.nan = function (value) {
-  return !is.number(value) || value !== value;
-};
+is.nan = value => !is.number(value) || Number.isNaN(value);
 
 /**
- * is.even
  * Test if `value` is an even number.
  *
  * @param {Number} value value to test
@@ -568,12 +659,11 @@ is.nan = function (value) {
  * @api public
  */
 
-is.even = function (value) {
-  return is.infinite(value) || (is.number(value) && value === value && value % 2 === 0);
-};
+is.even = value =>
+  is.infinite(value) ||
+  (is.number(value) && value % 2 === 0);
 
 /**
- * is.odd
  * Test if `value` is an odd number.
  *
  * @param {Number} value value to test
@@ -581,12 +671,11 @@ is.even = function (value) {
  * @api public
  */
 
-is.odd = function (value) {
-  return is.infinite(value) || (is.number(value) && value === value && value % 2 !== 0);
-};
+is.odd = value =>
+  is.infinite(value) ||
+  (is.number(value) && value % 2 !== 0);
 
 /**
- * is.ge
  * Test if `value` is greater than or equal to `other`.
  *
  * @param {Number} value value to test
@@ -596,14 +685,14 @@ is.odd = function (value) {
  */
 
 is.ge = function (value, other) {
-  if (isActualNaN(value) || isActualNaN(other)) {
+  if (Number.isNaN(value) || Number.isNaN(other)) {
     throw new TypeError('NaN is not a valid value');
   }
+
   return !is.infinite(value) && !is.infinite(other) && value >= other;
 };
 
 /**
- * is.gt
  * Test if `value` is greater than `other`.
  *
  * @param {Number} value value to test
@@ -613,14 +702,14 @@ is.ge = function (value, other) {
  */
 
 is.gt = function (value, other) {
-  if (isActualNaN(value) || isActualNaN(other)) {
+  if (Number.isNaN(value) || Number.isNaN(other)) {
     throw new TypeError('NaN is not a valid value');
   }
+
   return !is.infinite(value) && !is.infinite(other) && value > other;
 };
 
 /**
- * is.le
  * Test if `value` is less than or equal to `other`.
  *
  * @param {Number} value value to test
@@ -630,14 +719,14 @@ is.gt = function (value, other) {
  */
 
 is.le = function (value, other) {
-  if (isActualNaN(value) || isActualNaN(other)) {
+  if (Number.isNaN(value) || Number.isNaN(other)) {
     throw new TypeError('NaN is not a valid value');
   }
+
   return !is.infinite(value) && !is.infinite(other) && value <= other;
 };
 
 /**
- * is.lt
  * Test if `value` is less than `other`.
  *
  * @param {Number} value value to test
@@ -647,14 +736,14 @@ is.le = function (value, other) {
  */
 
 is.lt = function (value, other) {
-  if (isActualNaN(value) || isActualNaN(other)) {
+  if (Number.isNaN(value) || Number.isNaN(other)) {
     throw new TypeError('NaN is not a valid value');
   }
+
   return !is.infinite(value) && !is.infinite(other) && value < other;
 };
 
 /**
- * is.within
  * Test if `value` is within `start` and `finish`.
  *
  * @param {Number} value value to test
@@ -663,13 +752,16 @@ is.lt = function (value, other) {
  * @return {Boolean} true if 'value' is is within 'start' and 'finish'
  * @api public
  */
+
 is.within = function (value, start, finish) {
-  if (isActualNaN(value) || isActualNaN(start) || isActualNaN(finish)) {
+  if (Number.isNaN(value) || Number.isNaN(start) || Number.isNaN(finish)) {
     throw new TypeError('NaN is not a valid value');
   } else if (!is.number(value) || !is.number(start) || !is.number(finish)) {
     throw new TypeError('all arguments must be numbers');
   }
-  var isAnyInfinite = is.infinite(value) || is.infinite(start) || is.infinite(finish);
+
+  const isAnyInfinite =
+    is.infinite(value) || is.infinite(start) || is.infinite(finish);
   return isAnyInfinite || (value >= start && value <= finish);
 };
 
@@ -678,37 +770,41 @@ is.within = function (value, start, finish) {
  */
 
 /**
- * is.object
  * Test if `value` is an object.
  *
  * @param {*} value value to test
  * @return {Boolean} true if `value` is an object, false otherwise
  * @api public
  */
-is.object = function (value) {
-  return toStr.call(value) === '[object Object]';
-};
+
+is.object = value => toString_.call(value) === '[object Object]';
 
 /**
- * is.primitive
  * Test if `value` is a primitive.
  *
  * @param {*} value value to test
  * @return {Boolean} true if `value` is a primitive, false otherwise
  * @api public
  */
-is.primitive = function isPrimitive(value) {
+
+is.primitive = value => {
   if (!value) {
     return true;
   }
-  if (typeof value === 'object' || is.object(value) || is.fn(value) || is.array(value)) {
+
+  if (
+    typeof value === 'object' ||
+    is.object(value) ||
+    is.fn(value) ||
+    is.array(value)
+  ) {
     return false;
   }
+
   return true;
 };
 
 /**
- * is.hash
  * Test if `value` is a hash - a plain object literal.
  *
  * @param {*} value value to test
@@ -716,16 +812,17 @@ is.primitive = function isPrimitive(value) {
  * @api public
  */
 
-is.hash = function (value) {
-  return is.object(value) && value.constructor === Object && !value.nodeType && !value.setInterval;
-};
+is.hash = value =>
+  is.object(value) &&
+  value.constructor === Object &&
+  !value.nodeType &&
+  !value.setInterval;
 
 /**
  * Test regexp.
  */
 
 /**
- * is.regexp
  * Test if `value` is a regular expression.
  *
  * @param {*} value value to test
@@ -733,16 +830,13 @@ is.hash = function (value) {
  * @api public
  */
 
-is.regexp = function (value) {
-  return toStr.call(value) === '[object RegExp]';
-};
+is.regexp = value => toString_.call(value) === '[object RegExp]';
 
 /**
  * Test string.
  */
 
 /**
- * is.string
  * Test if `value` is a string.
  *
  * @param {*} value value to test
@@ -750,16 +844,13 @@ is.regexp = function (value) {
  * @api public
  */
 
-is.string = function (value) {
-  return toStr.call(value) === '[object String]';
-};
+is.string = value => toString_.call(value) === '[object String]';
 
 /**
  * Test base64 string.
  */
 
 /**
- * is.base64
  * Test if `value` is a valid base64 encoded string.
  *
  * @param {*} value value to test
@@ -767,16 +858,14 @@ is.string = function (value) {
  * @api public
  */
 
-is.base64 = function (value) {
-  return is.string(value) && (!value.length || base64Regex.test(value));
-};
+is.base64 = value =>
+  is.string(value) && (value.length === 0 || base64Regex.test(value));
 
 /**
  * Test base64 string.
  */
 
 /**
- * is.hex
  * Test if `value` is a valid hex encoded string.
  *
  * @param {*} value value to test
@@ -784,12 +873,10 @@ is.base64 = function (value) {
  * @api public
  */
 
-is.hex = function (value) {
-  return is.string(value) && (!value.length || hexRegex.test(value));
-};
+is.hex = value =>
+  is.string(value) && (value.length === 0 || hexRegex.test(value));
 
 /**
- * is.symbol
  * Test if `value` is an ES6 Symbol
  *
  * @param {*} value value to test
@@ -797,22 +884,80 @@ is.hex = function (value) {
  * @api public
  */
 
-is.symbol = function (value) {
-  return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
+is.symbol = value => typeof value === 'symbol';
+
+/**
+ * Test if `value` is a prototype
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a prototype, false otherwise
+ */
+
+is.prototype = value => {
+  const Ctor = value && value.constructor;
+  const proto = (typeof Ctor === 'function' && Ctor.prototype) || objectProto;
+  return value === proto;
 };
 
 /**
- * is.bigint
- * Test if `value` is an ES-proposed BigInt
+ * Test if `value` is an event.
  *
  * @param {*} value value to test
- * @return {Boolean} true if `value` is a BigInt, false otherise
- * @api public
+ * @return {Boolean} true if `value` is an event, false otherwise
  */
 
-is.bigint = function (value) {
-  // eslint-disable-next-line valid-typeof
-  return typeof BigInt === 'function' && toStr.call(value) === '[object BigInt]' && typeof bigIntValueOf.call(value) === 'bigint';
-};
+is.event = value => is.function(value.listen) && is.function(value.broadcast);
+
+/**
+ * Test if `value` is a Map
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a Map, false otherwise
+ */
+
+is.map = value => value instanceof Map;
+
+/**
+ * Test if `value` is a WeakMap
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a WeakMap, false otherwise
+ */
+
+is.weakMap = value => value instanceof WeakMap;
+
+/**
+ * Test if `value` is a Set
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a Set, false otherwise
+ */
+
+is.set = value => value instanceof Set;
+
+/**
+ * Test if `value` is a WeakSet
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a WeakSet, false otherwise
+ */
+
+is.weakSet = value => value instanceof WeakSet;
+
+/**
+ * Test if `env` is Node
+ *
+ * @return {Boolean} true if `env` is Node, false otherwise
+ */
+
+is.node = () => typeof window !== 'undefined';
+
+/**
+ * Test if `env` is Browser
+ *
+ * @return {Boolean} true if `env` is Browser, false otherwise
+ */
+
+is.browser = () => ![typeof window, typeof document].includes('undefined');
 
 module.exports = is;
