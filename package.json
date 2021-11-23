@@ -3,12 +3,12 @@
   "version": "3.3.0",
   "main": "index.js",
   "scripts": {
-    "prepublish": "safe-publish-latest",
+    "prepublishOnly": "safe-publish-latest",
+    "prepublish": "not-in-publish || npm run prepublishOnly",
     "pretest": "npm run lint",
     "test": "npm run --silent tests-only",
-    "tests-only": "node test/index.js",
-    "coverage": "covert test/index.js",
-    "coverage-quiet": "covert test/index.js --quiet",
+    "tests-only": "nyc tape 'test/**/*.js'",
+    "posttest": "aud --production",
     "lint": "eslint ."
   },
   "author": {
@@ -33,13 +33,14 @@
       "url": "https://github.com/ljharb"
     }
   ],
-  "dependencies": {},
   "devDependencies": {
     "@ljharb/eslint-config": "^13.0.0",
+    "aud": "^1.1.5",
     "covert": "^1.1.0",
     "eslint": "^5.10.0",
     "foreach": "^2.0.5",
     "make-generator-function": "^1.1.0",
+    "nyc": "^10.3.2",
     "safe-publish-latest": "^1.1.2",
     "tape": "^4.9.1"
   },
