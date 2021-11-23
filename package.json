@@ -36,7 +36,6 @@
   "devDependencies": {
     "@ljharb/eslint-config": "^13.0.0",
     "aud": "^1.1.5",
-    "covert": "^1.1.0",
     "eslint": "^5.10.0",
     "foreach": "^2.0.5",
     "make-generator-function": "^1.1.0",
