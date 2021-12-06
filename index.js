@@ -811,7 +811,6 @@ is.symbol = function (value) {
  */
 
 is.bigint = function (value) {
-  // eslint-disable-next-line valid-typeof
   return typeof BigInt === 'function' && toStr.call(value) === '[object BigInt]' && typeof bigIntValueOf.call(value) === 'bigint';
 };
 

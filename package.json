@@ -34,14 +34,14 @@
     }
   ],
   "devDependencies": {
-    "@ljharb/eslint-config": "^13.0.0",
+    "@ljharb/eslint-config": "^20.0.0",
     "aud": "^1.1.5",
-    "eslint": "^5.10.0",
+    "eslint": "^8.4.0",
     "foreach": "^2.0.5",
     "make-generator-function": "^1.1.0",
     "nyc": "^10.3.2",
-    "safe-publish-latest": "^1.1.2",
-    "tape": "^4.9.1"
+    "safe-publish-latest": "^2.0.0",
+    "tape": "^5.3.2"
   },
   "testling": {
     "files": "test/index.js",

@@ -4,26 +4,14 @@
 	"extends": "@ljharb",
 
 	"rules": {
-		"complexity": [2, 16],
-		"dot-notation": [2, { "allowKeywords": false }],
 		"func-name-matching": 0,
 		"indent": [2, 2],
-		"max-nested-callbacks": [2, 3],
-		"max-params": [2, 3],
-		"max-statements": [2, 30],
 		"multiline-comment-style": 1,
-		"new-cap": [2, { "capIsNewExceptions": ["BigInt"] }],
 		"no-multi-assign": 1,
-		"no-extra-parens": 0,
 		"no-magic-numbers": 0,
 		"no-plusplus": 1,
 		"no-restricted-syntax": [2, "BreakStatement", "ContinueStatement", "DebuggerStatement", "LabeledStatement", "WithStatement"],
-		"operator-linebreak": [2, "before"],
 		"spaced-comment": 0,
 		"strict": 0,
 	},
-
-    globals: {
-      BigInt: false,
-    },
 }

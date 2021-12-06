@@ -339,7 +339,7 @@ test('is.fn', function (t) {
   t.notOk(is.fn(null), 'null is not function');
 
   t.test('generator functions', { skip: !genFn }, function (st) {
-    t.ok(is.fn(genFn), 'generator function is function');
+    st.ok(is.fn(genFn), 'generator function is function');
     st.end();
   });
 
