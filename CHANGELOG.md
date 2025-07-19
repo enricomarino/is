@@ -1,3 +1,8 @@
+3.3.2 / 2025-07-19
+==================
+Note: this is a republish of v3.3.0.
+v3.3.1 (and v5.0.0) were published with malware in them by a hijacked account, and summarily deprecated.
+
 3.3.0 / 2018-12-14
 ==================
   * [New] add `is.bigint` (#36)
