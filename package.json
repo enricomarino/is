@@ -8,7 +8,7 @@
     "pretest": "npm run lint",
     "test": "npm run --silent tests-only",
     "tests-only": "nyc tape 'test/**/*.js'",
-    "posttest": "aud --production",
+    "posttest": "npx npm@\">= 10.2\" audit --production",
     "lint": "eslint ."
   },
   "author": {
@@ -35,7 +35,6 @@
   ],
   "devDependencies": {
     "@ljharb/eslint-config": "^21.1.1",
-    "aud": "^2.0.4",
     "eslint": "=8.8.0",
     "foreach": "^2.0.6",
     "in-publish": "^2.0.1",
